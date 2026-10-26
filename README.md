@@ -49,3 +49,17 @@ Para actualizar el catálogo: `node scripts/update-catalog.mjs`. Para validar co
 Supabase JS 2.118.0 está incluido en `dist/vendor/`, con su licencia MIT. SHA-256 del archivo UMD: `ee3be8de192b97cb1d73d1e95d6b82bb1f6b658c0f97c4ef757fc331996ed3d3`. Fuente: https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js
 
 Las vistas grandes usan renders de cuerpo completo de CSGOSKINS.GG; los iconos laterales mantienen el retrato correspondiente. Actualizar renders: `node scripts/fetch-full-agents.mjs` y `python scripts/encode-full-agents.py` (Pillow). Fuente de ejemplo: https://csgoskins.gg/items/number-k-the-professionals
+
+## Prueba de agente y guantes en 3D
+
+El botón «Probar Number K + guantes en 3D» abre un visor con giro, zoom y dos acabados: Sport Gloves Hedge Maze (10038) y Vice (10048). «Usar agente y guantes en T» aplica la combinación solamente a la vista Actual/Deseado abierta, mediante el guardado existente. La vista principal de T usa el mismo modelo 3D para estas combinaciones; las demás conservan las imágenes. Cancelar o cerrar la prueba no cambia el equipamiento.
+
+Se usan las mallas originales de Number K y los guantes `worldmodel`, con las articulaciones de manos/dedos enlazadas al agente. Los materiales PBR se preparan a partir de las paletas, máscaras, patrones y texturas de CS2. Es una aproximación sin simulación de float, desgaste ni semilla; no se reproduce el compositor de Source 2. No incluye armas 3D ni otros agentes todavía. Assets cargados bajo demanda, renderizado solo al cambiar la cámara, tamaño o acabado, y liberación de GPU al cerrar/cambiar vista. Si falla WebGL, la vista principal conserva la imagen.
+
+Reconstrucción desde una instalación local de CS2 (lectura solamente):
+
+1. Descargar la [CLI oficial Source 2 Viewer 20.1](https://github.com/ValveResourceFormat/ValveResourceFormat/releases/tag/20.1) en `.local-tools/source2viewer/`.
+2. `node scripts/export-agent-prototype.mjs` (opcional: `CS2_GAME_DIR` apunta a `game/csgo`).
+3. `python scripts/build-agent-prototype.py` (Pillow y NumPy).
+
+Solo se publican los modelos y texturas compactos de `dist/assets/agent-3d/`; las herramientas y exportaciones de trabajo están ignoradas. Modelos/texturas originales: Valve / Counter-Strike 2. Three.js 0.180.0 se distribuye con su licencia MIT en `dist/vendor/three/LICENSE`.

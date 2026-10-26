@@ -1,3 +1,5 @@
 skins-source.json
 agents-source.json
 *.tar.gz
+
+.local-tools/

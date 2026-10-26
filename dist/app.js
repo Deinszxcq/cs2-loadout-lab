@@ -1,3 +1,4 @@
+import {applyAgentPrototype,GLOVE_FINISHES} from './agent-prototype.mjs';
 import {selectedAgent,assignAgent} from './agent-selection.mjs';
 import {ensureLayouts,allowedWeapons,assignSlot} from './loadout-layout.mjs';
 const $=s=>document.querySelector(s);let data=[],weaponCatalog=[],agentCatalog=[],skinIndex=new Map(),skinGroups=new Map(),team='CT',weapon='USP-S',mode='desired',category='Todas',state={CT:{},T:{}},sets=[],viewMode='current',slotContext=null,agentContext=null;
@@ -108,7 +109,7 @@ async function loadAccount(nextUser,force=false){
   if(!force&&nextUser?.id===user?.id&&accountReady)return;
   const epoch=++accountEpoch;accountReady=false;user=nextUser||null;unsynced=false;
   state=emptyState();sets=[];team='CT';weapon='USP-S';category='Todas';$('#weaponSearch').value='';$('#search').value='';
-  if($('#saveDialog').open)$('#saveDialog').close();if($('#slotDialog').open)$('#slotDialog').close();slotContext=null;if($('#agentDialog').open)$('#agentDialog').close();agentContext=null;
+  if($('#saveDialog').open)$('#saveDialog').close();if($('#slotDialog').open)$('#slotDialog').close();slotContext=null;if($('#agentLabDialog').open)$('#agentLabDialog').close();if($('#agentDialog').open)$('#agentDialog').close();agentContext=null;
   $('#accountButton').textContent=user?'Mi cuenta':'Iniciar sesión';
   $('#accountEmail').textContent=user?.email||'';$('#accountMessage').textContent='';
   if(!user){const guest=readGuest();state=guest.state;sets=guest.sets;accountReady=true;status('Guardado local · Sin cuenta');lockEquipment(false);if(catalogReady)showEquipment();return}
@@ -182,7 +183,9 @@ function slotTile(teamKey,group,index,weaponName,rail=false){
   button.append(image,name,finish);button.onclick=()=>openSlot(teamKey,group,index);
   return button;
 }
+let boardViewers=[],boardViewerGeneration=0;
 function renderOverview(){
+  boardViewerGeneration++;for(const viewer of boardViewers)viewer.dispose();boardViewers=[];
   if(!catalogReady)return;
   $('#overviewTitle').textContent=viewMode==='current'?'Mi equipamiento actual':'Mi próximo equipamiento';
   document.querySelectorAll('[data-view-mode]').forEach(b=>{b.classList.toggle('selected',b.dataset.viewMode===viewMode);b.setAttribute('aria-pressed',b.dataset.viewMode===viewMode)});
@@ -210,6 +213,7 @@ function renderOverview(){
     const note=document.createElement('p');note.className='board-caption';note.textContent=(viewMode==='current'?'LO QUE TENGO':'LO QUE ME GUSTARÍA')+' / '+teamKey;
     board.append(heading,body,note);return board;
   }));
+  mountBoardAgent3D();
 }
 function openSlot(teamKey,group,index){
   if(!accountReady||!catalogReady)return;
@@ -280,3 +284,22 @@ function applyAgent(id){
 }
 $('#agentForm').onsubmit=e=>{e.preventDefault();applyAgent(agentContext?.id)};
 $('#agentClear').onclick=()=>applyAgent(null);
+
+const labFinishes=GLOVE_FINISHES.map(f=>f.id);let labViewer=null,labContext=null;
+async function mountBoardAgent3D(){
+ const figure=$('.board-t .board-figure[data-agent-id="agent-4732"]');if(!figure)return;
+ const layout=ensureLayouts(state.T,'T',weaponCatalog)[viewMode],finish=equippedSkin('T',layout.gloves[0],viewMode);if(!labFinishes.includes(finish.id))return;
+ const generation=boardViewerGeneration;try{const {createAgentViewer}=await import('./agent-viewer.mjs');if(generation!==boardViewerGeneration||!figure.isConnected)return;
+ const host=document.createElement('div');host.className='board-agent-3d';figure.append(host);const viewer=createAgentViewer(host,{finish:finish.id,interactive:false,onError:()=>{figure.classList.remove('has-agent-3d');host.remove()}});boardViewers.push(viewer);await viewer.ready;if(generation!==boardViewerGeneration||!figure.isConnected){viewer.dispose();return}if(host.dataset.ready){figure.classList.add('has-agent-3d');const badge=document.createElement('small');badge.className='agent-3d-badge';badge.textContent='3D · '+finish.name;$('.board-t .agent-identity').append(badge)}}catch{}
+}
+$('#openAgentLab').onclick=async()=>{
+ if(!accountReady||!catalogReady)return;const layout=ensureLayouts(state.T,'T',weaponCatalog)[viewMode],equipped=equippedSkin('T',layout.gloves[0],viewMode);
+ const context={epoch:accountEpoch,mode:viewMode,finish:labFinishes.includes(equipped.id)?equipped.id:labFinishes[0]};labContext=context;$('#agentLabApply').disabled=true;$('#agentLabStatus').textContent='Cargando modelo 3D…';$('#agentLabDestination').textContent='Se aplicará a T · '+(viewMode==='current'?'Lo que tengo':'Lo que me gustaría');$('#agentLabDialog').showModal();
+ document.querySelectorAll('[data-lab-finish]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.labFinish===context.finish));
+ try{const {createAgentViewer}=await import('./agent-viewer.mjs');if(labContext!==context)return;labViewer=createAgentViewer($('#agentLabStage'),{finish:context.finish,onError:()=>{$('#agentLabStatus').textContent='No se pudo cargar el visor 3D. Cierra y vuelve a intentarlo.'}});await labViewer.ready;if(labContext!==context)return;if($('#agentLabStage').dataset.ready==='true'){$('#agentLabStatus').textContent='Arrastra para girar · Rueda para acercar';$('#agentLabApply').disabled=false}}catch{$('#agentLabStatus').textContent='No se pudo cargar el visor. Cierra y vuelve a intentarlo.'}
+};
+function closeAgentLab(){labContext=null;labViewer?.dispose();labViewer=null;delete $('#agentLabStage').dataset.ready;delete $('#agentLabStage').dataset.error}
+$('#agentLabClose').onclick=()=>$('#agentLabDialog').close();$('#agentLabDialog').addEventListener('close',closeAgentLab);
+document.querySelectorAll('[data-lab-finish]').forEach(b=>b.onclick=()=>{if(!labContext)return;labContext.finish=b.dataset.labFinish;labViewer?.setFinish(labContext.finish);document.querySelectorAll('[data-lab-finish]').forEach(button=>button.setAttribute('aria-pressed',button===b))});
+document.querySelectorAll('[data-lab-camera]').forEach(b=>b.onclick=()=>labViewer?.setView(b.dataset.labCamera));
+$('#agentLabApply').onclick=()=>{const c=labContext;if(!c||c.epoch!==accountEpoch||!accountReady||!labFinishes.includes(c.finish))return;applyAgentPrototype(state.T,c.mode,c.finish,{agents:agentCatalog,weapons:weaponCatalog,skins:data});persist();$('#agentLabDialog').close();render();toast('Number K y guantes equipados en T')};
