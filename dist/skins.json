@@ -1,0 +1,674 @@
+[
+  {
+    "id": "skin-08730cd85d09",
+    "weapon": "USP-S",
+    "name": "Purple DDPAT",
+    "image": "assets/skin-08730cd85d09.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-0a4f3191b0d1",
+    "weapon": "USP-S",
+    "name": "Serum",
+    "image": "assets/skin-0a4f3191b0d1.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-fa4306cae873",
+    "weapon": "USP-S",
+    "name": "Target Acquired",
+    "image": "assets/skin-fa4306cae873.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-c14e09c62ca0",
+    "weapon": "USP-S",
+    "name": "Orange Anolis",
+    "image": "assets/skin-c14e09c62ca0.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-3061aea08996",
+    "weapon": "USP-S",
+    "name": "Dark Water",
+    "image": "assets/skin-3061aea08996.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-739d10d062d3",
+    "weapon": "USP-S",
+    "name": "Stainless",
+    "image": "assets/skin-739d10d062d3.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-6fcc0ba62469",
+    "weapon": "USP-S",
+    "name": "Caiman",
+    "image": "assets/skin-6fcc0ba62469.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-8667828828a0",
+    "weapon": "USP-S",
+    "name": "Business Class",
+    "image": "assets/skin-8667828828a0.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-9c09911caf5c",
+    "weapon": "USP-S",
+    "name": "Black Lotus",
+    "image": "assets/skin-9c09911caf5c.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-3901933d5e47",
+    "weapon": "USP-S",
+    "name": "Cortex",
+    "image": "assets/skin-3901933d5e47.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-95653cc7fb0e",
+    "weapon": "USP-S",
+    "name": "Cyrex",
+    "image": "assets/skin-95653cc7fb0e.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-9180ab4b5f86",
+    "weapon": "USP-S",
+    "name": "Guardian",
+    "image": "assets/skin-9180ab4b5f86.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-da5da69785da",
+    "weapon": "Glock-18",
+    "name": "Fade",
+    "image": "assets/skin-da5da69785da.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-52971a3886a2",
+    "weapon": "Glock-18",
+    "name": "Moonrise",
+    "image": "assets/skin-52971a3886a2.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-8d1c8d592ffb",
+    "weapon": "Glock-18",
+    "name": "High Beam",
+    "image": "assets/skin-8d1c8d592ffb.png",
+    "color": "#5e98d9"
+  },
+  {
+    "id": "skin-0926fb5dddc9",
+    "weapon": "Glock-18",
+    "name": "Twilight Galaxy",
+    "image": "assets/skin-0926fb5dddc9.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-dc7e8554bda0",
+    "weapon": "Glock-18",
+    "name": "Steel Disruption",
+    "image": "assets/skin-dc7e8554bda0.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-75c8474d12a2",
+    "weapon": "Glock-18",
+    "name": "Dragon Tattoo",
+    "image": "assets/skin-75c8474d12a2.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-a841a452bb30",
+    "weapon": "Glock-18",
+    "name": "Gamma Doppler",
+    "image": "assets/skin-a841a452bb30.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-45d3638f698c",
+    "weapon": "Glock-18",
+    "name": "Gamma Doppler",
+    "image": "assets/skin-45d3638f698c.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-2479da1a5f04",
+    "weapon": "Glock-18",
+    "name": "Gamma Doppler",
+    "image": "assets/skin-2479da1a5f04.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-0fc89d8cca2d",
+    "weapon": "Glock-18",
+    "name": "Gamma Doppler",
+    "image": "assets/skin-0fc89d8cca2d.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-b1ff8720cf58",
+    "weapon": "Glock-18",
+    "name": "Gamma Doppler",
+    "image": "assets/skin-b1ff8720cf58.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-c35e4824fa14",
+    "weapon": "Glock-18",
+    "name": "Reactor",
+    "image": "assets/skin-c35e4824fa14.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-e30d23329629",
+    "weapon": "Desert Eagle",
+    "name": "Blaze",
+    "image": "assets/skin-e30d23329629.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-be4448a9c6e2",
+    "weapon": "Desert Eagle",
+    "name": "Hypnotic",
+    "image": "assets/skin-be4448a9c6e2.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-7698ea25d00a",
+    "weapon": "Desert Eagle",
+    "name": "Bronze Deco",
+    "image": "assets/skin-7698ea25d00a.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-3b1a5d288858",
+    "weapon": "Desert Eagle",
+    "name": "Meteorite",
+    "image": "assets/skin-3b1a5d288858.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-6747a1a6fb43",
+    "weapon": "Desert Eagle",
+    "name": "Cobalt Disruption",
+    "image": "assets/skin-6747a1a6fb43.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-e63e9d7401f5",
+    "weapon": "Desert Eagle",
+    "name": "Night Heist",
+    "image": "assets/skin-e63e9d7401f5.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-3efd2f4af3ac",
+    "weapon": "Desert Eagle",
+    "name": "Emerald Jörmungandr",
+    "image": "assets/skin-3efd2f4af3ac.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-953912490f9b",
+    "weapon": "Desert Eagle",
+    "name": "The Bronze",
+    "image": "assets/skin-953912490f9b.png",
+    "color": "#5e98d9"
+  },
+  {
+    "id": "skin-706c54974c2f",
+    "weapon": "Desert Eagle",
+    "name": "Golden Koi",
+    "image": "assets/skin-706c54974c2f.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-aaeb9db13c75",
+    "weapon": "Desert Eagle",
+    "name": "Sunset Storm 壱",
+    "image": "assets/skin-aaeb9db13c75.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-369bc4160c35",
+    "weapon": "Desert Eagle",
+    "name": "Midnight Storm",
+    "image": "assets/skin-369bc4160c35.png",
+    "color": "#5e98d9"
+  },
+  {
+    "id": "skin-dff5f10fed23",
+    "weapon": "Desert Eagle",
+    "name": "Sunset Storm 弐",
+    "image": "assets/skin-dff5f10fed23.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-6370d1af59f7",
+    "weapon": "AK-47",
+    "name": "AUTOEXEC",
+    "image": "assets/skin-6370d1af59f7.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-f64cdaac0b90",
+    "weapon": "AK-47",
+    "name": "Crane Flight",
+    "image": "assets/skin-f64cdaac0b90.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-4c2e3face5fd",
+    "weapon": "AK-47",
+    "name": "Searing Rage",
+    "image": "assets/skin-4c2e3face5fd.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-651edfe9a99a",
+    "weapon": "AK-47",
+    "name": "Consequence of the Jinn",
+    "image": "assets/skin-651edfe9a99a.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-4608abab8351",
+    "weapon": "AK-47",
+    "name": "The Oligarch",
+    "image": "assets/skin-4608abab8351.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-ad56dc47a4c4",
+    "weapon": "AK-47",
+    "name": "The Outsiders",
+    "image": "assets/skin-ad56dc47a4c4.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-82dc98e09ba6",
+    "weapon": "AK-47",
+    "name": "Inheritance",
+    "image": "assets/skin-82dc98e09ba6.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-cde9a27f0dd5",
+    "weapon": "AK-47",
+    "name": "Hydroponic",
+    "image": "assets/skin-cde9a27f0dd5.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-2a8ebacc14e8",
+    "weapon": "AK-47",
+    "name": "Cartel",
+    "image": "assets/skin-2a8ebacc14e8.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-5fd3ee42a6c4",
+    "weapon": "AK-47",
+    "name": "Case Hardened",
+    "image": "assets/skin-5fd3ee42a6c4.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-45686ca4a063",
+    "weapon": "AK-47",
+    "name": "Phantom Disruptor",
+    "image": "assets/skin-45686ca4a063.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-1a5e885d9d28",
+    "weapon": "AK-47",
+    "name": "Neon Revolution",
+    "image": "assets/skin-1a5e885d9d28.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-81eee26a1c31",
+    "weapon": "M4A1-S",
+    "name": "Fade",
+    "image": "assets/skin-81eee26a1c31.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-da38a63696ab",
+    "weapon": "M4A1-S",
+    "name": "Moss Quartz",
+    "image": "assets/skin-da38a63696ab.png",
+    "color": "#5e98d9"
+  },
+  {
+    "id": "skin-196d87753c91",
+    "weapon": "M4A1-S",
+    "name": "Atomic Alloy",
+    "image": "assets/skin-196d87753c91.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-144ddd95becd",
+    "weapon": "M4A1-S",
+    "name": "Blue Phosphor",
+    "image": "assets/skin-144ddd95becd.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-7678cc4af1fb",
+    "weapon": "M4A1-S",
+    "name": "Knight",
+    "image": "assets/skin-7678cc4af1fb.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-795d725893f2",
+    "weapon": "M4A1-S",
+    "name": "Dark Water",
+    "image": "assets/skin-795d725893f2.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-7562e4bd91c7",
+    "weapon": "M4A1-S",
+    "name": "Hot Rod",
+    "image": "assets/skin-7562e4bd91c7.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-a9716a5f7bc2",
+    "weapon": "M4A1-S",
+    "name": "Basilisk",
+    "image": "assets/skin-a9716a5f7bc2.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-f7d21206f3a7",
+    "weapon": "M4A1-S",
+    "name": "Guardian",
+    "image": "assets/skin-f7d21206f3a7.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-5e983b2fc436",
+    "weapon": "M4A1-S",
+    "name": "Master Piece",
+    "image": "assets/skin-5e983b2fc436.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-3795f6827a11",
+    "weapon": "M4A1-S",
+    "name": "Flashback",
+    "image": "assets/skin-3795f6827a11.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-7b1351c2adba",
+    "weapon": "M4A1-S",
+    "name": "Hyper Beast",
+    "image": "assets/skin-7b1351c2adba.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-8fbcba8495ae",
+    "weapon": "AWP",
+    "name": "Fade",
+    "image": "assets/skin-8fbcba8495ae.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-67b936c9cb52",
+    "weapon": "AWP",
+    "name": "Man-o'-war",
+    "image": "assets/skin-67b936c9cb52.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-860a0652d07a",
+    "weapon": "AWP",
+    "name": "PAW",
+    "image": "assets/skin-860a0652d07a.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-278adf18c50e",
+    "weapon": "AWP",
+    "name": "Graphite",
+    "image": "assets/skin-278adf18c50e.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-69390026d135",
+    "weapon": "AWP",
+    "name": "Lightning Strike",
+    "image": "assets/skin-69390026d135.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-584e1dbd3391",
+    "weapon": "AWP",
+    "name": "Silk Tiger",
+    "image": "assets/skin-584e1dbd3391.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-c97e27944006",
+    "weapon": "AWP",
+    "name": "Worm God",
+    "image": "assets/skin-c97e27944006.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-fb4c997d4376",
+    "weapon": "AWP",
+    "name": "Black Box",
+    "image": "assets/skin-fb4c997d4376.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-a5be0877a3d7",
+    "weapon": "AWP",
+    "name": "Ice Coaled",
+    "image": "assets/skin-a5be0877a3d7.png",
+    "color": "#d32ce6"
+  },
+  {
+    "id": "skin-42c6a7e245d3",
+    "weapon": "AWP",
+    "name": "LongDog",
+    "image": "assets/skin-42c6a7e245d3.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-5a39103af835",
+    "weapon": "AWP",
+    "name": "Printstream",
+    "image": "assets/skin-5a39103af835.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-66197377b028",
+    "weapon": "AWP",
+    "name": "Queen's Gambit",
+    "image": "assets/skin-66197377b028.png",
+    "color": "#eb4b4b"
+  },
+  {
+    "id": "skin-40273e06d839",
+    "weapon": "MP9",
+    "name": "Sand Scale",
+    "image": "assets/skin-40273e06d839.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-0d8df804e0af",
+    "weapon": "MP9",
+    "name": "Mount Fuji",
+    "image": "assets/skin-0d8df804e0af.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-df8f2056f525",
+    "weapon": "MP9",
+    "name": "Pandora's Box",
+    "image": "assets/skin-df8f2056f525.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-78690c7d603a",
+    "weapon": "MP9",
+    "name": "Hypnotic",
+    "image": "assets/skin-78690c7d603a.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-5eda44447880",
+    "weapon": "MP9",
+    "name": "Army Sheen",
+    "image": "assets/skin-5eda44447880.png",
+    "color": "#b0c3d9"
+  },
+  {
+    "id": "skin-bb430e7deeba",
+    "weapon": "MP9",
+    "name": "Dark Age",
+    "image": "assets/skin-bb430e7deeba.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-f9bef4ddaca3",
+    "weapon": "MP9",
+    "name": "Music Box",
+    "image": "assets/skin-f9bef4ddaca3.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-6e2ddbfa3638",
+    "weapon": "MP9",
+    "name": "Bioleak",
+    "image": "assets/skin-6e2ddbfa3638.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-e1e7a9cee96e",
+    "weapon": "MP9",
+    "name": "Ruby Poison Dart",
+    "image": "assets/skin-e1e7a9cee96e.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-895e721a640e",
+    "weapon": "MP9",
+    "name": "Stained Glass",
+    "image": "assets/skin-895e721a640e.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-65b73b6b9f0a",
+    "weapon": "MP9",
+    "name": "Rose Iron",
+    "image": "assets/skin-65b73b6b9f0a.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-e716148d4001",
+    "weapon": "MP9",
+    "name": "Hot Rod",
+    "image": "assets/skin-e716148d4001.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-ee40f2adf026",
+    "weapon": "MAC-10",
+    "name": "Fade",
+    "image": "assets/skin-ee40f2adf026.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-045414110f51",
+    "weapon": "MAC-10",
+    "name": "Amber Fade",
+    "image": "assets/skin-045414110f51.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-d3caeffc5ec8",
+    "weapon": "MAC-10",
+    "name": "Last Dive",
+    "image": "assets/skin-d3caeffc5ec8.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-b21f4fbf965a",
+    "weapon": "MAC-10",
+    "name": "Gold Brick",
+    "image": "assets/skin-b21f4fbf965a.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-4c2dd0cc0324",
+    "weapon": "MAC-10",
+    "name": "Copper Borre",
+    "image": "assets/skin-4c2dd0cc0324.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-3f4120c9e552",
+    "weapon": "MAC-10",
+    "name": "Aloha",
+    "image": "assets/skin-3f4120c9e552.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-c6ff1f1300c7",
+    "weapon": "MAC-10",
+    "name": "Lapis Gator",
+    "image": "assets/skin-c6ff1f1300c7.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-4938e7b7b6cd",
+    "weapon": "MAC-10",
+    "name": "Malachite",
+    "image": "assets/skin-4938e7b7b6cd.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-9b16f88ae206",
+    "weapon": "MAC-10",
+    "name": "Oceanic",
+    "image": "assets/skin-9b16f88ae206.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-9f0f8f333aaa",
+    "weapon": "MAC-10",
+    "name": "Nuclear Garden",
+    "image": "assets/skin-9f0f8f333aaa.png",
+    "color": "#4b69ff"
+  },
+  {
+    "id": "skin-ed43fbef2a5f",
+    "weapon": "MAC-10",
+    "name": "Red Filigree",
+    "image": "assets/skin-ed43fbef2a5f.png",
+    "color": "#8847ff"
+  },
+  {
+    "id": "skin-47412dd518bb",
+    "weapon": "MAC-10",
+    "name": "Silver",
+    "image": "assets/skin-47412dd518bb.png",
+    "color": "#5e98d9"
+  }
+]
