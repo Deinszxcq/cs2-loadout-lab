@@ -32,3 +32,5 @@ test('clearing one agent preserves the other view and weapon slots',()=>{
   assignAgent(equipment,'CT','current',one.id,catalog);assignAgent(equipment,'CT','desired',two.id,catalog);assignAgent(equipment,'CT','current',null,catalog);
   assert.equal(selectedAgent(equipment,'CT','current',catalog),null);assert.equal(selectedAgent(equipment,'CT','desired',catalog).id,two.id);assert.deepEqual(equipment.__layout.current.rifles,['M4A4']);
 });
+
+test('all agents have a local full-body render independent of the inventory icon',()=>{for(const agent of catalog){assert(agent.fullImage);assert.notEqual(agent.fullImage,agent.image);const png=fs.readFileSync(new URL('../dist/'+agent.fullImage,import.meta.url));assert.equal(png.subarray(0,4).toString(),'RIFF');assert.equal(png.subarray(8,12).toString(),'WEBP')}});

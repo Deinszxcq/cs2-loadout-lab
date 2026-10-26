@@ -6,6 +6,7 @@ const response=await fetch('https://raw.githubusercontent.com/ByMykel/CSGO-API/m
 if(!response.ok)throw Error(`Agent catalog: HTTP ${response.status}`);
 const source=await response.json();
 const directory=path.join(root,'dist/assets/agents');await fs.mkdir(directory,{recursive:true});
+const previous=JSON.parse(await fs.readFile(path.join(root,'dist/agents.json'),'utf8'));
 const catalog=source.map(agent=>({id:agent.id,name:agent.name.split(' | ')[0],squad:agent.name.split(' | ').slice(1).join(' | '),team:agent.team.id==='counter-terrorists'?'CT':'T',image:`assets/agents/${agent.id}.png`,color:agent.rarity.color,collection:agent.collections[0]?.name||'',sourceImage:agent.image}));
 let cursor=0;
 await Promise.all(Array.from({length:5},async()=>{
@@ -17,6 +18,7 @@ await Promise.all(Array.from({length:5},async()=>{
     await fs.writeFile(file,bytes);
   }
 }));
+for(const agent of catalog){const old=previous.find(a=>a.id===agent.id);if(old?.fullImage){agent.fullImage=old.fullImage;agent.fullImageSource=old.fullImageSource}}
 catalog.sort((a,b)=>a.name.localeCompare(b.name));
 await fs.writeFile(path.join(root,'dist/agents.json'),JSON.stringify(catalog.map(({sourceImage,...agent})=>agent),null,2)+'\n');
 console.log(JSON.stringify({agents:catalog.length,CT:catalog.filter(a=>a.team==='CT').length,T:catalog.filter(a=>a.team==='T').length}));

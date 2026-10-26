@@ -47,3 +47,5 @@ Cada modelo tiene un enlace de consulta a Pricempire. El catálogo se obtiene de
 Para actualizar el catálogo: `node scripts/update-catalog.mjs`. Para validar cobertura, equipos y compatibilidad con selecciones anteriores: `node --test tests/catalog.test.mjs tests/loadout-layout.test.mjs tests/agents.test.mjs`. Los identificadores originales se mantienen para conservar conjuntos locales y de Supabase.
 
 Supabase JS 2.118.0 está incluido en `dist/vendor/`, con su licencia MIT. SHA-256 del archivo UMD: `ee3be8de192b97cb1d73d1e95d6b82bb1f6b658c0f97c4ef757fc331996ed3d3`. Fuente: https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js
+
+Las vistas grandes usan renders de cuerpo completo de CSGOSKINS.GG; los iconos laterales mantienen el retrato correspondiente. Actualizar renders: `node scripts/fetch-full-agents.mjs` y `python scripts/encode-full-agents.py` (Pillow). Fuente de ejemplo: https://csgoskins.gg/items/number-k-the-professionals

@@ -6,7 +6,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4619.png",
     "color": "#8847ff",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4619.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/blueberries-buckshot-nswc-seal.png"
   },
   {
     "id": "agent-4780",
@@ -15,7 +17,9 @@
     "team": "T",
     "image": "assets/agents/agent-4780.png",
     "color": "#eb4b4b",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4780.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/medium-rare-crasswater-guerrilla-warfare.png"
   },
   {
     "id": "agent-5504",
@@ -24,7 +28,9 @@
     "team": "T",
     "image": "assets/agents/agent-5504.png",
     "color": "#eb4b4b",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5504.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/the-doctor-romanov-sabre.png"
   },
   {
     "id": "agent-4680",
@@ -33,7 +39,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4680.png",
     "color": "#d32ce6",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4680.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/two-times-mccoy-tacp-cavalry.png"
   },
   {
     "id": "agent-5403",
@@ -42,7 +50,9 @@
     "team": "CT",
     "image": "assets/agents/agent-5403.png",
     "color": "#d32ce6",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5403.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/two-times-mccoy-usaf-tacp.png"
   },
   {
     "id": "agent-4712",
@@ -51,7 +61,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4712.png",
     "color": "#d32ce6",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4712.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/1st-lieutenant-farlow-swat.png"
   },
   {
     "id": "agent-5400",
@@ -60,7 +72,9 @@
     "team": "CT",
     "image": "assets/agents/agent-5400.png",
     "color": "#4b69ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5400.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/3rd-commando-company-ksk.png"
   },
   {
     "id": "agent-4775",
@@ -69,7 +83,9 @@
     "team": "T",
     "image": "assets/agents/agent-4775.png",
     "color": "#d32ce6",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4775.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/arno-the-overgrown-guerrilla-warfare.png"
   },
   {
     "id": "agent-4752",
@@ -78,7 +94,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4752.png",
     "color": "#4b69ff",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4752.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/aspirant-gendarmerie-nationale.png"
   },
   {
     "id": "agent-5601",
@@ -87,7 +105,9 @@
     "team": "CT",
     "image": "assets/agents/agent-5601.png",
     "color": "#4b69ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5601.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/b-squadron-officer-sas.png"
   },
   {
     "id": "agent-4714",
@@ -96,7 +116,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4714.png",
     "color": "#4b69ff",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4714.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/bio-haz-specialist-swat.png"
   },
   {
     "id": "agent-5503",
@@ -105,7 +127,9 @@
     "team": "T",
     "image": "assets/agents/agent-5503.png",
     "color": "#d32ce6",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5503.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/blackwolf-sabre.png"
   },
   {
     "id": "agent-4613",
@@ -114,7 +138,9 @@
     "team": "T",
     "image": "assets/agents/agent-4613.png",
     "color": "#d32ce6",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4613.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/bloody-darryl-the-strapped-the-professionals.png"
   },
   {
     "id": "agent-5402",
@@ -123,7 +149,9 @@
     "team": "CT",
     "image": "assets/agents/agent-5402.png",
     "color": "#8847ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5402.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/buckshot-nswc-seal.png"
   },
   {
     "id": "agent-4751",
@@ -132,7 +160,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4751.png",
     "color": "#eb4b4b",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4751.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/chef-descadron-rouchard-gendarmerie-nationale.png"
   },
   {
     "id": "agent-4750",
@@ -141,7 +171,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4750.png",
     "color": "#d32ce6",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4750.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/chem-haz-capitaine-gendarmerie-nationale.png"
   },
   {
     "id": "agent-4716",
@@ -150,7 +182,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4716.png",
     "color": "#4b69ff",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4716.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/chem-haz-specialist-swat.png"
   },
   {
     "id": "agent-4757",
@@ -159,7 +193,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4757.png",
     "color": "#eb4b4b",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4757.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/cmdr-davida-goggles-fernandez-seal-frogman.png"
   },
   {
     "id": "agent-4771",
@@ -168,7 +204,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4771.png",
     "color": "#eb4b4b",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4771.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/cmdr-frank-wet-sox-baroud-seal-frogman.png"
   },
   {
     "id": "agent-4711",
@@ -177,7 +215,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4711.png",
     "color": "#eb4b4b",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4711.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/cmdr-mae-dead-cold-jamison-swat.png"
   },
   {
     "id": "agent-4776",
@@ -186,7 +226,9 @@
     "team": "T",
     "image": "assets/agents/agent-4776.png",
     "color": "#8847ff",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4776.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/col-mangos-dabisi-guerrilla-warfare.png"
   },
   {
     "id": "agent-4774",
@@ -195,7 +237,9 @@
     "team": "T",
     "image": "assets/agents/agent-4774.png",
     "color": "#eb4b4b",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4774.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/crasswater-the-forgotten-guerrilla-warfare.png"
   },
   {
     "id": "agent-5602",
@@ -204,7 +248,9 @@
     "team": "CT",
     "image": "assets/agents/agent-5602.png",
     "color": "#4b69ff",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-5602.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/d-squadron-officer-nzsas.png"
   },
   {
     "id": "agent-5500",
@@ -213,7 +259,9 @@
     "team": "T",
     "image": "assets/agents/agent-5500.png",
     "color": "#8847ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5500.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/dragomir-sabre.png"
   },
   {
     "id": "agent-5505",
@@ -222,7 +270,9 @@
     "team": "T",
     "image": "assets/agents/agent-5505.png",
     "color": "#4b69ff",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-5505.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/dragomir-sabre-footsoldier.png"
   },
   {
     "id": "agent-4773",
@@ -231,7 +281,9 @@
     "team": "T",
     "image": "assets/agents/agent-4773.png",
     "color": "#d32ce6",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4773.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/elite-trapper-solman-guerrilla-warfare.png"
   },
   {
     "id": "agent-5206",
@@ -240,7 +292,9 @@
     "team": "T",
     "image": "assets/agents/agent-5206.png",
     "color": "#4b69ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5206.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/enforcer-phoenix.png"
   },
   {
     "id": "agent-4730",
@@ -249,7 +303,9 @@
     "team": "T",
     "image": "assets/agents/agent-4730.png",
     "color": "#8847ff",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4730.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/getaway-sally-the-professionals.png"
   },
   {
     "id": "agent-5105",
@@ -258,7 +314,9 @@
     "team": "T",
     "image": "assets/agents/agent-5105.png",
     "color": "#4b69ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5105.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/ground-rebel-elite-crew.png"
   },
   {
     "id": "agent-4713",
@@ -267,7 +325,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4713.png",
     "color": "#8847ff",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4713.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/john-van-healen-kask-swat.png"
   },
   {
     "id": "agent-5109",
@@ -276,7 +336,9 @@
     "team": "T",
     "image": "assets/agents/agent-5109.png",
     "color": "#4b69ff",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-5109.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/jungle-rebel-elite-crew.png"
   },
   {
     "id": "agent-4756",
@@ -285,7 +347,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4756.png",
     "color": "#8847ff",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4756.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/lieutenant-tree-hugger-farlow-swat.png"
   },
   {
     "id": "agent-4772",
@@ -294,7 +358,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4772.png",
     "color": "#d32ce6",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4772.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/lieutenant-rex-krikey-seal-frogman.png"
   },
   {
     "id": "agent-4728",
@@ -303,7 +369,9 @@
     "team": "T",
     "image": "assets/agents/agent-4728.png",
     "color": "#8847ff",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4728.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/little-kev-the-professionals.png"
   },
   {
     "id": "agent-5404",
@@ -312,7 +380,9 @@
     "team": "CT",
     "image": "assets/agents/agent-5404.png",
     "color": "#eb4b4b",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5404.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/lt-commander-ricksaw-nswc-seal.png"
   },
   {
     "id": "agent-5306",
@@ -321,7 +391,9 @@
     "team": "CT",
     "image": "assets/agents/agent-5306.png",
     "color": "#8847ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5306.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/markus-delrow-fbi-hrt.png"
   },
   {
     "id": "agent-5501",
@@ -330,7 +402,9 @@
     "team": "T",
     "image": "assets/agents/agent-5501.png",
     "color": "#8847ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5501.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/maximus-sabre.png"
   },
   {
     "id": "agent-5307",
@@ -339,7 +413,9 @@
     "team": "CT",
     "image": "assets/agents/agent-5307.png",
     "color": "#d32ce6",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5307.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/michael-syfers-fbi-sniper.png"
   },
   {
     "id": "agent-4732",
@@ -348,7 +424,9 @@
     "team": "T",
     "image": "assets/agents/agent-4732.png",
     "color": "#d32ce6",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4732.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/number-k-the-professionals.png"
   },
   {
     "id": "agent-4753",
@@ -357,7 +435,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4753.png",
     "color": "#8847ff",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4753.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/officer-jacques-beltram-gendarmerie-nationale.png"
   },
   {
     "id": "agent-5305",
@@ -366,7 +446,9 @@
     "team": "CT",
     "image": "assets/agents/agent-5305.png",
     "color": "#4b69ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5305.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/operator-fbi-swat.png"
   },
   {
     "id": "agent-5106",
@@ -375,7 +457,9 @@
     "team": "T",
     "image": "assets/agents/agent-5106.png",
     "color": "#8847ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5106.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/osiris-elite-crew.png"
   },
   {
     "id": "agent-5405",
@@ -384,7 +468,9 @@
     "team": "CT",
     "image": "assets/agents/agent-5405.png",
     "color": "#4b69ff",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-5405.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/primeiro-tenente-brazilian-1st-battalion.png"
   },
   {
     "id": "agent-5107",
@@ -393,7 +479,9 @@
     "team": "T",
     "image": "assets/agents/agent-5107.png",
     "color": "#d32ce6",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5107.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/prof-shahmat-elite-crew.png"
   },
   {
     "id": "agent-5502",
@@ -402,7 +490,9 @@
     "team": "T",
     "image": "assets/agents/agent-5502.png",
     "color": "#d32ce6",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5502.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/rezan-the-ready-sabre.png"
   },
   {
     "id": "agent-4718",
@@ -411,7 +501,9 @@
     "team": "T",
     "image": "assets/agents/agent-4718.png",
     "color": "#d32ce6",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4718.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/rezan-the-redshirt-sabre.png"
   },
   {
     "id": "agent-4727",
@@ -420,7 +512,9 @@
     "team": "T",
     "image": "assets/agents/agent-4727.png",
     "color": "#d32ce6",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4727.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/safecracker-voltzmann-the-professionals.png"
   },
   {
     "id": "agent-5401",
@@ -429,7 +523,9 @@
     "team": "CT",
     "image": "assets/agents/agent-5401.png",
     "color": "#4b69ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5401.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/seal-team-6-soldier-nswc-seal.png"
   },
   {
     "id": "agent-4715",
@@ -438,7 +534,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4715.png",
     "color": "#8847ff",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4715.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/sergeant-bombson-swat.png"
   },
   {
     "id": "agent-4735",
@@ -447,7 +545,9 @@
     "team": "T",
     "image": "assets/agents/agent-4735.png",
     "color": "#eb4b4b",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4735.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/sir-bloody-darryl-royale-the-professionals.png"
   },
   {
     "id": "agent-4736",
@@ -456,7 +556,9 @@
     "team": "T",
     "image": "assets/agents/agent-4736.png",
     "color": "#eb4b4b",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4736.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/sir-bloody-loudmouth-darryl-the-professionals.png"
   },
   {
     "id": "agent-4726",
@@ -465,7 +567,9 @@
     "team": "T",
     "image": "assets/agents/agent-4726.png",
     "color": "#eb4b4b",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4726.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/sir-bloody-miami-darryl-the-professionals.png"
   },
   {
     "id": "agent-4733",
@@ -474,7 +578,9 @@
     "team": "T",
     "image": "assets/agents/agent-4733.png",
     "color": "#eb4b4b",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4733.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/sir-bloody-silent-darryl-the-professionals.png"
   },
   {
     "id": "agent-4734",
@@ -483,7 +589,9 @@
     "team": "T",
     "image": "assets/agents/agent-4734.png",
     "color": "#eb4b4b",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-4734.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/sir-bloody-skullhead-darryl-the-professionals.png"
   },
   {
     "id": "agent-5207",
@@ -492,7 +600,9 @@
     "team": "T",
     "image": "assets/agents/agent-5207.png",
     "color": "#8847ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5207.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/slingshot-phoenix.png"
   },
   {
     "id": "agent-5205",
@@ -501,7 +611,9 @@
     "team": "T",
     "image": "assets/agents/agent-5205.png",
     "color": "#4b69ff",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5205.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/soldier-phoenix.png"
   },
   {
     "id": "agent-4749",
@@ -510,7 +622,9 @@
     "team": "CT",
     "image": "assets/agents/agent-4749.png",
     "color": "#8847ff",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4749.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/sous-lieutenant-medic-gendarmerie-nationale.png"
   },
   {
     "id": "agent-5308",
@@ -519,7 +633,9 @@
     "team": "CT",
     "image": "assets/agents/agent-5308.png",
     "color": "#eb4b4b",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5308.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/special-agent-ava-fbi.png"
   },
   {
     "id": "agent-5208",
@@ -528,7 +644,9 @@
     "team": "T",
     "image": "assets/agents/agent-5208.png",
     "color": "#4b69ff",
-    "collection": "Broken Fang Agents"
+    "collection": "Broken Fang Agents",
+    "fullImage": "assets/agents/full/agent-5208.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/street-soldier-phoenix.png"
   },
   {
     "id": "agent-5108",
@@ -537,7 +655,9 @@
     "team": "T",
     "image": "assets/agents/agent-5108.png",
     "color": "#eb4b4b",
-    "collection": "Shattered Web Agents"
+    "collection": "Shattered Web Agents",
+    "fullImage": "assets/agents/full/agent-5108.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/the-elite-mr-muhlik-elite-crew.png"
   },
   {
     "id": "agent-4781",
@@ -546,7 +666,9 @@
     "team": "T",
     "image": "assets/agents/agent-4781.png",
     "color": "#8847ff",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4781.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/trapper-guerrilla-warfare.png"
   },
   {
     "id": "agent-4778",
@@ -555,7 +677,9 @@
     "team": "T",
     "image": "assets/agents/agent-4778.png",
     "color": "#4b69ff",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4778.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/trapper-aggressor-guerrilla-warfare.png"
   },
   {
     "id": "agent-4777",
@@ -564,6 +688,8 @@
     "team": "T",
     "image": "assets/agents/agent-4777.png",
     "color": "#eb4b4b",
-    "collection": "Operation Riptide Agents"
+    "collection": "Operation Riptide Agents",
+    "fullImage": "assets/agents/full/agent-4777.webp",
+    "fullImageSource": "https://cdn.csgoskins.gg/public/images/inspections/v2/vypa-sista-of-the-revolution-guerrilla-warfare.png"
   }
 ]

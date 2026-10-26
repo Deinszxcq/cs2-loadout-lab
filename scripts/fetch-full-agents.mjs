@@ -1,0 +1,5 @@
+import fs from 'node:fs/promises';
+const agents=JSON.parse(await fs.readFile('dist/agents.json','utf8'));
+let cursor=0;const failed=[];await fs.mkdir('dist/assets/agents/full',{recursive:true});
+await Promise.all(Array.from({length:4},async()=>{while(cursor<agents.length){const a=agents[cursor++];const slug=(a.name+' '+a.squad).normalize('NFKD').replace(/[’']/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');const url=`https://cdn.csgoskins.gg/public/images/inspections/v2/${slug}.png`;if(a.fullImage){try{await fs.access('dist/'+a.fullImage);continue}catch{}}const r=await fetch(url);if(!r.ok){failed.push({name:a.name,slug,status:r.status});continue}const b=Buffer.from(await r.arrayBuffer());if(b.subarray(1,4).toString()!=='PNG'){failed.push({name:a.name,slug});continue}a.fullImage=`assets/agents/full/${a.id}.png`;a.fullImageSource=url;await fs.writeFile('dist/'+a.fullImage,b)}}));
+await fs.writeFile('dist/agents.json',JSON.stringify(agents,null,2)+'\n');console.log({downloaded:agents.filter(a=>a.fullImage).length,failed});
