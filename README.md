@@ -16,7 +16,13 @@ La pantalla inicial muestra CT y T con 15 armas en tres columnas y accesos a gua
 
 La distribución se guarda dentro de `equipment.__layout` y conserva el formato previo de selecciones por arma. Los conjuntos existentes reciben una distribución inicial al cargarse, sin modificar sus skins. Guardar un equipo conserva ambas vistas.
 
-Los agentes grandes son recortes recreados a partir de las capturas de referencia; son imágenes estáticas, no un visor 3D ni una representación del arma equipada.
+## Agentes
+
+El catálogo incluye 63 agentes (29 CT y 34 T) con sus imágenes oficiales de inventario descargadas en `dist/assets/agents/`. El selector se abre desde la imagen, el icono del agente o «Cambiar agente». Permite buscar por nombre, facción y colección, previsualizar, equipar y quitar la selección. Cada equipo conserva un agente actual y uno deseado de forma independiente, dentro de `equipment.__agent`. Esa información se guarda también en los conjuntos y se sincroniza con la cuenta.
+
+Las imágenes oficiales son retratos de inventario. Cuando no hay ningún agente seleccionado, se muestran los recortes recreados a partir de las capturas de referencia. Todas son imágenes estáticas; no representan el arma equipada ni un visor 3D.
+
+Actualizar agentes: `node scripts/update-agents.mjs`. Comprobar catálogo, persistencia y restricciones: `node --test tests/agents.test.mjs`.
 
 ## Desarrollo
 
@@ -38,6 +44,6 @@ Catálogo ampliado: 63 modelos (35 armas, 20 cuchillos y 8 familias de guantes),
 
 Cada modelo tiene un enlace de consulta a Pricempire. El catálogo se obtiene de los archivos públicos de ByMykel/CSGO-API, no de la API de Pricempire: esa API requiere una cuenta y una clave. No se incluyen precios ni se incrustan claves de Pricempire en el navegador.
 
-Para actualizar el catálogo: `node scripts/update-catalog.mjs`. Para validar cobertura, equipos y compatibilidad con selecciones anteriores: `node --test tests/catalog.test.mjs tests/loadout-layout.test.mjs`. Los identificadores originales se mantienen para conservar conjuntos locales y de Supabase.
+Para actualizar el catálogo: `node scripts/update-catalog.mjs`. Para validar cobertura, equipos y compatibilidad con selecciones anteriores: `node --test tests/catalog.test.mjs tests/loadout-layout.test.mjs tests/agents.test.mjs`. Los identificadores originales se mantienen para conservar conjuntos locales y de Supabase.
 
 Supabase JS 2.118.0 está incluido en `dist/vendor/`, con su licencia MIT. SHA-256 del archivo UMD: `ee3be8de192b97cb1d73d1e95d6b82bb1f6b658c0f97c4ef757fc331996ed3d3`. Fuente: https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js

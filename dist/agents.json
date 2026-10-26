@@ -1,0 +1,569 @@
+[
+  {
+    "id": "agent-4619",
+    "name": "'Blueberries' Buckshot",
+    "squad": "NSWC SEAL",
+    "team": "CT",
+    "image": "assets/agents/agent-4619.png",
+    "color": "#8847ff",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-4780",
+    "name": "'Medium Rare' Crasswater",
+    "squad": "Guerrilla Warfare",
+    "team": "T",
+    "image": "assets/agents/agent-4780.png",
+    "color": "#eb4b4b",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-5504",
+    "name": "'The Doctor' Romanov",
+    "squad": "Sabre",
+    "team": "T",
+    "image": "assets/agents/agent-5504.png",
+    "color": "#eb4b4b",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4680",
+    "name": "'Two Times' McCoy",
+    "squad": "TACP Cavalry",
+    "team": "CT",
+    "image": "assets/agents/agent-4680.png",
+    "color": "#d32ce6",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-5403",
+    "name": "'Two Times' McCoy",
+    "squad": "USAF TACP",
+    "team": "CT",
+    "image": "assets/agents/agent-5403.png",
+    "color": "#d32ce6",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4712",
+    "name": "1st Lieutenant Farlow",
+    "squad": "SWAT",
+    "team": "CT",
+    "image": "assets/agents/agent-4712.png",
+    "color": "#d32ce6",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-5400",
+    "name": "3rd Commando Company",
+    "squad": "KSK",
+    "team": "CT",
+    "image": "assets/agents/agent-5400.png",
+    "color": "#4b69ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4775",
+    "name": "Arno The Overgrown",
+    "squad": "Guerrilla Warfare",
+    "team": "T",
+    "image": "assets/agents/agent-4775.png",
+    "color": "#d32ce6",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-4752",
+    "name": "Aspirant",
+    "squad": "Gendarmerie Nationale",
+    "team": "CT",
+    "image": "assets/agents/agent-4752.png",
+    "color": "#4b69ff",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-5601",
+    "name": "B Squadron Officer",
+    "squad": "SAS",
+    "team": "CT",
+    "image": "assets/agents/agent-5601.png",
+    "color": "#4b69ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4714",
+    "name": "Bio-Haz Specialist",
+    "squad": "SWAT",
+    "team": "CT",
+    "image": "assets/agents/agent-4714.png",
+    "color": "#4b69ff",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-5503",
+    "name": "Blackwolf",
+    "squad": "Sabre",
+    "team": "T",
+    "image": "assets/agents/agent-5503.png",
+    "color": "#d32ce6",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4613",
+    "name": "Bloody Darryl The Strapped",
+    "squad": "The Professionals",
+    "team": "T",
+    "image": "assets/agents/agent-4613.png",
+    "color": "#d32ce6",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-5402",
+    "name": "Buckshot",
+    "squad": "NSWC SEAL",
+    "team": "CT",
+    "image": "assets/agents/agent-5402.png",
+    "color": "#8847ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4751",
+    "name": "Chef d'Escadron Rouchard",
+    "squad": "Gendarmerie Nationale",
+    "team": "CT",
+    "image": "assets/agents/agent-4751.png",
+    "color": "#eb4b4b",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-4750",
+    "name": "Chem-Haz Capitaine",
+    "squad": "Gendarmerie Nationale",
+    "team": "CT",
+    "image": "assets/agents/agent-4750.png",
+    "color": "#d32ce6",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-4716",
+    "name": "Chem-Haz Specialist",
+    "squad": "SWAT",
+    "team": "CT",
+    "image": "assets/agents/agent-4716.png",
+    "color": "#4b69ff",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-4757",
+    "name": "Cmdr. Davida 'Goggles' Fernandez",
+    "squad": "SEAL Frogman",
+    "team": "CT",
+    "image": "assets/agents/agent-4757.png",
+    "color": "#eb4b4b",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-4771",
+    "name": "Cmdr. Frank 'Wet Sox' Baroud",
+    "squad": "SEAL Frogman",
+    "team": "CT",
+    "image": "assets/agents/agent-4771.png",
+    "color": "#eb4b4b",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-4711",
+    "name": "Cmdr. Mae 'Dead Cold' Jamison",
+    "squad": "SWAT",
+    "team": "CT",
+    "image": "assets/agents/agent-4711.png",
+    "color": "#eb4b4b",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-4776",
+    "name": "Col. Mangos Dabisi",
+    "squad": "Guerrilla Warfare",
+    "team": "T",
+    "image": "assets/agents/agent-4776.png",
+    "color": "#8847ff",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-4774",
+    "name": "Crasswater The Forgotten",
+    "squad": "Guerrilla Warfare",
+    "team": "T",
+    "image": "assets/agents/agent-4774.png",
+    "color": "#eb4b4b",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-5602",
+    "name": "D Squadron Officer",
+    "squad": "NZSAS",
+    "team": "CT",
+    "image": "assets/agents/agent-5602.png",
+    "color": "#4b69ff",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-5500",
+    "name": "Dragomir",
+    "squad": "Sabre",
+    "team": "T",
+    "image": "assets/agents/agent-5500.png",
+    "color": "#8847ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-5505",
+    "name": "Dragomir",
+    "squad": "Sabre Footsoldier",
+    "team": "T",
+    "image": "assets/agents/agent-5505.png",
+    "color": "#4b69ff",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-4773",
+    "name": "Elite Trapper Solman",
+    "squad": "Guerrilla Warfare",
+    "team": "T",
+    "image": "assets/agents/agent-4773.png",
+    "color": "#d32ce6",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-5206",
+    "name": "Enforcer",
+    "squad": "Phoenix",
+    "team": "T",
+    "image": "assets/agents/agent-5206.png",
+    "color": "#4b69ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4730",
+    "name": "Getaway Sally",
+    "squad": "The Professionals",
+    "team": "T",
+    "image": "assets/agents/agent-4730.png",
+    "color": "#8847ff",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-5105",
+    "name": "Ground Rebel ",
+    "squad": "Elite Crew",
+    "team": "T",
+    "image": "assets/agents/agent-5105.png",
+    "color": "#4b69ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4713",
+    "name": "John 'Van Healen' Kask",
+    "squad": "SWAT",
+    "team": "CT",
+    "image": "assets/agents/agent-4713.png",
+    "color": "#8847ff",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-5109",
+    "name": "Jungle Rebel",
+    "squad": "Elite Crew",
+    "team": "T",
+    "image": "assets/agents/agent-5109.png",
+    "color": "#4b69ff",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-4756",
+    "name": "Lieutenant 'Tree Hugger' Farlow",
+    "squad": "SWAT",
+    "team": "CT",
+    "image": "assets/agents/agent-4756.png",
+    "color": "#8847ff",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-4772",
+    "name": "Lieutenant Rex Krikey",
+    "squad": "SEAL Frogman",
+    "team": "CT",
+    "image": "assets/agents/agent-4772.png",
+    "color": "#d32ce6",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-4728",
+    "name": "Little Kev",
+    "squad": "The Professionals",
+    "team": "T",
+    "image": "assets/agents/agent-4728.png",
+    "color": "#8847ff",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-5404",
+    "name": "Lt. Commander Ricksaw",
+    "squad": "NSWC SEAL",
+    "team": "CT",
+    "image": "assets/agents/agent-5404.png",
+    "color": "#eb4b4b",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-5306",
+    "name": "Markus Delrow",
+    "squad": "FBI HRT",
+    "team": "CT",
+    "image": "assets/agents/agent-5306.png",
+    "color": "#8847ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-5501",
+    "name": "Maximus",
+    "squad": "Sabre",
+    "team": "T",
+    "image": "assets/agents/agent-5501.png",
+    "color": "#8847ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-5307",
+    "name": "Michael Syfers ",
+    "squad": "FBI Sniper",
+    "team": "CT",
+    "image": "assets/agents/agent-5307.png",
+    "color": "#d32ce6",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4732",
+    "name": "Number K",
+    "squad": "The Professionals",
+    "team": "T",
+    "image": "assets/agents/agent-4732.png",
+    "color": "#d32ce6",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-4753",
+    "name": "Officer Jacques Beltram",
+    "squad": "Gendarmerie Nationale",
+    "team": "CT",
+    "image": "assets/agents/agent-4753.png",
+    "color": "#8847ff",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-5305",
+    "name": "Operator",
+    "squad": "FBI SWAT",
+    "team": "CT",
+    "image": "assets/agents/agent-5305.png",
+    "color": "#4b69ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-5106",
+    "name": "Osiris",
+    "squad": "Elite Crew",
+    "team": "T",
+    "image": "assets/agents/agent-5106.png",
+    "color": "#8847ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-5405",
+    "name": "Primeiro Tenente",
+    "squad": "Brazilian 1st Battalion",
+    "team": "CT",
+    "image": "assets/agents/agent-5405.png",
+    "color": "#4b69ff",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-5107",
+    "name": "Prof. Shahmat",
+    "squad": "Elite Crew",
+    "team": "T",
+    "image": "assets/agents/agent-5107.png",
+    "color": "#d32ce6",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-5502",
+    "name": "Rezan The Ready",
+    "squad": "Sabre",
+    "team": "T",
+    "image": "assets/agents/agent-5502.png",
+    "color": "#d32ce6",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4718",
+    "name": "Rezan the Redshirt",
+    "squad": "Sabre",
+    "team": "T",
+    "image": "assets/agents/agent-4718.png",
+    "color": "#d32ce6",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-4727",
+    "name": "Safecracker Voltzmann",
+    "squad": "The Professionals",
+    "team": "T",
+    "image": "assets/agents/agent-4727.png",
+    "color": "#d32ce6",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-5401",
+    "name": "Seal Team 6 Soldier",
+    "squad": "NSWC SEAL",
+    "team": "CT",
+    "image": "assets/agents/agent-5401.png",
+    "color": "#4b69ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4715",
+    "name": "Sergeant Bombson",
+    "squad": "SWAT",
+    "team": "CT",
+    "image": "assets/agents/agent-4715.png",
+    "color": "#8847ff",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-4735",
+    "name": "Sir Bloody Darryl Royale",
+    "squad": "The Professionals",
+    "team": "T",
+    "image": "assets/agents/agent-4735.png",
+    "color": "#eb4b4b",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-4736",
+    "name": "Sir Bloody Loudmouth Darryl",
+    "squad": "The Professionals",
+    "team": "T",
+    "image": "assets/agents/agent-4736.png",
+    "color": "#eb4b4b",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-4726",
+    "name": "Sir Bloody Miami Darryl",
+    "squad": "The Professionals",
+    "team": "T",
+    "image": "assets/agents/agent-4726.png",
+    "color": "#eb4b4b",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-4733",
+    "name": "Sir Bloody Silent Darryl",
+    "squad": "The Professionals",
+    "team": "T",
+    "image": "assets/agents/agent-4733.png",
+    "color": "#eb4b4b",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-4734",
+    "name": "Sir Bloody Skullhead Darryl",
+    "squad": "The Professionals",
+    "team": "T",
+    "image": "assets/agents/agent-4734.png",
+    "color": "#eb4b4b",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-5207",
+    "name": "Slingshot",
+    "squad": "Phoenix",
+    "team": "T",
+    "image": "assets/agents/agent-5207.png",
+    "color": "#8847ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-5205",
+    "name": "Soldier",
+    "squad": "Phoenix",
+    "team": "T",
+    "image": "assets/agents/agent-5205.png",
+    "color": "#4b69ff",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4749",
+    "name": "Sous-Lieutenant Medic",
+    "squad": "Gendarmerie Nationale",
+    "team": "CT",
+    "image": "assets/agents/agent-4749.png",
+    "color": "#8847ff",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-5308",
+    "name": "Special Agent Ava",
+    "squad": "FBI",
+    "team": "CT",
+    "image": "assets/agents/agent-5308.png",
+    "color": "#eb4b4b",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-5208",
+    "name": "Street Soldier",
+    "squad": "Phoenix",
+    "team": "T",
+    "image": "assets/agents/agent-5208.png",
+    "color": "#4b69ff",
+    "collection": "Broken Fang Agents"
+  },
+  {
+    "id": "agent-5108",
+    "name": "The Elite Mr. Muhlik",
+    "squad": "Elite Crew",
+    "team": "T",
+    "image": "assets/agents/agent-5108.png",
+    "color": "#eb4b4b",
+    "collection": "Shattered Web Agents"
+  },
+  {
+    "id": "agent-4781",
+    "name": "Trapper",
+    "squad": "Guerrilla Warfare",
+    "team": "T",
+    "image": "assets/agents/agent-4781.png",
+    "color": "#8847ff",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-4778",
+    "name": "Trapper Aggressor",
+    "squad": "Guerrilla Warfare",
+    "team": "T",
+    "image": "assets/agents/agent-4778.png",
+    "color": "#4b69ff",
+    "collection": "Operation Riptide Agents"
+  },
+  {
+    "id": "agent-4777",
+    "name": "Vypa Sista of the Revolution",
+    "squad": "Guerrilla Warfare",
+    "team": "T",
+    "image": "assets/agents/agent-4777.png",
+    "color": "#eb4b4b",
+    "collection": "Operation Riptide Agents"
+  }
+]

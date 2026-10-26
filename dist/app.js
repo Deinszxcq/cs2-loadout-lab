@@ -1,5 +1,6 @@
+import {selectedAgent,assignAgent} from './agent-selection.mjs';
 import {ensureLayouts,allowedWeapons,assignSlot} from './loadout-layout.mjs';
-const $=s=>document.querySelector(s);let data=[],weaponCatalog=[],skinIndex=new Map(),skinGroups=new Map(),team='CT',weapon='USP-S',mode='desired',category='Todas',state={CT:{},T:{}},sets=[],viewMode='current',slotContext=null;
+const $=s=>document.querySelector(s);let data=[],weaponCatalog=[],agentCatalog=[],skinIndex=new Map(),skinGroups=new Map(),team='CT',weapon='USP-S',mode='desired',category='Todas',state={CT:{},T:{}},sets=[],viewMode='current',slotContext=null,agentContext=null;
 const cloud=supabase.createClient(LOADOUT_CLOUD.url,LOADOUT_CLOUD.publishableKey,{auth:{flowType:'pkce'}});
 let user=null,accountReady=false,accountEpoch=0,saveQueue=Promise.resolve(),unsynced=false,catalogReady=false,writeRevision=0;
 const status=(message,error=false)=>{$('#syncStatus').textContent=message;$('#syncStatus').dataset.error=error};
@@ -35,7 +36,7 @@ function imageFor(img,src,lazy=false){img.loading=lazy?'lazy':'eager';img.decodi
 function render(){
   if(!catalogReady)return;
   document.querySelectorAll('[data-team]').forEach(b=>b.classList.toggle('selected',b.dataset.team===team));
-  $('#teamTitle').textContent=team==='CT'?'CONTRATERRORISTAS':'TERRORISTAS';$('#agentTitle').textContent=team==='CT'?'NSWC SEAL':'THE PROFESSIONALS';$('#agentImg').src='assets/agent-'+team.toLowerCase()+'.png';$('#teamBadge').textContent=team;
+  $('#teamTitle').textContent=team==='CT'?'CONTRATERRORISTAS':'TERRORISTAS';$('#agentTitle').textContent=team==='CT'?'NSWC SEAL':'THE PROFESSIONALS';$('#agentImg').src='assets/agent-'+team.toLowerCase()+'.png';$('#teamBadge').textContent=team;const explorerAgent=selectedAgent(state[team],team,mode,agentCatalog);if(explorerAgent){$('#agentTitle').textContent=explorerAgent.name;imageFor($('#agentImg'),explorerAgent.image)}
   const query=$('#weaponSearch').value.trim().toLowerCase();
   const visible=weapons().filter(w=>(category==='Todas'||cat(w)===category)&&w.toLowerCase().includes(query));
   $('#weaponCount').textContent=visible.length+' / '+weapons().length;
@@ -64,7 +65,7 @@ function renderSkins(){
   }));
   if(!list.length){const p=document.createElement('p');p.className='empty';p.textContent='No hay skins con ese nombre.';$('#skins').append(p)}
 }
-function showSaved(){ $('#overview').hidden=true;$('#explore').classList.remove('active');$('.workspace').hidden=true;$('#savedPanel').hidden=false;$('#equip').classList.remove('active');$('#saved').classList.add('active');$('#sets').replaceChildren();if(!sets.length){const p=document.createElement('p');p.className='empty';p.textContent='Todavía no has guardado conjuntos. Arma tu primera combinación y pulsa «Guardar conjunto».';$('#sets').append(p)}sets.forEach(set=>{const row=document.createElement('article');row.className='set';const info=document.createElement('div'),title=document.createElement('h3'),small=document.createElement('small');title.textContent=set.name;small.textContent=`${set.team} · ${set.loadout.__layout?'18 casillas · Actual y deseado':Object.keys(set.loadout).filter(k=>!k.startsWith('__')).length+' elementos'} · ${new Date(set.date).toLocaleDateString('es')}`;info.append(title,small);const load=document.createElement('button');load.textContent='Cargar conjunto';load.onclick=()=>{team=set.team;state[team]=JSON.parse(JSON.stringify(set.loadout));weapon=weapons()[0];category='Todas';$('#weaponSearch').value='';$('#search').value='';persist();showEquipment();toast('Conjunto cargado')};const remove=document.createElement('button');remove.textContent='Eliminar';remove.onclick=()=>deleteSet(set,remove);row.append(info,load,remove);$('#sets').append(row)})}
+function showSaved(){ $('#overview').hidden=true;$('#explore').classList.remove('active');$('.workspace').hidden=true;$('#savedPanel').hidden=false;$('#equip').classList.remove('active');$('#saved').classList.add('active');$('#sets').replaceChildren();if(!sets.length){const p=document.createElement('p');p.className='empty';p.textContent='Todavía no has guardado conjuntos. Arma tu primera combinación y pulsa «Guardar conjunto».';$('#sets').append(p)}sets.forEach(set=>{const row=document.createElement('article');row.className='set';const info=document.createElement('div'),title=document.createElement('h3'),small=document.createElement('small');title.textContent=set.name;small.textContent=`${set.team} · ${set.loadout.__layout?'18 casillas'+(set.loadout.__agent?' + agentes':'')+' · Actual y deseado':Object.keys(set.loadout).filter(k=>!k.startsWith('__')).length+' elementos'} · ${new Date(set.date).toLocaleDateString('es')}`;info.append(title,small);const load=document.createElement('button');load.textContent='Cargar conjunto';load.onclick=()=>{team=set.team;state[team]=JSON.parse(JSON.stringify(set.loadout));weapon=weapons()[0];category='Todas';$('#weaponSearch').value='';$('#search').value='';persist();showEquipment();toast('Conjunto cargado')};const remove=document.createElement('button');remove.textContent='Eliminar';remove.onclick=()=>deleteSet(set,remove);row.append(info,load,remove);$('#sets').append(row)})}
 function showEquipment(){$('#overview').hidden=false;$('.workspace').hidden=true;$('#savedPanel').hidden=true;$('#equip').classList.add('active');$('#explore').classList.remove('active');$('#saved').classList.remove('active');renderOverview()}
 function showExplorer(){$('#overview').hidden=true;$('.workspace').hidden=false;$('#savedPanel').hidden=true;$('#equip').classList.remove('active');$('#saved').classList.remove('active');$('#explore').classList.add('active');render()}
 document.querySelectorAll('[data-team]').forEach(b=>b.onclick=()=>{team=b.dataset.team;weapon=weapons()[0];category='Todas';$('#weaponSearch').value='';$('#search').value='';render();persist()});document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;render()});$('#search').oninput=renderSkins;$('#weaponSearch').oninput=render;$('#saved').onclick=showSaved;$('#equip').onclick=showEquipment;$('#explore').onclick=showExplorer;
@@ -86,8 +87,8 @@ $('#saveForm').onsubmit=async e=>{
     if(!$('#savedPanel').hidden)showSaved();
   }catch{toast('No se pudo guardar el conjunto. Inténtalo de nuevo.')}finally{submit.disabled=false}
 };
-Promise.all(['skins.json','weapons.json'].map(async file=>{const r=await fetch(file);if(!r.ok)throw Error();return r.json()})).then(([items,models])=>{
-  data=items;weaponCatalog=models;skinIndex=new Map(data.map(s=>[s.id,s]));
+Promise.all(['skins.json','weapons.json','agents.json'].map(async file=>{const r=await fetch(file);if(!r.ok)throw Error();return r.json()})).then(([items,models,agents])=>{
+  data=items;weaponCatalog=models;agentCatalog=agents;skinIndex=new Map(data.map(s=>[s.id,s]));
   for(const skin of data){if(!skinGroups.has(skin.weapon))skinGroups.set(skin.weapon,[]);skinGroups.get(skin.weapon).push(skin)}
   for(const list of skinGroups.values())list.sort((a,b)=>Number(!!b.vanilla)-Number(!!a.vanilla)||a.name.localeCompare(b.name));
   catalogReady=true;render();lockEquipment(!accountReady);
@@ -107,7 +108,7 @@ async function loadAccount(nextUser,force=false){
   if(!force&&nextUser?.id===user?.id&&accountReady)return;
   const epoch=++accountEpoch;accountReady=false;user=nextUser||null;unsynced=false;
   state=emptyState();sets=[];team='CT';weapon='USP-S';category='Todas';$('#weaponSearch').value='';$('#search').value='';
-  if($('#saveDialog').open)$('#saveDialog').close();if($('#slotDialog').open)$('#slotDialog').close();slotContext=null;
+  if($('#saveDialog').open)$('#saveDialog').close();if($('#slotDialog').open)$('#slotDialog').close();slotContext=null;if($('#agentDialog').open)$('#agentDialog').close();agentContext=null;
   $('#accountButton').textContent=user?'Mi cuenta':'Iniciar sesión';
   $('#accountEmail').textContent=user?.email||'';$('#accountMessage').textContent='';
   if(!user){const guest=readGuest();state=guest.state;sets=guest.sets;accountReady=true;status('Guardado local · Sin cuenta');lockEquipment(false);if(catalogReady)showEquipment();return}
@@ -186,7 +187,7 @@ function renderOverview(){
   $('#overviewTitle').textContent=viewMode==='current'?'Mi equipamiento actual':'Mi próximo equipamiento';
   document.querySelectorAll('[data-view-mode]').forEach(b=>{b.classList.toggle('selected',b.dataset.viewMode===viewMode);b.setAttribute('aria-pressed',b.dataset.viewMode===viewMode)});
   $('#loadoutBoards').replaceChildren(...['CT','T'].map(teamKey=>{
-    const layout=ensureLayouts(state[teamKey],teamKey,weaponCatalog)[viewMode];
+    const layout=ensureLayouts(state[teamKey],teamKey,weaponCatalog)[viewMode];const chosenAgent=selectedAgent(state[teamKey],teamKey,viewMode,agentCatalog);
     const board=document.createElement('article');board.className='loadout-board board-'+teamKey.toLowerCase();board.setAttribute('aria-label','Equipamiento '+teamKey);
     const heading=document.createElement('div');heading.className='board-heading';
     const title=document.createElement('h3');title.textContent=teamKey==='CT'?'ANTITERRORISTAS':'TERRORISTAS';
@@ -194,11 +195,11 @@ function renderOverview(){
     const save=document.createElement('button');save.className='board-save';save.textContent='Guardar '+teamKey;save.onclick=()=>openSave(teamKey);heading.append(badge,title,save);
     const stage=document.createElement('div');stage.className='board-stage';
     const rail=document.createElement('div');rail.className='equipment-rail';
-    const agentIcon=document.createElement('div');agentIcon.className='rail-agent';const portrait=document.createElement('img');portrait.src='assets/agent-'+teamKey.toLowerCase()+'.png';portrait.alt='Agente de referencia';agentIcon.append(portrait);rail.append(agentIcon);
+    const agentIcon=document.createElement('button');agentIcon.type='button';agentIcon.className='rail-agent';agentIcon.setAttribute('aria-label','Cambiar agente '+teamKey+' · '+(viewMode==='current'?'Actual':'Deseado'));agentIcon.title=chosenAgent?chosenAgent.name+' · '+chosenAgent.squad:'Elegir agente';agentIcon.onclick=()=>openAgentPicker(teamKey);const portrait=document.createElement('img');imageFor(portrait,chosenAgent?.image||'assets/agent-'+teamKey.toLowerCase()+'.png');portrait.alt='';agentIcon.append(portrait);rail.append(agentIcon);
     for(const group of ['gloves','knife','zeus'])rail.append(slotTile(teamKey,group,0,layout[group][0],true));
-    const figure=document.createElement('div');figure.className='board-figure';const agent=document.createElement('img');agent.src='assets/loadout-agent-'+teamKey.toLowerCase()+'.png';agent.alt='Agente de referencia '+teamKey+' de cuerpo completo';figure.append(agent);
+    const figure=document.createElement('button');figure.type='button';figure.setAttribute('aria-label','Cambiar agente desde la imagen '+teamKey);figure.onclick=()=>openAgentPicker(teamKey);figure.className='board-figure'+(chosenAgent?' inventory-agent':'');const agent=document.createElement('img');imageFor(agent,chosenAgent?.image||'assets/loadout-agent-'+teamKey.toLowerCase()+'.png');agent.alt=chosenAgent?chosenAgent.name+' | '+chosenAgent.squad:'Agente de referencia '+teamKey+' de cuerpo completo';figure.append(agent);const identity=document.createElement('div');identity.className='agent-identity';const agentName=document.createElement('strong'),squad=document.createElement('span');agentName.textContent=chosenAgent?.name||'Sin agente seleccionado';squad.textContent=chosenAgent?.squad||'Imagen de referencia';identity.append(agentName,squad);const changeAgent=document.createElement('button');changeAgent.type='button';changeAgent.className='change-agent';changeAgent.textContent='Cambiar agente ↗';changeAgent.setAttribute('aria-label','Cambiar agente '+teamKey);changeAgent.onclick=()=>openAgentPicker(teamKey);
     const teamMark=document.createElement('span');teamMark.className='stage-team-mark';teamMark.textContent=teamKey;
-    stage.append(teamMark,rail,figure);
+    stage.append(teamMark,rail,figure,identity,changeAgent);
     const arsenal=document.createElement('div');arsenal.className='board-arsenal';
     for(const [group,label] of [['pistols','Pistola inicial'],['mid','Nivel medio'],['rifles','Rifles']]){
       const column=document.createElement('section');column.className='weapon-column';column.setAttribute('aria-label',teamKey+' · '+label);
@@ -243,3 +244,39 @@ $('#slotForm').onsubmit=e=>{
   state[c.team][c.weapon]={...(state[c.team][c.weapon]||defaultPair(c.weapon)),[c.mode]:c.skin};
   team=c.team;weapon=c.weapon;mode=c.mode;category='Todas';$('#weaponSearch').value='';$('#search').value='';persist();closeSlot();render();toast('Equipamiento actualizado');
 };
+
+function openAgentPicker(teamKey){
+  if(!accountReady||!catalogReady)return;
+  const current=selectedAgent(state[teamKey],teamKey,viewMode,agentCatalog);
+  const first=current||agentCatalog.find(agent=>agent.team===teamKey);
+  agentContext={team:teamKey,mode:viewMode,id:first.id,epoch:accountEpoch};
+  $('#agentEyebrow').textContent=teamKey+' / '+(viewMode==='current'?'LO QUE TENGO':'LO QUE ME GUSTARÍA');
+  $('#agentSearch').value='';renderAgentPicker();$('#agentDialog').showModal();
+}
+function renderAgentPicker(){
+  const context=agentContext;if(!context)return;
+  const selected=agentCatalog.find(agent=>agent.id===context.id&&agent.team===context.team);
+  imageFor($('#agentPreview'),selected.image);$('#agentPreview').alt=selected.name+' | '+selected.squad;
+  $('#agentPreviewName').textContent=selected.name;$('#agentPreviewSquad').textContent=selected.squad;$('#agentPreviewCollection').textContent=selected.collection;
+  const query=$('#agentSearch').value.trim().toLocaleLowerCase();
+  const candidates=agentCatalog.filter(agent=>agent.team===context.team);
+  const matches=candidates.filter(agent=>(agent.name+' '+agent.squad+' '+agent.collection).toLocaleLowerCase().includes(query));
+  $('#agentResults').textContent=matches.length+' de '+candidates.length+' agentes · '+context.team;
+  $('#agentChoices').replaceChildren(...matches.map(agent=>{
+    const button=document.createElement('button');button.type='button';button.className='agent-choice'+(agent.id===context.id?' picked':'');button.style.setProperty('--rarity',agent.color);button.setAttribute('aria-label','Probar agente '+agent.name+' | '+agent.squad);button.setAttribute('aria-pressed',agent.id===context.id);
+    const image=document.createElement('img');image.alt='';imageFor(image,agent.image,true);
+    const name=document.createElement('strong');name.textContent=agent.name;const squad=document.createElement('span');squad.textContent=agent.squad;button.append(image,name,squad);
+    button.onclick=()=>{context.id=agent.id;const scroll=$('#agentChoices').scrollTop;renderAgentPicker();$('#agentChoices').scrollTop=scroll};return button;
+  }));
+  if(!matches.length){const p=document.createElement('p');p.className='empty';p.textContent='No hay agentes con ese nombre.';$('#agentChoices').append(p)}
+}
+const closeAgentPicker=()=>{$('#agentDialog').close();agentContext=null};
+$('#agentClose').onclick=closeAgentPicker;$('#agentCancel').onclick=closeAgentPicker;$('#agentDialog').addEventListener('cancel',()=>{agentContext=null});
+$('#agentSearch').oninput=renderAgentPicker;
+function applyAgent(id){
+  const context=agentContext;if(!context||context.epoch!==accountEpoch||!accountReady)return;
+  assignAgent(state[context.team],context.team,context.mode,id,agentCatalog);
+  persist();closeAgentPicker();render();toast(id?'Agente equipado':'Selección de agente eliminada');
+}
+$('#agentForm').onsubmit=e=>{e.preventDefault();applyAgent(agentContext?.id)};
+$('#agentClear').onclick=()=>applyAgent(null);
