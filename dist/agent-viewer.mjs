@@ -1,9 +1,10 @@
+import {applyInventoryPose} from './agent-presentation.mjs';
 import * as THREE from 'three';
 import {GLTFLoader} from './vendor/three/GLTFLoader.js';
 import {RoomEnvironment} from './vendor/three/RoomEnvironment.js';
 import {OrbitControls} from './vendor/three/OrbitControls.js';
 export function createAgentViewer(host,{assets,agentId,finish,interactive=true,onError=()=>{}}={}){
- let disposed=false,renderer,controls,observer,paintRevision=0,paintResources=[],view='full',handTarget=new THREE.Vector3(0,.8,0),gloveMaterials=[];
+ let disposed=false,renderer,controls,observer,paintRevision=0,paintResources=[],view='full',handTarget=new THREE.Vector3(0,.8,0),faceTarget=new THREE.Vector3(0,1.85,0),gloveMaterials=[];
  const resources=new Set(),scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(30,1,.01,30),originals=new Map();
  const draw=()=>{if(!disposed&&renderer)renderer.render(scene,camera)};
  const fail=error=>{if(!disposed){host.dataset.error='true';console.error('Agent viewer:',error);onError(error)}};
@@ -19,7 +20,7 @@ export function createAgentViewer(host,{assets,agentId,finish,interactive=true,o
    freePaint(paintResources);paintResources=pending;for(const r of pending)resources.add(r);host.dataset.finish=id;draw();return true;
   }catch(error){freePaint(pending);fail(error);return false}
  }
- function setView(next){view=next;if(!controls)return;const target=next==='hands'?handTarget:new THREE.Vector3(0,1,0);controls.target.copy(target);const aspect=Math.max(.3,host.clientWidth/Math.max(1,host.clientHeight)),distance=next==='hands'?Math.max(.95,.65/aspect):Math.max(4.05,1.5/aspect);if(next==='hands')camera.position.set(target.x+distance*.9,target.y+.03,target.z+distance*.45);else camera.position.set(target.x,target.y+.02,target.z+distance);controls.update();draw()}
+ function setView(next){view=next;if(!controls)return;const target=next==='hands'?handTarget:next==='face'?faceTarget:new THREE.Vector3(0,1,0);controls.target.copy(target);const aspect=Math.max(.3,host.clientWidth/Math.max(1,host.clientHeight)),distance=next==='hands'?Math.max(.95,.65/aspect):next==='face'?Math.max(.75,.45/aspect):Math.max(4.05,1.5/aspect);if(next==='hands')camera.position.set(target.x+distance*.9,target.y+.03,target.z+distance*.45);else camera.position.set(target.x,target.y+.02,target.z+distance);controls.update();draw()}
  const ready=(async()=>{
   const agentSpec=assets.agents[agentId],finishSpec=assets.finishes[finish],familySpec=assets.families[finishSpec?.family];if(!agentSpec||!familySpec)throw Error('Combinación no disponible');
   renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;renderer.domElement.setAttribute('aria-label','Agente en 3D con guantes equipados');renderer.domElement.setAttribute('role','img');host.append(renderer.domElement);
@@ -40,10 +41,11 @@ export function createAgentViewer(host,{assets,agentId,finish,interactive=true,o
     originals.set(m,{map:m.map,normalMap:m.normalMap,roughnessMap:m.roughnessMap,metalnessMap:m.metalnessMap,aoMap:m.aoMap,roughness:m.roughness,metalness:m.metalness,aoMapIntensity:m.aoMapIntensity});gloveMaterials.push(m)
    }
   }
-  function aim(name,childName,direction){const bone=bones.get(name),child=bones.get(childName);if(!bone||!child)return;agent.scene.updateMatrixWorld(true);const position=bone.getWorldPosition(new THREE.Vector3()),current=child.getWorldPosition(new THREE.Vector3()).sub(position).normalize(),rotation=bone.getWorldQuaternion(new THREE.Quaternion());rotation.premultiply(new THREE.Quaternion().setFromUnitVectors(current,new THREE.Vector3(...direction).normalize()));bone.quaternion.copy(bone.parent.getWorldQuaternion(new THREE.Quaternion()).invert().multiply(rotation));agent.scene.updateMatrixWorld(true)}
-  for(const side of ['L','R']){const sign=side==='L'?1:-1;aim('arm_upper_'+side,'arm_lower_'+side,[sign*.22,-1,.06]);aim('arm_lower_'+side,'hand_'+side,[sign*.1,-1,.15])}
+  applyInventoryPose(bones,assets.poses[agentSpec.pose]);agent.scene.updateMatrixWorld(true);host.dataset.pose=agentSpec.pose;
+  const eyeLoader=new THREE.TextureLoader();await Promise.all((agentSpec.eyes||[]).map(async spec=>{const texture=await eyeLoader.loadAsync(spec.color);texture.flipY=false;texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());resources.add(texture);if(disposed)return;agent.scene.traverse(node=>{if(!node.isMesh)return;for(const material of Array.isArray(node.material)?node.material:[node.material])if(material.name===spec.material){material.map=texture;material.needsUpdate=true}})}));if(disposed)return false;
 
   const hands=['hand_L','hand_R'].map(n=>bones.get(n)?.getWorldPosition(new THREE.Vector3())).filter(Boolean);if(hands.length)handTarget.copy(hands[0]).add(new THREE.Vector3(0,-.1,0));
+  const head=bones.get('head_0');if(head)faceTarget.copy(head.getWorldPosition(new THREE.Vector3())).add(new THREE.Vector3(0,.09,.06));
   if(!await setFinish(finish)||disposed)return false;
   const resize=()=>{if(disposed)return;const w=Math.max(1,host.clientWidth),h=Math.max(1,host.clientHeight);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();draw()};observer=new ResizeObserver(resize);observer.observe(host);resize();setView(view);host.dataset.ready='true';return true;
  })().catch(error=>{fail(error);return false}).finally(()=>{if(disposed)for(const r of resources)r.dispose()});

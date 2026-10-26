@@ -1,6 +1,6 @@
 """Build all local agent/world-glove models and source-based PBR glove finishes."""
 from pathlib import Path
-import json,struct,io,re,time,sys
+import json,struct,io,re,time,sys,subprocess
 import numpy as np
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'.local-tools/all-3d';DEST=ROOT/'dist/assets/equipment-3d';DEST.mkdir(parents=True,exist_ok=True)
@@ -85,4 +85,6 @@ def main():
    time.sleep(.5)
   params=bake(skin['pattern']['id']);manifest['finishes'][skin['id']]={'family':skin['weapon']['name'],'name':skin['pattern']['name'],**params};print(skin['pattern']['id'],flush=True)
  (ROOT/'dist/agent-3d-catalog.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+'\n',encoding='utf8');print('Complete',len(manifest['agents']),len(manifest['families']),len(manifest['finishes']))
-if __name__=='__main__':main()
+if __name__=='__main__':
+ main()
+ subprocess.run([sys.executable,str(ROOT/'scripts/build-agent-presentations.py')],check=True)

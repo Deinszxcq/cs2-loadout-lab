@@ -66,3 +66,12 @@ Reconstrucción desde CS2 local (solo lectura):
 4. `node --test tests/*.test.mjs`. Verifica las 504 combinaciones de articulaciones, cobertura de acabados y guardado independiente por equipo/vista.
 
 Solo se publican los modelos y materiales compactos de `dist/assets/equipment-3d/` y su manifiesto. Las texturas embebidas usan EXT_texture_webp para navegadores modernos. Herramientas y exportaciones de trabajo quedan ignoradas. Modelos/texturas originales: Valve / Counter-Strike 2. Three.js 0.180.0 conserva su licencia MIT en `dist/vendor/three/LICENSE`.
+
+
+### Poses y ojos
+
+La presentación conserva una pose de inventario nativa por agente (14 secuencias compartidas). Las rotaciones se aplican como diferencias respecto a la pose base de cada esqueleto, sin sustituir sus proporciones ni reorientar la raíz. Los cinco profesionales cuyo esquema apunta a la secuencia antigua ausente `cu_t_pose05` reutilizan `cu_t_pose04` de la misma familia. Cambiar guantes conserva la postura.
+
+Las 42 superficies de cara con `F_EYEBALLS` usan una textura adicional que combina el albedo original del ojo, su máscara, el tamaño de iris/pupila y la posición de los huesos oculares. La mirada está fijada al frente del rostro; no simula el seguimiento ocular dinámico de Source 2. «Rostro» permite revisar el resultado. Los agentes enmascarados sin esa capa mantienen su material original.
+
+`python scripts/build-agent-presentations.py` reconstruye las poses y las texturas de ojos sin volver a empaquetar los modelos grandes. El proceso general de materiales lo ejecuta al terminar. Algoritmo de referencia para los parámetros oculares: [Source 2 Viewer](https://github.com/ValveResourceFormat/ValveResourceFormat/blob/master/Renderer/Shaders/features/csgo_character_eyes_ps.slang).
