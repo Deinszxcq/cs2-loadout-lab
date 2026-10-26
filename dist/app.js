@@ -1,4 +1,5 @@
-const $=s=>document.querySelector(s);let data=[],weaponCatalog=[],skinIndex=new Map(),skinGroups=new Map(),team='CT',weapon='USP-S',mode='desired',category='Todas',state={CT:{},T:{}},sets=[];
+import {ensureLayouts,allowedWeapons,assignSlot} from './loadout-layout.mjs';
+const $=s=>document.querySelector(s);let data=[],weaponCatalog=[],skinIndex=new Map(),skinGroups=new Map(),team='CT',weapon='USP-S',mode='desired',category='Todas',state={CT:{},T:{}},sets=[],viewMode='current',slotContext=null;
 const cloud=supabase.createClient(LOADOUT_CLOUD.url,LOADOUT_CLOUD.publishableKey,{auth:{flowType:'pkce'}});
 let user=null,accountReady=false,accountEpoch=0,saveQueue=Promise.resolve(),unsynced=false,catalogReady=false,writeRevision=0;
 const status=(message,error=false)=>{$('#syncStatus').textContent=message;$('#syncStatus').dataset.error=error};
@@ -50,7 +51,7 @@ function render(){
   const pair=selection();$('#compareTitle').textContent=weapon;
   for(const m of ['current','desired']){const skin=skinIndex.get(pair[m]);imageFor($('#'+m+'Img'),skin.image);$('#'+m+'Name').textContent=skin.name}
   const metadata=weaponCatalog.find(w=>w.name===weapon);$('#pricempireLink').href=metadata.pricempire;$('#pricempireLink').textContent='Ver '+weapon+' en Pricempire ↗';
-  document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.mode===mode));renderSkins();$('#count').textContent=sets.length;
+  document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.mode===mode));renderSkins();$('#count').textContent=sets.length;renderOverview();
 }
 function renderSkins(){
   if(!catalogReady)return;
@@ -63,18 +64,21 @@ function renderSkins(){
   }));
   if(!list.length){const p=document.createElement('p');p.className='empty';p.textContent='No hay skins con ese nombre.';$('#skins').append(p)}
 }
-function showSaved(){ $('.workspace').hidden=true;$('#savedPanel').hidden=false;$('#equip').classList.remove('active');$('#saved').classList.add('active');$('#sets').replaceChildren();if(!sets.length){const p=document.createElement('p');p.className='empty';p.textContent='Todavía no has guardado conjuntos. Arma tu primera combinación y pulsa «Guardar conjunto».';$('#sets').append(p)}sets.forEach(set=>{const row=document.createElement('article');row.className='set';const info=document.createElement('div'),title=document.createElement('h3'),small=document.createElement('small');title.textContent=set.name;small.textContent=`${set.team} · ${Object.keys(set.loadout).length} elementos · ${new Date(set.date).toLocaleDateString('es')}`;info.append(title,small);const load=document.createElement('button');load.textContent='Cargar conjunto';load.onclick=()=>{team=set.team;state[team]=JSON.parse(JSON.stringify(set.loadout));weapon=weapons()[0];category='Todas';$('#weaponSearch').value='';$('#search').value='';persist();showEquipment();toast('Conjunto cargado')};const remove=document.createElement('button');remove.textContent='Eliminar';remove.onclick=()=>deleteSet(set,remove);row.append(info,load,remove);$('#sets').append(row)})}
-function showEquipment(){$('.workspace').hidden=false;$('#savedPanel').hidden=true;$('#equip').classList.add('active');$('#saved').classList.remove('active');render()}
-document.querySelectorAll('[data-team]').forEach(b=>b.onclick=()=>{team=b.dataset.team;weapon=weapons()[0];category='Todas';$('#weaponSearch').value='';$('#search').value='';render();persist()});document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;render()});$('#search').oninput=renderSkins;$('#weaponSearch').oninput=render;$('#saved').onclick=showSaved;$('#equip').onclick=showEquipment;
-$('#save').onclick=()=>{$('#setName').value='';$('#saveDialog').showModal();$('#setName').focus()};
+function showSaved(){ $('#overview').hidden=true;$('#explore').classList.remove('active');$('.workspace').hidden=true;$('#savedPanel').hidden=false;$('#equip').classList.remove('active');$('#saved').classList.add('active');$('#sets').replaceChildren();if(!sets.length){const p=document.createElement('p');p.className='empty';p.textContent='Todavía no has guardado conjuntos. Arma tu primera combinación y pulsa «Guardar conjunto».';$('#sets').append(p)}sets.forEach(set=>{const row=document.createElement('article');row.className='set';const info=document.createElement('div'),title=document.createElement('h3'),small=document.createElement('small');title.textContent=set.name;small.textContent=`${set.team} · ${set.loadout.__layout?'18 casillas · Actual y deseado':Object.keys(set.loadout).filter(k=>!k.startsWith('__')).length+' elementos'} · ${new Date(set.date).toLocaleDateString('es')}`;info.append(title,small);const load=document.createElement('button');load.textContent='Cargar conjunto';load.onclick=()=>{team=set.team;state[team]=JSON.parse(JSON.stringify(set.loadout));weapon=weapons()[0];category='Todas';$('#weaponSearch').value='';$('#search').value='';persist();showEquipment();toast('Conjunto cargado')};const remove=document.createElement('button');remove.textContent='Eliminar';remove.onclick=()=>deleteSet(set,remove);row.append(info,load,remove);$('#sets').append(row)})}
+function showEquipment(){$('#overview').hidden=false;$('.workspace').hidden=true;$('#savedPanel').hidden=true;$('#equip').classList.add('active');$('#explore').classList.remove('active');$('#saved').classList.remove('active');renderOverview()}
+function showExplorer(){$('#overview').hidden=true;$('.workspace').hidden=false;$('#savedPanel').hidden=true;$('#equip').classList.remove('active');$('#saved').classList.remove('active');$('#explore').classList.add('active');render()}
+document.querySelectorAll('[data-team]').forEach(b=>b.onclick=()=>{team=b.dataset.team;weapon=weapons()[0];category='Todas';$('#weaponSearch').value='';$('#search').value='';render();persist()});document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;render()});$('#search').oninput=renderSkins;$('#weaponSearch').oninput=render;$('#saved').onclick=showSaved;$('#equip').onclick=showEquipment;$('#explore').onclick=showExplorer;
+function openSave(teamKey=team){$('#setTeam').value=teamKey;$('#setName').value='';$('#saveDialog').showModal();$('#setName').focus()}
+$('#save').onclick=()=>openSave();
 $('#cancel').onclick=()=>$('#saveDialog').close();
 $('#saveForm').onsubmit=async e=>{
   e.preventDefault();const name=$('#setName').value.trim();if(!name)return;
   const submit=$('#saveForm .primary');submit.disabled=true;
   const owner=user?.id,epoch=accountEpoch;
   try{
-    if(user&&!accountReady)throw Error('Espera a que se cargue tu cuenta.');
-    const oldWeapon=weapon;for(const w of weapons()){weapon=w;selection()}weapon=oldWeapon;
+    if(!accountReady||!catalogReady)throw Error('Espera a que se cargue tu cuenta.');
+    team=$('#setTeam').value;ensureLayouts(state[team],team,weaponCatalog);
+    const oldWeapon=weapon;for(const w of weapons()){weapon=w;selection()}weapon=weapons().includes(oldWeapon)?oldWeapon:weapons()[0];
     const set={id:crypto.randomUUID(),name,team,date:Date.now(),loadout:JSON.parse(JSON.stringify(state[team]))};
     if(user){const {error}=await cloud.from('loadout_sets').insert({id:set.id,user_id:owner,name,team,equipment:set.loadout,created_at:new Date(set.date).toISOString()});if(error)throw error;if(epoch!==accountEpoch)return;}
     sets.unshift(set);const ok=persist();$('#saveDialog').close();
@@ -98,12 +102,12 @@ async function deleteSet(set,button){
   }catch{toast('No se pudo eliminar el conjunto. Inténtalo de nuevo.');button.disabled=false}
 }
 
-function lockEquipment(locked){$('.workspace').inert=locked;$('#savedPanel').inert=locked;$('#save').disabled=locked||!catalogReady}
+function lockEquipment(locked){$('#overview').inert=locked;$('.workspace').inert=locked;$('#savedPanel').inert=locked;$('#save').disabled=locked||!catalogReady}
 async function loadAccount(nextUser,force=false){
   if(!force&&nextUser?.id===user?.id&&accountReady)return;
   const epoch=++accountEpoch;accountReady=false;user=nextUser||null;unsynced=false;
   state=emptyState();sets=[];team='CT';weapon='USP-S';category='Todas';$('#weaponSearch').value='';$('#search').value='';
-  if($('#saveDialog').open)$('#saveDialog').close();
+  if($('#saveDialog').open)$('#saveDialog').close();if($('#slotDialog').open)$('#slotDialog').close();slotContext=null;
   $('#accountButton').textContent=user?'Mi cuenta':'Iniciar sesión';
   $('#accountEmail').textContent=user?.email||'';$('#accountMessage').textContent='';
   if(!user){const guest=readGuest();state=guest.state;sets=guest.sets;accountReady=true;status('Guardado local · Sin cuenta');lockEquipment(false);if(catalogReady)showEquipment();return}
@@ -160,3 +164,82 @@ $('#importGuest').onclick=async()=>{
 };
 window.addEventListener('beforeunload',e=>{if(user&&unsynced){e.preventDefault();e.returnValue=''}});
 cloud.auth.onAuthStateChange((event,session)=>{if(event==='TOKEN_REFRESHED')return;setTimeout(()=>loadAccount(session?.user),0)});
+
+function equippedSkin(teamKey,weaponName,displayMode){
+  const id=state[teamKey][weaponName]?.[displayMode];
+  return skinIndex.get(id)?.weapon===weaponName?skinIndex.get(id):skinIndex.get(defaultPair(weaponName)[displayMode]);
+}
+function slotTile(teamKey,group,index,weaponName,rail=false){
+  const skin=equippedSkin(teamKey,weaponName,viewMode),button=document.createElement('button');
+  button.type='button';button.className=rail?'rail-slot':'loadout-slot';
+  button.style.setProperty('--skin-color',skin.color);
+  button.dataset.slotTeam=teamKey;button.dataset.slotGroup=group;button.dataset.slotIndex=index;
+  button.setAttribute('aria-label',`${teamKey} · ${viewMode==='current'?'Actual':'Deseado'} · ${weaponName} · ${skin.name}`);
+  button.title=weaponName+' · '+skin.name;
+  const image=document.createElement('img');image.alt='';imageFor(image,skin.image,true);
+  const name=document.createElement('strong'),finish=document.createElement('span');name.textContent=weaponName;finish.textContent=skin.name;
+  button.append(image,name,finish);button.onclick=()=>openSlot(teamKey,group,index);
+  return button;
+}
+function renderOverview(){
+  if(!catalogReady)return;
+  $('#overviewTitle').textContent=viewMode==='current'?'Mi equipamiento actual':'Mi próximo equipamiento';
+  document.querySelectorAll('[data-view-mode]').forEach(b=>{b.classList.toggle('selected',b.dataset.viewMode===viewMode);b.setAttribute('aria-pressed',b.dataset.viewMode===viewMode)});
+  $('#loadoutBoards').replaceChildren(...['CT','T'].map(teamKey=>{
+    const layout=ensureLayouts(state[teamKey],teamKey,weaponCatalog)[viewMode];
+    const board=document.createElement('article');board.className='loadout-board board-'+teamKey.toLowerCase();board.setAttribute('aria-label','Equipamiento '+teamKey);
+    const heading=document.createElement('div');heading.className='board-heading';
+    const title=document.createElement('h3');title.textContent=teamKey==='CT'?'ANTITERRORISTAS':'TERRORISTAS';
+    const badge=document.createElement('span');badge.className='board-team';badge.textContent=teamKey;
+    const save=document.createElement('button');save.className='board-save';save.textContent='Guardar '+teamKey;save.onclick=()=>openSave(teamKey);heading.append(badge,title,save);
+    const stage=document.createElement('div');stage.className='board-stage';
+    const rail=document.createElement('div');rail.className='equipment-rail';
+    const agentIcon=document.createElement('div');agentIcon.className='rail-agent';const portrait=document.createElement('img');portrait.src='assets/agent-'+teamKey.toLowerCase()+'.png';portrait.alt='Agente de referencia';agentIcon.append(portrait);rail.append(agentIcon);
+    for(const group of ['gloves','knife','zeus'])rail.append(slotTile(teamKey,group,0,layout[group][0],true));
+    const figure=document.createElement('div');figure.className='board-figure';const agent=document.createElement('img');agent.src='assets/loadout-agent-'+teamKey.toLowerCase()+'.png';agent.alt='Agente de referencia '+teamKey+' de cuerpo completo';figure.append(agent);
+    const teamMark=document.createElement('span');teamMark.className='stage-team-mark';teamMark.textContent=teamKey;
+    stage.append(teamMark,rail,figure);
+    const arsenal=document.createElement('div');arsenal.className='board-arsenal';
+    for(const [group,label] of [['pistols','Pistola inicial'],['mid','Nivel medio'],['rifles','Rifles']]){
+      const column=document.createElement('section');column.className='weapon-column';column.setAttribute('aria-label',teamKey+' · '+label);
+      const h=document.createElement('h4');h.textContent=label;column.append(h);
+      layout[group].forEach((w,index)=>{const tile=slotTile(teamKey,group,index,w);if(group==='pistols'&&index===1){const sub=document.createElement('small');sub.className='other-pistols';sub.textContent='Otras pistolas';tile.append(sub)}column.append(tile)});arsenal.append(column);
+    }
+    const body=document.createElement('div');body.className='board-body';if(teamKey==='CT')body.append(stage,arsenal);else body.append(arsenal,stage);
+    const note=document.createElement('p');note.className='board-caption';note.textContent=(viewMode==='current'?'LO QUE TENGO':'LO QUE ME GUSTARÍA')+' / '+teamKey;
+    board.append(heading,body,note);return board;
+  }));
+}
+function openSlot(teamKey,group,index){
+  if(!accountReady||!catalogReady)return;
+  const layout=ensureLayouts(state[teamKey],teamKey,weaponCatalog)[viewMode],name=layout[group][index];
+  slotContext={team:teamKey,group,index,mode:viewMode,weapon:name,skin:equippedSkin(teamKey,name,viewMode).id,epoch:accountEpoch};
+  $('#slotEyebrow').textContent=teamKey+' / '+(viewMode==='current'?'LO QUE TENGO':'LO QUE ME GUSTARÍA');
+  $('#slotTitle').textContent=group==='pistols'&&index===0?'Pistola inicial':group==='mid'?'Nivel medio':group==='rifles'?'Rifles':group==='knife'?'Cuchillo':group==='gloves'?'Guantes':group==='zeus'?'Zeus x27':'Otras pistolas';
+  $('#slotWeapon').replaceChildren(...allowedWeapons(weaponCatalog,teamKey,group,index).map(w=>{const option=document.createElement('option');option.value=w;option.textContent=w;return option}));
+  $('#slotWeapon').value=name;$('#slotSearch').value='';renderSlotPicker();$('#slotDialog').showModal();
+}
+function renderSlotPicker(){
+  const context=slotContext;if(!context)return;
+  const selected=skinIndex.get(context.skin);imageFor($('#slotPreview'),selected.image);$('#slotSkinName').textContent=selected.name;$('#slotWeaponName').textContent=context.weapon;
+  const list=skins(context.weapon).filter(s=>s.name.toLowerCase().includes($('#slotSearch').value.trim().toLowerCase()));
+  $('#slotResults').textContent=list.length+' acabados disponibles';
+  $('#slotSkins').replaceChildren(...list.map(s=>{
+    const button=document.createElement('button');button.type='button';button.className='skin'+(s.id===context.skin?' picked':'');button.style.setProperty('--rarity',s.color);button.setAttribute('aria-label','Probar '+s.name);button.setAttribute('aria-pressed',s.id===context.skin);button.title=s.name;
+    const img=document.createElement('img');img.alt='';imageFor(img,s.image,true);const name=document.createElement('span');name.textContent=s.name;button.append(img,name);
+    button.onclick=()=>{context.skin=s.id;const scroll=$('#slotSkins').scrollTop;renderSlotPicker();$('#slotSkins').scrollTop=scroll};return button;
+  }));
+  if(!list.length){const p=document.createElement('p');p.className='empty';p.textContent='No hay acabados con ese nombre.';$('#slotSkins').append(p)}
+}
+document.querySelectorAll('[data-view-mode]').forEach(b=>b.onclick=()=>{viewMode=b.dataset.viewMode;mode=viewMode;renderOverview()});
+$('#slotWeapon').onchange=()=>{if(!slotContext)return;slotContext.weapon=$('#slotWeapon').value;slotContext.skin=equippedSkin(slotContext.team,slotContext.weapon,slotContext.mode).id;$('#slotSearch').value='';renderSlotPicker();$('#slotSkins').scrollTop=0};
+$('#slotSearch').oninput=renderSlotPicker;
+const closeSlot=()=>{$('#slotDialog').close();slotContext=null};
+$('#slotClose').onclick=closeSlot;$('#slotCancel').onclick=closeSlot;$('#slotDialog').addEventListener('cancel',()=>{slotContext=null});
+$('#slotForm').onsubmit=e=>{
+  e.preventDefault();const c=slotContext;if(!c||c.epoch!==accountEpoch||!accountReady)return;
+  if(!allowedWeapons(weaponCatalog,c.team,c.group,c.index).includes(c.weapon)||skinIndex.get(c.skin)?.weapon!==c.weapon)return;
+  const layout=ensureLayouts(state[c.team],c.team,weaponCatalog)[c.mode];assignSlot(layout,c.group,c.index,c.weapon);
+  state[c.team][c.weapon]={...(state[c.team][c.weapon]||defaultPair(c.weapon)),[c.mode]:c.skin};
+  team=c.team;weapon=c.weapon;mode=c.mode;category='Todas';$('#weaponSearch').value='';$('#search').value='';persist();closeSlot();render();toast('Equipamiento actualizado');
+};
