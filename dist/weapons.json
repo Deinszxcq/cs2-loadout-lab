@@ -1,0 +1,614 @@
+[
+  {
+    "name": "CZ75-Auto",
+    "category": "Pistolas",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/cz75-auto",
+    "count": 37
+  },
+  {
+    "name": "Desert Eagle",
+    "category": "Pistolas",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/desert-eagle",
+    "count": 45
+  },
+  {
+    "name": "Dual Berettas",
+    "category": "Pistolas",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/dual-berettas",
+    "count": 43
+  },
+  {
+    "name": "Five-SeveN",
+    "category": "Pistolas",
+    "teams": [
+      "CT"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/five-seven",
+    "count": 42
+  },
+  {
+    "name": "Glock-18",
+    "category": "Pistolas",
+    "teams": [
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/glock-18",
+    "count": 59
+  },
+  {
+    "name": "P2000",
+    "category": "Pistolas",
+    "teams": [
+      "CT"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/p2000",
+    "count": 36
+  },
+  {
+    "name": "P250",
+    "category": "Pistolas",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/p250",
+    "count": 58
+  },
+  {
+    "name": "R8 Revolver",
+    "category": "Pistolas",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/r8-revolver",
+    "count": 27
+  },
+  {
+    "name": "Tec-9",
+    "category": "Pistolas",
+    "teams": [
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/tec-9",
+    "count": 48
+  },
+  {
+    "name": "USP-S",
+    "category": "Pistolas",
+    "teams": [
+      "CT"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/usp-s",
+    "count": 45
+  },
+  {
+    "name": "AK-47",
+    "category": "Rifles",
+    "teams": [
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/ak-47",
+    "count": 61
+  },
+  {
+    "name": "AUG",
+    "category": "Rifles",
+    "teams": [
+      "CT"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/aug",
+    "count": 46
+  },
+  {
+    "name": "AWP",
+    "category": "Rifles",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/awp",
+    "count": 52
+  },
+  {
+    "name": "FAMAS",
+    "category": "Rifles",
+    "teams": [
+      "CT"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/famas",
+    "count": 44
+  },
+  {
+    "name": "G3SG1",
+    "category": "Rifles",
+    "teams": [
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/g3sg1",
+    "count": 30
+  },
+  {
+    "name": "Galil AR",
+    "category": "Rifles",
+    "teams": [
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/galil-ar",
+    "count": 44
+  },
+  {
+    "name": "M4A1-S",
+    "category": "Rifles",
+    "teams": [
+      "CT"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/m4a1-s",
+    "count": 46
+  },
+  {
+    "name": "M4A4",
+    "category": "Rifles",
+    "teams": [
+      "CT"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/m4a4",
+    "count": 52
+  },
+  {
+    "name": "SCAR-20",
+    "category": "Rifles",
+    "teams": [
+      "CT"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/scar-20",
+    "count": 33
+  },
+  {
+    "name": "SG 553",
+    "category": "Rifles",
+    "teams": [
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/sg-553",
+    "count": 38
+  },
+  {
+    "name": "SSG 08",
+    "category": "Rifles",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/ssg-08",
+    "count": 43
+  },
+  {
+    "name": "MAC-10",
+    "category": "Subfusiles",
+    "teams": [
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/mac-10",
+    "count": 57
+  },
+  {
+    "name": "MP5-SD",
+    "category": "Subfusiles",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/mp5-sd",
+    "count": 24
+  },
+  {
+    "name": "MP7",
+    "category": "Subfusiles",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/mp7",
+    "count": 40
+  },
+  {
+    "name": "MP9",
+    "category": "Subfusiles",
+    "teams": [
+      "CT"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/mp9",
+    "count": 47
+  },
+  {
+    "name": "P90",
+    "category": "Subfusiles",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/p90",
+    "count": 52
+  },
+  {
+    "name": "PP-Bizon",
+    "category": "Subfusiles",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/pp-bizon",
+    "count": 39
+  },
+  {
+    "name": "UMP-45",
+    "category": "Subfusiles",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/ump-45",
+    "count": 45
+  },
+  {
+    "name": "M249",
+    "category": "Pesadas",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/m249",
+    "count": 26
+  },
+  {
+    "name": "MAG-7",
+    "category": "Pesadas",
+    "teams": [
+      "CT"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/mag-7",
+    "count": 37
+  },
+  {
+    "name": "Negev",
+    "category": "Pesadas",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/negev",
+    "count": 25
+  },
+  {
+    "name": "Nova",
+    "category": "Pesadas",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/nova",
+    "count": 47
+  },
+  {
+    "name": "Sawed-Off",
+    "category": "Pesadas",
+    "teams": [
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/sawed-off",
+    "count": 36
+  },
+  {
+    "name": "XM1014",
+    "category": "Pesadas",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/xm1014",
+    "count": 45
+  },
+  {
+    "name": "Bayonet",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/bayonet",
+    "count": 34
+  },
+  {
+    "name": "Bowie Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/bowie-knife",
+    "count": 34
+  },
+  {
+    "name": "Butterfly Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/butterfly-knife",
+    "count": 34
+  },
+  {
+    "name": "Classic Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/classic-knife",
+    "count": 12
+  },
+  {
+    "name": "Falchion Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/falchion-knife",
+    "count": 34
+  },
+  {
+    "name": "Flip Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/flip-knife",
+    "count": 34
+  },
+  {
+    "name": "Gut Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/gut-knife",
+    "count": 34
+  },
+  {
+    "name": "Huntsman Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/huntsman-knife",
+    "count": 34
+  },
+  {
+    "name": "Karambit",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/karambit",
+    "count": 34
+  },
+  {
+    "name": "Kukri Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/kukri-knife",
+    "count": 12
+  },
+  {
+    "name": "M9 Bayonet",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/m9-bayonet",
+    "count": 34
+  },
+  {
+    "name": "Navaja Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/navaja-knife",
+    "count": 24
+  },
+  {
+    "name": "Nomad Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/nomad-knife",
+    "count": 24
+  },
+  {
+    "name": "Paracord Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/paracord-knife",
+    "count": 24
+  },
+  {
+    "name": "Shadow Daggers",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/shadow-daggers",
+    "count": 34
+  },
+  {
+    "name": "Skeleton Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/skeleton-knife",
+    "count": 24
+  },
+  {
+    "name": "Stiletto Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/stiletto-knife",
+    "count": 24
+  },
+  {
+    "name": "Survival Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/survival-knife",
+    "count": 24
+  },
+  {
+    "name": "Talon Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/talon-knife",
+    "count": 24
+  },
+  {
+    "name": "Ursus Knife",
+    "category": "Cuchillos",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/ursus-knife",
+    "count": 24
+  },
+  {
+    "name": "Bloodhound Gloves",
+    "category": "Guantes",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/bloodhound-gloves",
+    "count": 4
+  },
+  {
+    "name": "Broken Fang Gloves",
+    "category": "Guantes",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/broken-fang-gloves",
+    "count": 4
+  },
+  {
+    "name": "Driver Gloves",
+    "category": "Guantes",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/driver-gloves",
+    "count": 20
+  },
+  {
+    "name": "Hand Wraps",
+    "category": "Guantes",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/hand-wraps",
+    "count": 12
+  },
+  {
+    "name": "Hydra Gloves",
+    "category": "Guantes",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/hydra-gloves",
+    "count": 4
+  },
+  {
+    "name": "Moto Gloves",
+    "category": "Guantes",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/moto-gloves",
+    "count": 12
+  },
+  {
+    "name": "Specialist Gloves",
+    "category": "Guantes",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/specialist-gloves",
+    "count": 19
+  },
+  {
+    "name": "Sport Gloves",
+    "category": "Guantes",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/sport-gloves",
+    "count": 19
+  },
+  {
+    "name": "Zeus x27",
+    "category": "Equipo",
+    "teams": [
+      "CT",
+      "T"
+    ],
+    "pricempire": "https://pricempire.com/cs2-skin-search/zeus-x27",
+    "count": 7
+  }
+]
