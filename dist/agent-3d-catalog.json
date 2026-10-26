@@ -1,0 +1,1005 @@
+{
+  "agents": {
+    "agent-4619": {
+      "model": "assets/equipment-3d/agents/agent-4619.glb",
+      "team": "CT"
+    },
+    "agent-4780": {
+      "model": "assets/equipment-3d/agents/agent-4780.glb",
+      "team": "T"
+    },
+    "agent-5504": {
+      "model": "assets/equipment-3d/agents/agent-5504.glb",
+      "team": "T"
+    },
+    "agent-4680": {
+      "model": "assets/equipment-3d/agents/agent-4680.glb",
+      "team": "CT"
+    },
+    "agent-5403": {
+      "model": "assets/equipment-3d/agents/agent-5403.glb",
+      "team": "CT"
+    },
+    "agent-4712": {
+      "model": "assets/equipment-3d/agents/agent-4712.glb",
+      "team": "CT"
+    },
+    "agent-5400": {
+      "model": "assets/equipment-3d/agents/agent-5400.glb",
+      "team": "CT"
+    },
+    "agent-4775": {
+      "model": "assets/equipment-3d/agents/agent-4775.glb",
+      "team": "T"
+    },
+    "agent-4752": {
+      "model": "assets/equipment-3d/agents/agent-4752.glb",
+      "team": "CT"
+    },
+    "agent-5601": {
+      "model": "assets/equipment-3d/agents/agent-5601.glb",
+      "team": "CT"
+    },
+    "agent-4714": {
+      "model": "assets/equipment-3d/agents/agent-4714.glb",
+      "team": "CT"
+    },
+    "agent-5503": {
+      "model": "assets/equipment-3d/agents/agent-5503.glb",
+      "team": "T"
+    },
+    "agent-4613": {
+      "model": "assets/equipment-3d/agents/agent-4613.glb",
+      "team": "T"
+    },
+    "agent-5402": {
+      "model": "assets/equipment-3d/agents/agent-5402.glb",
+      "team": "CT"
+    },
+    "agent-4751": {
+      "model": "assets/equipment-3d/agents/agent-4751.glb",
+      "team": "CT"
+    },
+    "agent-4750": {
+      "model": "assets/equipment-3d/agents/agent-4750.glb",
+      "team": "CT"
+    },
+    "agent-4716": {
+      "model": "assets/equipment-3d/agents/agent-4716.glb",
+      "team": "CT"
+    },
+    "agent-4757": {
+      "model": "assets/equipment-3d/agents/agent-4757.glb",
+      "team": "CT"
+    },
+    "agent-4771": {
+      "model": "assets/equipment-3d/agents/agent-4771.glb",
+      "team": "CT"
+    },
+    "agent-4711": {
+      "model": "assets/equipment-3d/agents/agent-4711.glb",
+      "team": "CT"
+    },
+    "agent-4776": {
+      "model": "assets/equipment-3d/agents/agent-4776.glb",
+      "team": "T"
+    },
+    "agent-4774": {
+      "model": "assets/equipment-3d/agents/agent-4774.glb",
+      "team": "T"
+    },
+    "agent-5602": {
+      "model": "assets/equipment-3d/agents/agent-5602.glb",
+      "team": "CT"
+    },
+    "agent-5500": {
+      "model": "assets/equipment-3d/agents/agent-5500.glb",
+      "team": "T"
+    },
+    "agent-5505": {
+      "model": "assets/equipment-3d/agents/agent-5505.glb",
+      "team": "T"
+    },
+    "agent-4773": {
+      "model": "assets/equipment-3d/agents/agent-4773.glb",
+      "team": "T"
+    },
+    "agent-5206": {
+      "model": "assets/equipment-3d/agents/agent-5206.glb",
+      "team": "T"
+    },
+    "agent-4730": {
+      "model": "assets/equipment-3d/agents/agent-4730.glb",
+      "team": "T"
+    },
+    "agent-5105": {
+      "model": "assets/equipment-3d/agents/agent-5105.glb",
+      "team": "T"
+    },
+    "agent-4713": {
+      "model": "assets/equipment-3d/agents/agent-4713.glb",
+      "team": "CT"
+    },
+    "agent-5109": {
+      "model": "assets/equipment-3d/agents/agent-5109.glb",
+      "team": "T"
+    },
+    "agent-4756": {
+      "model": "assets/equipment-3d/agents/agent-4756.glb",
+      "team": "CT"
+    },
+    "agent-4772": {
+      "model": "assets/equipment-3d/agents/agent-4772.glb",
+      "team": "CT"
+    },
+    "agent-4728": {
+      "model": "assets/equipment-3d/agents/agent-4728.glb",
+      "team": "T"
+    },
+    "agent-5404": {
+      "model": "assets/equipment-3d/agents/agent-5404.glb",
+      "team": "CT"
+    },
+    "agent-5306": {
+      "model": "assets/equipment-3d/agents/agent-5306.glb",
+      "team": "CT"
+    },
+    "agent-5501": {
+      "model": "assets/equipment-3d/agents/agent-5501.glb",
+      "team": "T"
+    },
+    "agent-5307": {
+      "model": "assets/equipment-3d/agents/agent-5307.glb",
+      "team": "CT"
+    },
+    "agent-4732": {
+      "model": "assets/equipment-3d/agents/agent-4732.glb",
+      "team": "T"
+    },
+    "agent-4753": {
+      "model": "assets/equipment-3d/agents/agent-4753.glb",
+      "team": "CT"
+    },
+    "agent-5305": {
+      "model": "assets/equipment-3d/agents/agent-5305.glb",
+      "team": "CT"
+    },
+    "agent-5106": {
+      "model": "assets/equipment-3d/agents/agent-5106.glb",
+      "team": "T"
+    },
+    "agent-5405": {
+      "model": "assets/equipment-3d/agents/agent-5405.glb",
+      "team": "CT"
+    },
+    "agent-5107": {
+      "model": "assets/equipment-3d/agents/agent-5107.glb",
+      "team": "T"
+    },
+    "agent-5502": {
+      "model": "assets/equipment-3d/agents/agent-5502.glb",
+      "team": "T"
+    },
+    "agent-4718": {
+      "model": "assets/equipment-3d/agents/agent-4718.glb",
+      "team": "T"
+    },
+    "agent-4727": {
+      "model": "assets/equipment-3d/agents/agent-4727.glb",
+      "team": "T"
+    },
+    "agent-5401": {
+      "model": "assets/equipment-3d/agents/agent-5401.glb",
+      "team": "CT"
+    },
+    "agent-4715": {
+      "model": "assets/equipment-3d/agents/agent-4715.glb",
+      "team": "CT"
+    },
+    "agent-4735": {
+      "model": "assets/equipment-3d/agents/agent-4735.glb",
+      "team": "T"
+    },
+    "agent-4736": {
+      "model": "assets/equipment-3d/agents/agent-4736.glb",
+      "team": "T"
+    },
+    "agent-4726": {
+      "model": "assets/equipment-3d/agents/agent-4726.glb",
+      "team": "T"
+    },
+    "agent-4733": {
+      "model": "assets/equipment-3d/agents/agent-4733.glb",
+      "team": "T"
+    },
+    "agent-4734": {
+      "model": "assets/equipment-3d/agents/agent-4734.glb",
+      "team": "T"
+    },
+    "agent-5207": {
+      "model": "assets/equipment-3d/agents/agent-5207.glb",
+      "team": "T"
+    },
+    "agent-5205": {
+      "model": "assets/equipment-3d/agents/agent-5205.glb",
+      "team": "T"
+    },
+    "agent-4749": {
+      "model": "assets/equipment-3d/agents/agent-4749.glb",
+      "team": "CT"
+    },
+    "agent-5308": {
+      "model": "assets/equipment-3d/agents/agent-5308.glb",
+      "team": "CT"
+    },
+    "agent-5208": {
+      "model": "assets/equipment-3d/agents/agent-5208.glb",
+      "team": "T"
+    },
+    "agent-5108": {
+      "model": "assets/equipment-3d/agents/agent-5108.glb",
+      "team": "T"
+    },
+    "agent-4781": {
+      "model": "assets/equipment-3d/agents/agent-4781.glb",
+      "team": "T"
+    },
+    "agent-4778": {
+      "model": "assets/equipment-3d/agents/agent-4778.glb",
+      "team": "T"
+    },
+    "agent-4777": {
+      "model": "assets/equipment-3d/agents/agent-4777.glb",
+      "team": "T"
+    }
+  },
+  "families": {
+    "Bloodhound Gloves": {
+      "model": "assets/equipment-3d/families/bloodhound.glb"
+    },
+    "Broken Fang Gloves": {
+      "model": "assets/equipment-3d/families/brokenfang.glb"
+    },
+    "Driver Gloves": {
+      "model": "assets/equipment-3d/families/slick.glb"
+    },
+    "Hand Wraps": {
+      "model": "assets/equipment-3d/families/handwrap.glb"
+    },
+    "Hydra Gloves": {
+      "model": "assets/equipment-3d/families/hydra.glb"
+    },
+    "Moto Gloves": {
+      "model": "assets/equipment-3d/families/motorcycle.glb"
+    },
+    "Specialist Gloves": {
+      "model": "assets/equipment-3d/families/specialist.glb"
+    },
+    "Sport Gloves": {
+      "model": "assets/equipment-3d/families/sporty.glb"
+    }
+  },
+  "finishes": {
+    "base_weapon-studded_bloodhound_gloves": {
+      "family": "Bloodhound Gloves",
+      "name": "Sin skin",
+      "vanilla": true
+    },
+    "base_weapon-studded_brokenfang_gloves": {
+      "family": "Broken Fang Gloves",
+      "name": "Sin skin",
+      "vanilla": true
+    },
+    "base_weapon-slick_gloves": {
+      "family": "Driver Gloves",
+      "name": "Sin skin",
+      "vanilla": true
+    },
+    "base_weapon-leather_handwraps": {
+      "family": "Hand Wraps",
+      "name": "Sin skin",
+      "vanilla": true
+    },
+    "base_weapon-studded_hydra_gloves": {
+      "family": "Hydra Gloves",
+      "name": "Sin skin",
+      "vanilla": true
+    },
+    "base_weapon-motorcycle_gloves": {
+      "family": "Moto Gloves",
+      "name": "Sin skin",
+      "vanilla": true
+    },
+    "base_weapon-specialist_gloves": {
+      "family": "Specialist Gloves",
+      "name": "Sin skin",
+      "vanilla": true
+    },
+    "base_weapon-sporty_gloves": {
+      "family": "Sport Gloves",
+      "name": "Sin skin",
+      "vanilla": true
+    },
+    "skin-e757fd7191f9": {
+      "family": "Hand Wraps",
+      "name": "Spruce DDPAT",
+      "color": "assets/equipment-3d/finishes/handwrap_camo_grey.webp",
+      "orm": "assets/equipment-3d/finishes/handwrap_camo_grey-orm.webp",
+      "paintkit": "handwrap_camo_grey"
+    },
+    "skin-7646a28247e0": {
+      "family": "Hand Wraps",
+      "name": "Desert Shamagh",
+      "color": "assets/equipment-3d/finishes/handwrap_fabric_houndstooth_orange.webp",
+      "orm": "assets/equipment-3d/finishes/handwrap_fabric_houndstooth_orange-orm.webp",
+      "paintkit": "handwrap_fabric_houndstooth_orange"
+    },
+    "skin-71c8a21234d4": {
+      "family": "Hand Wraps",
+      "name": "Badlands",
+      "color": "assets/equipment-3d/finishes/handwrap_fabric_orange_camo.webp",
+      "orm": "assets/equipment-3d/finishes/handwrap_fabric_orange_camo-orm.webp",
+      "paintkit": "handwrap_fabric_orange_camo"
+    },
+    "skin-e728cedb22fe": {
+      "family": "Hand Wraps",
+      "name": "CAUTION!",
+      "color": "assets/equipment-3d/finishes/handwrap_leathery_caution.webp",
+      "orm": "assets/equipment-3d/finishes/handwrap_leathery_caution-orm.webp",
+      "paintkit": "handwrap_leathery_caution"
+    },
+    "skin-03513562b183": {
+      "family": "Hand Wraps",
+      "name": "Duct Tape",
+      "color": "assets/equipment-3d/finishes/handwrap_leathery_ducttape.webp",
+      "orm": "assets/equipment-3d/finishes/handwrap_leathery_ducttape-orm.webp",
+      "paintkit": "handwrap_leathery_ducttape"
+    },
+    "skin-a4133c8cedcb": {
+      "family": "Hand Wraps",
+      "name": "Cobalt Skulls",
+      "color": "assets/equipment-3d/finishes/handwrap_leathery_fabric_blue_skulls.webp",
+      "orm": "assets/equipment-3d/finishes/handwrap_leathery_fabric_blue_skulls-orm.webp",
+      "paintkit": "handwrap_leathery_fabric_blue_skulls"
+    },
+    "skin-438616f5a678": {
+      "family": "Hand Wraps",
+      "name": "Overprint",
+      "color": "assets/equipment-3d/finishes/handwrap_leathery_fabric_geometric_blue.webp",
+      "orm": "assets/equipment-3d/finishes/handwrap_leathery_fabric_geometric_blue-orm.webp",
+      "paintkit": "handwrap_leathery_fabric_geometric_blue"
+    },
+    "skin-cde47366da64": {
+      "family": "Hand Wraps",
+      "name": "Giraffe",
+      "color": "assets/equipment-3d/finishes/handwrap_leathery_fabric_giraffe.webp",
+      "orm": "assets/equipment-3d/finishes/handwrap_leathery_fabric_giraffe-orm.webp",
+      "paintkit": "handwrap_leathery_fabric_giraffe"
+    },
+    "skin-51c5ce405526": {
+      "family": "Hand Wraps",
+      "name": "Arboreal",
+      "color": "assets/equipment-3d/finishes/handwrap_leathery_fabric_green_camo.webp",
+      "orm": "assets/equipment-3d/finishes/handwrap_leathery_fabric_green_camo-orm.webp",
+      "paintkit": "handwrap_leathery_fabric_green_camo"
+    },
+    "skin-fb30d56f4210": {
+      "family": "Hand Wraps",
+      "name": "Leather",
+      "color": "assets/equipment-3d/finishes/handwrap_leathery.webp",
+      "orm": "assets/equipment-3d/finishes/handwrap_leathery-orm.webp",
+      "paintkit": "handwrap_leathery"
+    },
+    "skin-be5a5c9a12c2": {
+      "family": "Hand Wraps",
+      "name": "Constrictor",
+      "color": "assets/equipment-3d/finishes/handwrap_leathery_snakeskin_orange.webp",
+      "orm": "assets/equipment-3d/finishes/handwrap_leathery_snakeskin_orange-orm.webp",
+      "paintkit": "handwrap_leathery_snakeskin_orange"
+    },
+    "skin-1f6ac4772c2b": {
+      "family": "Hand Wraps",
+      "name": "Slaughter",
+      "color": "assets/equipment-3d/finishes/handwrap_red_slaughter.webp",
+      "orm": "assets/equipment-3d/finishes/handwrap_red_slaughter-orm.webp",
+      "paintkit": "handwrap_red_slaughter"
+    },
+    "skin-d8671b33d6d9": {
+      "family": "Moto Gloves",
+      "name": "Eclipse",
+      "color": "assets/equipment-3d/finishes/motorcycle_basic_black.webp",
+      "orm": "assets/equipment-3d/finishes/motorcycle_basic_black-orm.webp",
+      "paintkit": "motorcycle_basic_black"
+    },
+    "skin-6bd9ed91c37e": {
+      "family": "Moto Gloves",
+      "name": "Turtle",
+      "color": "assets/equipment-3d/finishes/motorcycle_basic_green_orange.webp",
+      "orm": "assets/equipment-3d/finishes/motorcycle_basic_green_orange-orm.webp",
+      "paintkit": "motorcycle_basic_green_orange"
+    },
+    "skin-38236b83de3c": {
+      "family": "Moto Gloves",
+      "name": "Blood Pressure",
+      "color": "assets/equipment-3d/finishes/motorcycle_carbonfiber_red.webp",
+      "orm": "assets/equipment-3d/finishes/motorcycle_carbonfiber_red-orm.webp",
+      "paintkit": "motorcycle_carbonfiber_red"
+    },
+    "skin-a35568f027a4": {
+      "family": "Moto Gloves",
+      "name": "Finish Line",
+      "color": "assets/equipment-3d/finishes/motorcycle_checker_flag_blue_green.webp",
+      "orm": "assets/equipment-3d/finishes/motorcycle_checker_flag_blue_green-orm.webp",
+      "paintkit": "motorcycle_checker_flag_blue_green"
+    },
+    "skin-509033032197": {
+      "family": "Moto Gloves",
+      "name": "POW!",
+      "color": "assets/equipment-3d/finishes/motorcycle_choco_boom.webp",
+      "orm": "assets/equipment-3d/finishes/motorcycle_choco_boom-orm.webp",
+      "paintkit": "motorcycle_choco_boom"
+    },
+    "skin-5cbc5bc584a3": {
+      "family": "Moto Gloves",
+      "name": "3rd Commando Company",
+      "color": "assets/equipment-3d/finishes/motorcycle_commando_ksk.webp",
+      "orm": "assets/equipment-3d/finishes/motorcycle_commando_ksk-orm.webp",
+      "paintkit": "motorcycle_commando_ksk"
+    },
+    "skin-a363d8de9765": {
+      "family": "Moto Gloves",
+      "name": "Spearmint",
+      "color": "assets/equipment-3d/finishes/motorcycle_mint_triangle.webp",
+      "orm": "assets/equipment-3d/finishes/motorcycle_mint_triangle-orm.webp",
+      "paintkit": "motorcycle_mint_triangle"
+    },
+    "skin-b3e2c06aad05": {
+      "family": "Moto Gloves",
+      "name": "Boom!",
+      "color": "assets/equipment-3d/finishes/motorcycle_mono_boom.webp",
+      "orm": "assets/equipment-3d/finishes/motorcycle_mono_boom-orm.webp",
+      "paintkit": "motorcycle_mono_boom"
+    },
+    "skin-0ab789f2f54c": {
+      "family": "Moto Gloves",
+      "name": "Smoke Out",
+      "color": "assets/equipment-3d/finishes/motorcycle_smoke.webp",
+      "orm": "assets/equipment-3d/finishes/motorcycle_smoke-orm.webp",
+      "paintkit": "motorcycle_smoke"
+    },
+    "skin-510d868c343b": {
+      "family": "Moto Gloves",
+      "name": "Cool Mint",
+      "color": "assets/equipment-3d/finishes/motorcycle_triangle_blue.webp",
+      "orm": "assets/equipment-3d/finishes/motorcycle_triangle_blue-orm.webp",
+      "paintkit": "motorcycle_triangle_blue"
+    },
+    "skin-bfd054b9c87b": {
+      "family": "Moto Gloves",
+      "name": "Polygon",
+      "color": "assets/equipment-3d/finishes/motorcycle_trigrid_blue.webp",
+      "orm": "assets/equipment-3d/finishes/motorcycle_trigrid_blue-orm.webp",
+      "paintkit": "motorcycle_trigrid_blue"
+    },
+    "skin-27fbe222018d": {
+      "family": "Moto Gloves",
+      "name": "Transport",
+      "color": "assets/equipment-3d/finishes/motorcycle_yellow_camo.webp",
+      "orm": "assets/equipment-3d/finishes/motorcycle_yellow_camo-orm.webp",
+      "paintkit": "motorcycle_yellow_camo"
+    },
+    "skin-b8f492474850": {
+      "family": "Driver Gloves",
+      "name": "Brocade Crane",
+      "color": "assets/equipment-3d/finishes/glove_driver_brocade_crane_red.webp",
+      "orm": "assets/equipment-3d/finishes/glove_driver_brocade_crane_red-orm.webp",
+      "paintkit": "glove_driver_brocade_crane_red",
+      "normal": "assets/equipment-3d/finishes/glove_driver_brocade_crane_red-normal.png"
+    },
+    "skin-d9b9add3d4ae": {
+      "family": "Driver Gloves",
+      "name": "Brocade Flowers",
+      "color": "assets/equipment-3d/finishes/glove_driver_brocade_flower_red.webp",
+      "orm": "assets/equipment-3d/finishes/glove_driver_brocade_flower_red-orm.webp",
+      "paintkit": "glove_driver_brocade_flower_red",
+      "normal": "assets/equipment-3d/finishes/glove_driver_brocade_flower_red-normal.png"
+    },
+    "skin-f9ff211df27d": {
+      "family": "Driver Gloves",
+      "name": "Dragon Fists",
+      "color": "assets/equipment-3d/finishes/glove_driver_dragon_scale_red.webp",
+      "orm": "assets/equipment-3d/finishes/glove_driver_dragon_scale_red-orm.webp",
+      "paintkit": "glove_driver_dragon_scale_red",
+      "normal": "assets/equipment-3d/finishes/glove_driver_dragon_scale_red-normal.png"
+    },
+    "skin-2d7a4c354277": {
+      "family": "Driver Gloves",
+      "name": "Garden",
+      "color": "assets/equipment-3d/finishes/glove_driver_embroidered_flowers_teal.webp",
+      "orm": "assets/equipment-3d/finishes/glove_driver_embroidered_flowers_teal-orm.webp",
+      "paintkit": "glove_driver_embroidered_flowers_teal",
+      "normal": "assets/equipment-3d/finishes/glove_driver_embroidered_flowers_teal-normal.png"
+    },
+    "skin-25977544c37d": {
+      "family": "Driver Gloves",
+      "name": "Hand Sweaters",
+      "color": "assets/equipment-3d/finishes/glove_driver_knit_argyle_green.webp",
+      "orm": "assets/equipment-3d/finishes/glove_driver_knit_argyle_green-orm.webp",
+      "paintkit": "glove_driver_knit_argyle_green",
+      "normal": "assets/equipment-3d/finishes/glove_driver_knit_argyle_green-normal.png"
+    },
+    "skin-c79f644ef9e1": {
+      "family": "Driver Gloves",
+      "name": "Plum Quill",
+      "color": "assets/equipment-3d/finishes/glove_driver_ostrich_purple.webp",
+      "orm": "assets/equipment-3d/finishes/glove_driver_ostrich_purple-orm.webp",
+      "paintkit": "glove_driver_ostrich_purple",
+      "normal": "assets/equipment-3d/finishes/glove_driver_ostrich_purple-normal.png"
+    },
+    "skin-f31ff8147493": {
+      "family": "Driver Gloves",
+      "name": "Seigaiha",
+      "color": "assets/equipment-3d/finishes/glove_driver_scallop_metallic_blue.webp",
+      "orm": "assets/equipment-3d/finishes/glove_driver_scallop_metallic_blue-orm.webp",
+      "paintkit": "glove_driver_scallop_metallic_blue",
+      "normal": "assets/equipment-3d/finishes/glove_driver_scallop_metallic_blue-normal.png"
+    },
+    "skin-b1dcd2af898f": {
+      "family": "Driver Gloves",
+      "name": "Wave Chaser",
+      "color": "assets/equipment-3d/finishes/glove_driver_silk_dragon_white.webp",
+      "orm": "assets/equipment-3d/finishes/glove_driver_silk_dragon_white-orm.webp",
+      "paintkit": "glove_driver_silk_dragon_white",
+      "normal": "assets/equipment-3d/finishes/glove_driver_silk_dragon_white-normal.png"
+    },
+    "skin-e8384ee7aa31": {
+      "family": "Driver Gloves",
+      "name": "Lunar Weave",
+      "color": "assets/equipment-3d/finishes/slick_black.webp",
+      "orm": "assets/equipment-3d/finishes/slick_black-orm.webp",
+      "paintkit": "slick_black"
+    },
+    "skin-30ad2640a228": {
+      "family": "Driver Gloves",
+      "name": "Snow Leopard",
+      "color": "assets/equipment-3d/finishes/slick_jaguar_white.webp",
+      "orm": "assets/equipment-3d/finishes/slick_jaguar_white-orm.webp",
+      "paintkit": "slick_jaguar_white"
+    },
+    "skin-5410329f8334": {
+      "family": "Driver Gloves",
+      "name": "Queen Jaguar",
+      "color": "assets/equipment-3d/finishes/slick_jaguar_yellow.webp",
+      "orm": "assets/equipment-3d/finishes/slick_jaguar_yellow-orm.webp",
+      "paintkit": "slick_jaguar_yellow"
+    },
+    "skin-6875abfca574": {
+      "family": "Driver Gloves",
+      "name": "Convoy",
+      "color": "assets/equipment-3d/finishes/slick_military.webp",
+      "orm": "assets/equipment-3d/finishes/slick_military-orm.webp",
+      "paintkit": "slick_military"
+    },
+    "skin-7b51c8bd957b": {
+      "family": "Driver Gloves",
+      "name": "Imperial Plaid",
+      "color": "assets/equipment-3d/finishes/slick_plaid_purple.webp",
+      "orm": "assets/equipment-3d/finishes/slick_plaid_purple-orm.webp",
+      "paintkit": "slick_plaid_purple"
+    },
+    "skin-941014ee5a6e": {
+      "family": "Driver Gloves",
+      "name": "Crimson Weave",
+      "color": "assets/equipment-3d/finishes/slick_red.webp",
+      "orm": "assets/equipment-3d/finishes/slick_red-orm.webp",
+      "paintkit": "slick_red"
+    },
+    "skin-3344646c8178": {
+      "family": "Driver Gloves",
+      "name": "Rezan the Red",
+      "color": "assets/equipment-3d/finishes/slick_rezan.webp",
+      "orm": "assets/equipment-3d/finishes/slick_rezan-orm.webp",
+      "paintkit": "slick_rezan"
+    },
+    "skin-ead101bfb2c9": {
+      "family": "Driver Gloves",
+      "name": "King Snake",
+      "color": "assets/equipment-3d/finishes/slick_snakeskin_white.webp",
+      "orm": "assets/equipment-3d/finishes/slick_snakeskin_white-orm.webp",
+      "paintkit": "slick_snakeskin_white"
+    },
+    "skin-52a9a70cdd76": {
+      "family": "Driver Gloves",
+      "name": "Diamondback",
+      "color": "assets/equipment-3d/finishes/slick_snakeskin_yellow.webp",
+      "orm": "assets/equipment-3d/finishes/slick_snakeskin_yellow-orm.webp",
+      "paintkit": "slick_snakeskin_yellow"
+    },
+    "skin-56be8a3a2bb8": {
+      "family": "Driver Gloves",
+      "name": "Overtake",
+      "color": "assets/equipment-3d/finishes/slick_stitched_black_orange.webp",
+      "orm": "assets/equipment-3d/finishes/slick_stitched_black_orange-orm.webp",
+      "paintkit": "slick_stitched_black_orange"
+    },
+    "skin-31ec4a2f49a1": {
+      "family": "Driver Gloves",
+      "name": "Black Tie",
+      "color": "assets/equipment-3d/finishes/slick_stitched_black_white.webp",
+      "orm": "assets/equipment-3d/finishes/slick_stitched_black_white-orm.webp",
+      "paintkit": "slick_stitched_black_white"
+    },
+    "skin-5e8f5f1fecb1": {
+      "family": "Driver Gloves",
+      "name": "Racing Green",
+      "color": "assets/equipment-3d/finishes/slick_stitched_green_grey.webp",
+      "orm": "assets/equipment-3d/finishes/slick_stitched_green_grey-orm.webp",
+      "paintkit": "slick_stitched_green_grey"
+    },
+    "skin-7b77498783da": {
+      "family": "Specialist Gloves",
+      "name": "Lime Polycam",
+      "color": "assets/equipment-3d/finishes/glove_specialist_abstract_green.webp",
+      "orm": "assets/equipment-3d/finishes/glove_specialist_abstract_green-orm.webp",
+      "paintkit": "glove_specialist_abstract_green",
+      "normal": "assets/equipment-3d/finishes/glove_specialist_abstract_green-normal.png"
+    },
+    "skin-1f8f2cadf55b": {
+      "family": "Specialist Gloves",
+      "name": "Cloud Chaser",
+      "color": "assets/equipment-3d/finishes/glove_specialist_dragon_blue.webp",
+      "orm": "assets/equipment-3d/finishes/glove_specialist_dragon_blue-orm.webp",
+      "paintkit": "glove_specialist_dragon_blue",
+      "normal": "assets/equipment-3d/finishes/glove_specialist_dragon_blue-normal.png"
+    },
+    "skin-6d087aad2621": {
+      "family": "Specialist Gloves",
+      "name": "Blackbook",
+      "color": "assets/equipment-3d/finishes/glove_specialist_graffiti_black.webp",
+      "orm": "assets/equipment-3d/finishes/glove_specialist_graffiti_black-orm.webp",
+      "paintkit": "glove_specialist_graffiti_black",
+      "normal": "assets/equipment-3d/finishes/glove_specialist_graffiti_black-normal.png"
+    },
+    "skin-cc0d5dff95fc": {
+      "family": "Specialist Gloves",
+      "name": "Chocolate Chesterfield",
+      "color": "assets/equipment-3d/finishes/glove_specialist_quilted_black.webp",
+      "orm": "assets/equipment-3d/finishes/glove_specialist_quilted_black-orm.webp",
+      "paintkit": "glove_specialist_quilted_black",
+      "normal": "assets/equipment-3d/finishes/glove_specialist_quilted_black-normal.png"
+    },
+    "skin-da1393aefb9c": {
+      "family": "Specialist Gloves",
+      "name": "Pillow Punchers",
+      "color": "assets/equipment-3d/finishes/glove_specialist_quilted_white.webp",
+      "orm": "assets/equipment-3d/finishes/glove_specialist_quilted_white-orm.webp",
+      "paintkit": "glove_specialist_quilted_white",
+      "normal": "assets/equipment-3d/finishes/glove_specialist_quilted_white-normal.png"
+    },
+    "skin-aba169232063": {
+      "family": "Specialist Gloves",
+      "name": "Sunburst",
+      "color": "assets/equipment-3d/finishes/glove_specialist_sunburst_red.webp",
+      "orm": "assets/equipment-3d/finishes/glove_specialist_sunburst_red-orm.webp",
+      "paintkit": "glove_specialist_sunburst_red",
+      "normal": "assets/equipment-3d/finishes/glove_specialist_sunburst_red-normal.png"
+    },
+    "skin-6977cd7028dd": {
+      "family": "Specialist Gloves",
+      "name": "Big Swell",
+      "color": "assets/equipment-3d/finishes/glove_specialist_wave_blue.webp",
+      "orm": "assets/equipment-3d/finishes/glove_specialist_wave_blue-orm.webp",
+      "paintkit": "glove_specialist_wave_blue",
+      "normal": "assets/equipment-3d/finishes/glove_specialist_wave_blue-normal.png"
+    },
+    "skin-fabc9079a914": {
+      "family": "Specialist Gloves",
+      "name": "Forest DDPAT",
+      "color": "assets/equipment-3d/finishes/specialist_ddpat_green_camo.webp",
+      "orm": "assets/equipment-3d/finishes/specialist_ddpat_green_camo-orm.webp",
+      "paintkit": "specialist_ddpat_green_camo"
+    },
+    "skin-844038d20265": {
+      "family": "Specialist Gloves",
+      "name": "Emerald Web",
+      "color": "assets/equipment-3d/finishes/specialist_emerald_web.webp",
+      "orm": "assets/equipment-3d/finishes/specialist_emerald_web-orm.webp",
+      "paintkit": "specialist_emerald_web"
+    },
+    "skin-25bbf8e641c1": {
+      "family": "Specialist Gloves",
+      "name": "Fade",
+      "color": "assets/equipment-3d/finishes/specialist_fade.webp",
+      "orm": "assets/equipment-3d/finishes/specialist_fade-orm.webp",
+      "paintkit": "specialist_fade"
+    },
+    "skin-b98ee789cd59": {
+      "family": "Specialist Gloves",
+      "name": "Field Agent",
+      "color": "assets/equipment-3d/finishes/specialist_fbi.webp",
+      "orm": "assets/equipment-3d/finishes/specialist_fbi-orm.webp",
+      "paintkit": "specialist_fbi"
+    },
+    "skin-b6c2f9e4afaa": {
+      "family": "Specialist Gloves",
+      "name": "Buckshot",
+      "color": "assets/equipment-3d/finishes/specialist_forest_brown.webp",
+      "orm": "assets/equipment-3d/finishes/specialist_forest_brown-orm.webp",
+      "paintkit": "specialist_forest_brown"
+    },
+    "skin-5766610447f3": {
+      "family": "Specialist Gloves",
+      "name": "Crimson Kimono",
+      "color": "assets/equipment-3d/finishes/specialist_kimono_diamonds_red.webp",
+      "orm": "assets/equipment-3d/finishes/specialist_kimono_diamonds_red-orm.webp",
+      "paintkit": "specialist_kimono_diamonds_red"
+    },
+    "skin-cc333ec05de7": {
+      "family": "Specialist Gloves",
+      "name": "Marble Fade",
+      "color": "assets/equipment-3d/finishes/specialist_marble_fade.webp",
+      "orm": "assets/equipment-3d/finishes/specialist_marble_fade-orm.webp",
+      "paintkit": "specialist_marble_fade"
+    },
+    "skin-d0749a0d812b": {
+      "family": "Specialist Gloves",
+      "name": "Foundation",
+      "color": "assets/equipment-3d/finishes/specialist_orange_white.webp",
+      "orm": "assets/equipment-3d/finishes/specialist_orange_white-orm.webp",
+      "paintkit": "specialist_orange_white"
+    },
+    "skin-fa577b9fd717": {
+      "family": "Specialist Gloves",
+      "name": "Lt. Commander",
+      "color": "assets/equipment-3d/finishes/specialist_ricksaw_camo.webp",
+      "orm": "assets/equipment-3d/finishes/specialist_ricksaw_camo-orm.webp",
+      "paintkit": "specialist_ricksaw_camo"
+    },
+    "skin-be400920aea9": {
+      "family": "Specialist Gloves",
+      "name": "Tiger Strike",
+      "color": "assets/equipment-3d/finishes/specialist_tiger_orange.webp",
+      "orm": "assets/equipment-3d/finishes/specialist_tiger_orange-orm.webp",
+      "paintkit": "specialist_tiger_orange"
+    },
+    "skin-560640de154c": {
+      "family": "Specialist Gloves",
+      "name": "Crimson Web",
+      "color": "assets/equipment-3d/finishes/specialist_webs_red.webp",
+      "orm": "assets/equipment-3d/finishes/specialist_webs_red-orm.webp",
+      "paintkit": "specialist_webs_red"
+    },
+    "skin-3b7b8a6e12a6": {
+      "family": "Specialist Gloves",
+      "name": "Mogul",
+      "color": "assets/equipment-3d/finishes/specialist_winterhex.webp",
+      "orm": "assets/equipment-3d/finishes/specialist_winterhex-orm.webp",
+      "paintkit": "specialist_winterhex"
+    },
+    "skin-0f6327fef452": {
+      "family": "Sport Gloves",
+      "name": "Violet Beadwork",
+      "color": "assets/equipment-3d/finishes/glove_sport_beadwork_diamonds_purple.webp",
+      "orm": "assets/equipment-3d/finishes/glove_sport_beadwork_diamonds_purple-orm.webp",
+      "paintkit": "glove_sport_beadwork_diamonds_purple",
+      "normal": "assets/equipment-3d/finishes/glove_sport_beadwork_diamonds_purple-normal.png"
+    },
+    "skin-c747da872a60": {
+      "family": "Sport Gloves",
+      "name": "Frosty",
+      "color": "assets/equipment-3d/finishes/glove_sport_camo_winter.webp",
+      "orm": "assets/equipment-3d/finishes/glove_sport_camo_winter-orm.webp",
+      "paintkit": "glove_sport_camo_winter",
+      "normal": "assets/equipment-3d/finishes/glove_sport_camo_winter-normal.png"
+    },
+    "skin-4a3cb425ea4e": {
+      "family": "Sport Gloves",
+      "name": "Blaze",
+      "color": "assets/equipment-3d/finishes/glove_sport_flames_orange.webp",
+      "orm": "assets/equipment-3d/finishes/glove_sport_flames_orange-orm.webp",
+      "paintkit": "glove_sport_flames_orange",
+      "normal": "assets/equipment-3d/finishes/glove_sport_flames_orange-normal.png"
+    },
+    "skin-1cd6adc6787e": {
+      "family": "Sport Gloves",
+      "name": "Creme Pinstripe",
+      "color": "assets/equipment-3d/finishes/glove_sport_pinstripe_black.webp",
+      "orm": "assets/equipment-3d/finishes/glove_sport_pinstripe_black-orm.webp",
+      "paintkit": "glove_sport_pinstripe_black",
+      "normal": "assets/equipment-3d/finishes/glove_sport_pinstripe_black-normal.png"
+    },
+    "skin-01ecc031f210": {
+      "family": "Sport Gloves",
+      "name": "Red Racer",
+      "color": "assets/equipment-3d/finishes/glove_sport_racer_red.webp",
+      "orm": "assets/equipment-3d/finishes/glove_sport_racer_red-orm.webp",
+      "paintkit": "glove_sport_racer_red",
+      "normal": "assets/equipment-3d/finishes/glove_sport_racer_red-normal.png"
+    },
+    "skin-635fbb080d7c": {
+      "family": "Sport Gloves",
+      "name": "Ultra Violent",
+      "color": "assets/equipment-3d/finishes/glove_sport_tech_gradient_bright.webp",
+      "orm": "assets/equipment-3d/finishes/glove_sport_tech_gradient_bright-orm.webp",
+      "paintkit": "glove_sport_tech_gradient_bright",
+      "normal": "assets/equipment-3d/finishes/glove_sport_tech_gradient_bright-normal.png"
+    },
+    "skin-9ff0ea2301d4": {
+      "family": "Sport Gloves",
+      "name": "Occult",
+      "color": "assets/equipment-3d/finishes/glove_sport_velvet_red.webp",
+      "orm": "assets/equipment-3d/finishes/glove_sport_velvet_red-orm.webp",
+      "paintkit": "glove_sport_velvet_red",
+      "normal": "assets/equipment-3d/finishes/glove_sport_velvet_red-normal.png"
+    },
+    "skin-b06ecb36172b": {
+      "family": "Sport Gloves",
+      "name": "Omega",
+      "color": "assets/equipment-3d/finishes/sporty_black_webbing_yellow.webp",
+      "orm": "assets/equipment-3d/finishes/sporty_black_webbing_yellow-orm.webp",
+      "paintkit": "sporty_black_webbing_yellow"
+    },
+    "skin-c1ae7186f829": {
+      "family": "Sport Gloves",
+      "name": "Vice",
+      "color": "assets/equipment-3d/finishes/sporty_blue_pink.webp",
+      "orm": "assets/equipment-3d/finishes/sporty_blue_pink-orm.webp",
+      "paintkit": "sporty_blue_pink"
+    },
+    "skin-b05ee2bf4f0d": {
+      "family": "Sport Gloves",
+      "name": "Hedge Maze",
+      "color": "assets/equipment-3d/finishes/sporty_green.webp",
+      "orm": "assets/equipment-3d/finishes/sporty_green-orm.webp",
+      "paintkit": "sporty_green"
+    },
+    "skin-35e39e9a94b1": {
+      "family": "Sport Gloves",
+      "name": "Scarlet Shamagh",
+      "color": "assets/equipment-3d/finishes/sporty_houndstooth_red.webp",
+      "orm": "assets/equipment-3d/finishes/sporty_houndstooth_red-orm.webp",
+      "paintkit": "sporty_houndstooth_red"
+    },
+    "skin-b75169b00be8": {
+      "family": "Sport Gloves",
+      "name": "Big Game",
+      "color": "assets/equipment-3d/finishes/sporty_hunter.webp",
+      "orm": "assets/equipment-3d/finishes/sporty_hunter-orm.webp",
+      "paintkit": "sporty_hunter"
+    },
+    "skin-9918998292c5": {
+      "family": "Sport Gloves",
+      "name": "Nocts",
+      "color": "assets/equipment-3d/finishes/sporty_jaguar.webp",
+      "orm": "assets/equipment-3d/finishes/sporty_jaguar-orm.webp",
+      "paintkit": "sporty_jaguar"
+    },
+    "skin-562a47f22d9c": {
+      "family": "Sport Gloves",
+      "name": "Superconductor",
+      "color": "assets/equipment-3d/finishes/sporty_light_blue.webp",
+      "orm": "assets/equipment-3d/finishes/sporty_light_blue-orm.webp",
+      "paintkit": "sporty_light_blue"
+    },
+    "skin-96fe89fd41f9": {
+      "family": "Sport Gloves",
+      "name": "Arid",
+      "color": "assets/equipment-3d/finishes/sporty_military.webp",
+      "orm": "assets/equipment-3d/finishes/sporty_military-orm.webp",
+      "paintkit": "sporty_military"
+    },
+    "skin-e2344261c5cb": {
+      "family": "Sport Gloves",
+      "name": "Amphibious",
+      "color": "assets/equipment-3d/finishes/sporty_poison_frog_blue_white.webp",
+      "orm": "assets/equipment-3d/finishes/sporty_poison_frog_blue_white-orm.webp",
+      "paintkit": "sporty_poison_frog_blue_white"
+    },
+    "skin-24bd5ece81d7": {
+      "family": "Sport Gloves",
+      "name": "Bronze Morph",
+      "color": "assets/equipment-3d/finishes/sporty_poison_frog_red_green.webp",
+      "orm": "assets/equipment-3d/finishes/sporty_poison_frog_red_green-orm.webp",
+      "paintkit": "sporty_poison_frog_red_green"
+    },
+    "skin-e506270deff6": {
+      "family": "Sport Gloves",
+      "name": "Pandora's Box",
+      "color": "assets/equipment-3d/finishes/sporty_purple.webp",
+      "orm": "assets/equipment-3d/finishes/sporty_purple-orm.webp",
+      "paintkit": "sporty_purple"
+    },
+    "skin-41eeda7bb735": {
+      "family": "Sport Gloves",
+      "name": "Slingshot",
+      "color": "assets/equipment-3d/finishes/sporty_slingshot.webp",
+      "orm": "assets/equipment-3d/finishes/sporty_slingshot-orm.webp",
+      "paintkit": "sporty_slingshot"
+    },
+    "skin-c9241d03e33b": {
+      "family": "Bloodhound Gloves",
+      "name": "Charred",
+      "color": "assets/equipment-3d/finishes/bloodhound_black_silver.webp",
+      "orm": "assets/equipment-3d/finishes/bloodhound_black_silver-orm.webp",
+      "paintkit": "bloodhound_black_silver"
+    },
+    "skin-cd619968abb9": {
+      "family": "Bloodhound Gloves",
+      "name": "Guerrilla",
+      "color": "assets/equipment-3d/finishes/bloodhound_guerrilla.webp",
+      "orm": "assets/equipment-3d/finishes/bloodhound_guerrilla-orm.webp",
+      "paintkit": "bloodhound_guerrilla"
+    },
+    "skin-4e17d497a43e": {
+      "family": "Bloodhound Gloves",
+      "name": "Bronzed",
+      "color": "assets/equipment-3d/finishes/bloodhound_metallic.webp",
+      "orm": "assets/equipment-3d/finishes/bloodhound_metallic-orm.webp",
+      "paintkit": "bloodhound_metallic"
+    },
+    "skin-de7d4238a5c9": {
+      "family": "Bloodhound Gloves",
+      "name": "Snakebite",
+      "color": "assets/equipment-3d/finishes/bloodhound_snakeskin_brass.webp",
+      "orm": "assets/equipment-3d/finishes/bloodhound_snakeskin_brass-orm.webp",
+      "paintkit": "bloodhound_snakeskin_brass"
+    },
+    "skin-a371f5d8dddc": {
+      "family": "Broken Fang Gloves",
+      "name": "Needle Point",
+      "color": "assets/equipment-3d/finishes/operation10_floral.webp",
+      "orm": "assets/equipment-3d/finishes/operation10_floral-orm.webp",
+      "paintkit": "operation10_floral"
+    },
+    "skin-82516a2fa315": {
+      "family": "Broken Fang Gloves",
+      "name": "Jade",
+      "color": "assets/equipment-3d/finishes/operation10_metalic_green.webp",
+      "orm": "assets/equipment-3d/finishes/operation10_metalic_green-orm.webp",
+      "paintkit": "operation10_metalic_green"
+    },
+    "skin-ac0c22b15c7c": {
+      "family": "Broken Fang Gloves",
+      "name": "Yellow-banded",
+      "color": "assets/equipment-3d/finishes/operation10_poison_frog_black_yellow.webp",
+      "orm": "assets/equipment-3d/finishes/operation10_poison_frog_black_yellow-orm.webp",
+      "paintkit": "operation10_poison_frog_black_yellow"
+    },
+    "skin-27555a08b61e": {
+      "family": "Broken Fang Gloves",
+      "name": "Unhinged",
+      "color": "assets/equipment-3d/finishes/operation10_snakeskin_black.webp",
+      "orm": "assets/equipment-3d/finishes/operation10_snakeskin_black-orm.webp",
+      "paintkit": "operation10_snakeskin_black"
+    },
+    "skin-76266354fa03": {
+      "family": "Hydra Gloves",
+      "name": "Emerald",
+      "color": "assets/equipment-3d/finishes/bloodhound_hydra_black_green.webp",
+      "orm": "assets/equipment-3d/finishes/bloodhound_hydra_black_green-orm.webp",
+      "paintkit": "bloodhound_hydra_black_green"
+    },
+    "skin-e8fa9ecb2fbe": {
+      "family": "Hydra Gloves",
+      "name": "Case Hardened",
+      "color": "assets/equipment-3d/finishes/bloodhound_hydra_case_hardened.webp",
+      "orm": "assets/equipment-3d/finishes/bloodhound_hydra_case_hardened-orm.webp",
+      "paintkit": "bloodhound_hydra_case_hardened"
+    },
+    "skin-530add68f13a": {
+      "family": "Hydra Gloves",
+      "name": "Mangrove",
+      "color": "assets/equipment-3d/finishes/bloodhound_hydra_green_leather_mesh_brass.webp",
+      "orm": "assets/equipment-3d/finishes/bloodhound_hydra_green_leather_mesh_brass-orm.webp",
+      "paintkit": "bloodhound_hydra_green_leather_mesh_brass"
+    },
+    "skin-fb73d424e4dd": {
+      "family": "Hydra Gloves",
+      "name": "Rattler",
+      "color": "assets/equipment-3d/finishes/bloodhound_hydra_snakeskin_brass.webp",
+      "orm": "assets/equipment-3d/finishes/bloodhound_hydra_snakeskin_brass-orm.webp",
+      "paintkit": "bloodhound_hydra_snakeskin_brass"
+    }
+  },
+  "rendering": "Source-based PBR; fixed pose; no wear/seed simulation"
+}

@@ -3,3 +3,4 @@ agents-source.json
 *.tar.gz
 
 .local-tools/
+__pycache__/

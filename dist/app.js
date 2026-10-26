@@ -1,7 +1,7 @@
-import {applyAgentPrototype,GLOVE_FINISHES} from './agent-prototype.mjs';
+import {applyAgentEquipment} from './agent-prototype.mjs';
 import {selectedAgent,assignAgent} from './agent-selection.mjs';
 import {ensureLayouts,allowedWeapons,assignSlot} from './loadout-layout.mjs';
-const $=s=>document.querySelector(s);let data=[],weaponCatalog=[],agentCatalog=[],skinIndex=new Map(),skinGroups=new Map(),team='CT',weapon='USP-S',mode='desired',category='Todas',state={CT:{},T:{}},sets=[],viewMode='current',slotContext=null,agentContext=null;
+const $=s=>document.querySelector(s);let data=[],weaponCatalog=[],agentCatalog=[],agentAssets=null,skinIndex=new Map(),skinGroups=new Map(),team='CT',weapon='USP-S',mode='desired',category='Todas',state={CT:{},T:{}},sets=[],viewMode='current',slotContext=null,agentContext=null;
 const cloud=supabase.createClient(LOADOUT_CLOUD.url,LOADOUT_CLOUD.publishableKey,{auth:{flowType:'pkce'}});
 let user=null,accountReady=false,accountEpoch=0,saveQueue=Promise.resolve(),unsynced=false,catalogReady=false,writeRevision=0;
 const status=(message,error=false)=>{$('#syncStatus').textContent=message;$('#syncStatus').dataset.error=error};
@@ -88,8 +88,8 @@ $('#saveForm').onsubmit=async e=>{
     if(!$('#savedPanel').hidden)showSaved();
   }catch{toast('No se pudo guardar el conjunto. Inténtalo de nuevo.')}finally{submit.disabled=false}
 };
-Promise.all(['skins.json','weapons.json','agents.json'].map(async file=>{const r=await fetch(file);if(!r.ok)throw Error();return r.json()})).then(([items,models,agents])=>{
-  data=items;weaponCatalog=models;agentCatalog=agents;skinIndex=new Map(data.map(s=>[s.id,s]));
+Promise.all(['skins.json','weapons.json','agents.json','agent-3d-catalog.json'].map(async file=>{const r=await fetch(file);if(!r.ok)throw Error();return r.json()})).then(([items,models,agents,assets])=>{
+  data=items;weaponCatalog=models;agentCatalog=agents;agentAssets=assets;skinIndex=new Map(data.map(s=>[s.id,s]));
   for(const skin of data){if(!skinGroups.has(skin.weapon))skinGroups.set(skin.weapon,[]);skinGroups.get(skin.weapon).push(skin)}
   for(const list of skinGroups.values())list.sort((a,b)=>Number(!!b.vanilla)-Number(!!a.vanilla)||a.name.localeCompare(b.name));
   catalogReady=true;render();lockEquipment(!accountReady);
@@ -285,21 +285,27 @@ function applyAgent(id){
 $('#agentForm').onsubmit=e=>{e.preventDefault();applyAgent(agentContext?.id)};
 $('#agentClear').onclick=()=>applyAgent(null);
 
-const labFinishes=GLOVE_FINISHES.map(f=>f.id);let labViewer=null,labContext=null;
+let labViewer=null,labContext=null;
 async function mountBoardAgent3D(){
- const figure=$('.board-t .board-figure[data-agent-id="agent-4732"]');if(!figure)return;
- const layout=ensureLayouts(state.T,'T',weaponCatalog)[viewMode],finish=equippedSkin('T',layout.gloves[0],viewMode);if(!labFinishes.includes(finish.id))return;
- const generation=boardViewerGeneration;try{const {createAgentViewer}=await import('./agent-viewer.mjs');if(generation!==boardViewerGeneration||!figure.isConnected)return;
- const host=document.createElement('div');host.className='board-agent-3d';figure.append(host);const viewer=createAgentViewer(host,{finish:finish.id,interactive:false,onError:()=>{figure.classList.remove('has-agent-3d');host.remove()}});boardViewers.push(viewer);await viewer.ready;if(generation!==boardViewerGeneration||!figure.isConnected){viewer.dispose();return}if(host.dataset.ready){figure.classList.add('has-agent-3d');const badge=document.createElement('small');badge.className='agent-3d-badge';badge.textContent='3D · '+finish.name;$('.board-t .agent-identity').append(badge)}}catch{}
+ if(!agentAssets)return;const generation=boardViewerGeneration;
+ await Promise.all(['CT','T'].map(async teamKey=>{
+ const figure=$('.board-'+teamKey.toLowerCase()+' .board-figure'),agentId=figure?.dataset.agentId;if(!agentAssets.agents[agentId])return;
+ const layout=ensureLayouts(state[teamKey],teamKey,weaponCatalog)[viewMode],finish=equippedSkin(teamKey,layout.gloves[0],viewMode);if(!agentAssets.finishes[finish.id])return;
+ try{const {createAgentViewer}=await import('./agent-viewer.mjs');if(generation!==boardViewerGeneration||!figure.isConnected)return;const host=document.createElement('div');host.className='board-agent-3d';figure.append(host);const viewer=createAgentViewer(host,{assets:agentAssets,agentId,finish:finish.id,interactive:false,onError:()=>{figure.classList.remove('has-agent-3d');host.remove()}});boardViewers.push(viewer);const ok=await viewer.ready;if(generation!==boardViewerGeneration||!figure.isConnected){viewer.dispose();return}if(ok){figure.classList.add('has-agent-3d');const badge=document.createElement('small');badge.className='agent-3d-badge';badge.textContent='3D · '+finish.name;$('.board-'+teamKey.toLowerCase()+' .agent-identity').append(badge)}}catch{}
+ }));
 }
-$('#openAgentLab').onclick=async()=>{
- if(!accountReady||!catalogReady)return;const layout=ensureLayouts(state.T,'T',weaponCatalog)[viewMode],equipped=equippedSkin('T',layout.gloves[0],viewMode);
- const context={epoch:accountEpoch,mode:viewMode,finish:labFinishes.includes(equipped.id)?equipped.id:labFinishes[0]};labContext=context;$('#agentLabApply').disabled=true;$('#agentLabStatus').textContent='Cargando modelo 3D…';$('#agentLabDestination').textContent='Se aplicará a T · '+(viewMode==='current'?'Lo que tengo':'Lo que me gustaría');$('#agentLabDialog').showModal();
- document.querySelectorAll('[data-lab-finish]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.labFinish===context.finish));
- try{const {createAgentViewer}=await import('./agent-viewer.mjs');if(labContext!==context)return;labViewer=createAgentViewer($('#agentLabStage'),{finish:context.finish,onError:()=>{$('#agentLabStatus').textContent='No se pudo cargar el visor 3D. Cierra y vuelve a intentarlo.'}});await labViewer.ready;if(labContext!==context)return;if($('#agentLabStage').dataset.ready==='true'){$('#agentLabStatus').textContent='Arrastra para girar · Rueda para acercar';$('#agentLabApply').disabled=false}}catch{$('#agentLabStatus').textContent='No se pudo cargar el visor. Cierra y vuelve a intentarlo.'}
-};
+function populateLabAgents(){const c=labContext;const agents=agentCatalog.filter(a=>a.team===c.team&&agentAssets.agents[a.id]);if(!agents.some(a=>a.id===c.agentId))c.agentId=agents[0].id;$('#labAgent').replaceChildren(...agents.map(a=>new Option(a.name+' | '+a.squad,a.id)));$('#labAgent').value=c.agentId}
+function populateLabFinishes(){const c=labContext;const finishes=data.filter(s=>s.weapon===c.family&&agentAssets.finishes[s.id]).sort((a,b)=>Number(!!b.vanilla)-Number(!!a.vanilla)||a.name.localeCompare(b.name));if(!finishes.some(f=>f.id===c.finish))c.finish=finishes.find(f=>!f.vanilla)?.id||finishes[0].id;$('#labFinish').replaceChildren(...finishes.map(f=>new Option(f.vanilla?'Sin acabado · Modelo base':f.name,f.id)));$('#labFinish').value=c.finish}
+function labDestination(){const c=labContext;$('#agentLabDestination').textContent='Se aplicará a '+c.team+' · '+(c.mode==='current'?'Lo que tengo':'Lo que me gustaría');$('#labEyebrow').textContent=c.team+' / '+(c.mode==='current'?'ACTUAL':'DESEADO')+' · VISTA 3D'}
+async function refreshLabViewer(){
+ const context=labContext;if(!context)return;const revision=++context.revision;labViewer?.dispose();labViewer=null;delete $('#agentLabStage').dataset.ready;delete $('#agentLabStage').dataset.error;$('#agentLabApply').disabled=true;$('#agentLabStatus').textContent='Cargando agente y guantes…';labDestination();
+ try{const {createAgentViewer}=await import('./agent-viewer.mjs');if(labContext!==context||context.revision!==revision)return;const viewer=createAgentViewer($('#agentLabStage'),{assets:agentAssets,agentId:context.agentId,finish:context.finish,onError:()=>{if(labContext===context&&context.revision===revision)$('#agentLabStatus').textContent='No se pudo cargar el modelo. Cambia la selección o vuelve a intentarlo.'}});labViewer=viewer;const ok=await viewer.ready;if(labContext!==context||context.revision!==revision){viewer.dispose();return}if(ok){$('#agentLabStatus').textContent='Arrastra para girar · Rueda para acercar';$('#agentLabApply').disabled=false}}catch{$('#agentLabStatus').textContent='No se pudo abrir el visor 3D.'}
+}
+function setLabTeam(teamKey){const c=labContext;c.team=teamKey;const layout=ensureLayouts(state[teamKey],teamKey,weaponCatalog)[c.mode];c.agentId=selectedAgent(state[teamKey],teamKey,c.mode,agentCatalog)?.id;c.family=layout.gloves[0];c.finish=equippedSkin(teamKey,c.family,c.mode).id;$('#labTeam').value=teamKey;populateLabAgents();$('#labFamily').value=c.family;populateLabFinishes();refreshLabViewer()}
+$('#openAgentLab').onclick=()=>{if(!accountReady||!catalogReady||!agentAssets)return;labContext={epoch:accountEpoch,mode:viewMode,revision:0};$('#labFamily').replaceChildren(...Object.keys(agentAssets.families).sort().map(name=>new Option(name,name)));$('#labCounts').textContent=Object.keys(agentAssets.agents).length+' agentes · '+Object.keys(agentAssets.families).length+' tipos de guantes · '+Object.values(agentAssets.finishes).filter(f=>!f.vanilla).length+' acabados';$('#agentLabDialog').showModal();setLabTeam(team)};
 function closeAgentLab(){labContext=null;labViewer?.dispose();labViewer=null;delete $('#agentLabStage').dataset.ready;delete $('#agentLabStage').dataset.error}
 $('#agentLabClose').onclick=()=>$('#agentLabDialog').close();$('#agentLabDialog').addEventListener('close',closeAgentLab);
-document.querySelectorAll('[data-lab-finish]').forEach(b=>b.onclick=()=>{if(!labContext)return;labContext.finish=b.dataset.labFinish;labViewer?.setFinish(labContext.finish);document.querySelectorAll('[data-lab-finish]').forEach(button=>button.setAttribute('aria-pressed',button===b))});
+$('#labTeam').onchange=()=>setLabTeam($('#labTeam').value);$('#labAgent').onchange=()=>{labContext.agentId=$('#labAgent').value;refreshLabViewer()};$('#labFamily').onchange=()=>{labContext.family=$('#labFamily').value;labContext.finish=equippedSkin(labContext.team,labContext.family,labContext.mode).id;populateLabFinishes();refreshLabViewer()};
+$('#labFinish').onchange=async()=>{const c=labContext;if(!c)return;c.finish=$('#labFinish').value;if(!labViewer||$('#agentLabStage').dataset.ready!=='true'){refreshLabViewer();return}const revision=++c.revision;$('#agentLabApply').disabled=true;$('#agentLabStatus').textContent='Cargando acabado…';const ok=await labViewer.setFinish(c.finish);if(labContext===c&&c.revision===revision){$('#agentLabApply').disabled=!ok;$('#agentLabStatus').textContent=ok?'Arrastra para girar · Rueda para acercar':'No se pudo cargar el acabado.'}};
 document.querySelectorAll('[data-lab-camera]').forEach(b=>b.onclick=()=>labViewer?.setView(b.dataset.labCamera));
-$('#agentLabApply').onclick=()=>{const c=labContext;if(!c||c.epoch!==accountEpoch||!accountReady||!labFinishes.includes(c.finish))return;applyAgentPrototype(state.T,c.mode,c.finish,{agents:agentCatalog,weapons:weaponCatalog,skins:data});persist();$('#agentLabDialog').close();render();toast('Number K y guantes equipados en T')};
+$('#agentLabApply').onclick=()=>{const c=labContext;if(!c||c.epoch!==accountEpoch||!accountReady)return;applyAgentEquipment(state[c.team],c.team,c.mode,c.agentId,c.finish,{agents:agentCatalog,weapons:weaponCatalog,skins:data,assets:agentAssets});team=c.team;persist();$('#agentLabDialog').close();render();toast('Agente y guantes equipados en '+c.team)};
