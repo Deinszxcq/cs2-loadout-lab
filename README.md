@@ -124,3 +124,8 @@ Sin un agente elegido se muestra SAS (CT) o Phoenix (T), sin escribir un agente 
 ### Desgaste y armas activas
 
 `currentWear`/`desiredWear` y `currentVariant`/`desiredVariant` se guardan junto a cada par de skins; las configuraciones anteriores siguen siendo válidas. El estado solo acepta desgastes y variantes que existen para la skin. Las tarjetas del equipamiento consultan el precio Steam del estado guardado mediante la caché de mercado existente. Las armas desactivadas se guardan en `__disabled.current` y `__disabled.desired` por equipo y se pueden recuperar desde «Armas» sin borrar sus acabados. Todo viaja en el JSON del perfil y de los conjuntos existentes.
+
+
+### Mercado y resumen por equipo
+
+El selector Steam/CSFloat cambia las tarjetas, el editor y el resumen, y recuerda la preferencia en este navegador (`lab-price-market`). El resumen del modo actual/deseado incluye acabados activos de armas, cuchillo, guantes, Zeus y agente seleccionado; omite «Sin skin» y agentes predeterminados. Consulta también los artículos fuera de pantalla para no calcular solo lo visible. El desglose permite revisar cada partida. Los importes se suman en céntimos y las cotizaciones ausentes o pendientes producen un subtotal marcado como parcial. Los datos anteriores se indican. CT + TT suma ambos equipamientos, por lo que un artículo compartido cuenta en cada uno.

@@ -1,8 +1,9 @@
+import {summaryItems,summarizeQuotes} from './loadout-total.mjs';
 import {wearLabels,validCondition,savedCondition,setCondition,weaponEnabled,setWeaponEnabled} from './equipment-options.mjs';
-import {createCardPrices} from './card-prices.mjs?v=lab-1';
+import {createCardPrices} from './card-prices.mjs?v=totals-1';
 import {overviewWeapons,overviewAgent} from './overview-catalog.mjs';
 import {createAgentCatalog} from './agent-catalog.mjs';
-import {createExplorer} from './explorer.mjs?v=lab-1';
+import {createExplorer} from './explorer.mjs?v=totals-1';
 import {applyAgentEquipment} from './agent-prototype.mjs';
 import {selectedAgent,assignAgent} from './agent-selection.mjs';
 import {ensureLayouts,allowedWeapons,assignSlot} from './loadout-layout.mjs';
@@ -39,8 +40,17 @@ const selection=()=>{
   state[team][weapon]=pair;return pair;
 };
 function imageFor(img,src,lazy=false){img.loading=lazy?'lazy':'eager';img.decoding='async';img.onerror=()=>{img.onerror=null;img.src='assets/image-unavailable.svg'};img.src=src}
-const overviewPrices=createCardPrices($('#overview')),editorPrices=createCardPrices($('#slotDialog'));
-function steamQuote(skin,condition){const e=document.createElement('span');e.className='steam-quote';e.textContent=skin.vanilla?'Steam —':'Steam …';if(!skin.vanilla){e.dataset.priceSkin=skin.id;e.dataset.priceWear=condition.wear;e.dataset.priceVariant=condition.variant}return e}
+let priceMarket='steam';try{if(localStorage.getItem('lab-price-market')==='csfloat')priceMarket='csfloat'}catch{}let summaryTimer;
+const overviewPrices=createCardPrices($('#overview'),{provider:()=>priceMarket,onUpdate:queueSummary}),editorPrices=createCardPrices($('#slotDialog'),{provider:()=>priceMarket});
+$('#equipmentMarket').value=priceMarket;
+function queueSummary(){clearTimeout(summaryTimer);summaryTimer=setTimeout(renderSummaryTotals,20)}
+const money=cents=>new Intl.NumberFormat('es-EC',{style:'currency',currency:'USD'}).format(cents/100);
+function setPriceMarket(value){priceMarket=value==='csfloat'?'csfloat':'steam';try{localStorage.setItem('lab-price-market',priceMarket)}catch{}$('#equipmentMarket').value=priceMarket;$('#slotPriceMarket').value=priceMarket;for(const e of document.querySelectorAll('#overview .steam-quote,#slotSteamPrice .steam-quote')){e.textContent=(priceMarket==='steam'?'Steam':'CSFloat')+(e.dataset.priceSkin?' …':' —');e.dataset.priceLoaded='false';delete e.dataset.priceValue}overviewPrices.observe();editorPrices.observe();queueSummary()}
+$('#equipmentMarket').onchange=()=>setPriceMarket($('#equipmentMarket').value);
+function renderSummaryItems(){const area=$('#summaryItems');area.replaceChildren();for(const side of ['CT','T']){const layout=ensureLayouts(state[side],side,weaponCatalog)[viewMode],items=summaryItems({equipment:state[side],team:side,mode:viewMode,catalog:weaponCatalog,layout,agents:agentCatalog,details:skinDetails,skinFor:w=>equippedSkin(side,w,viewMode)}),group=document.createElement('div'),heading=document.createElement('h3');heading.textContent=side==='CT'?'CT':'TT';group.append(heading);for(const item of items){const row=document.createElement('div');row.className='summary-item';const name=document.createElement('span');name.textContent=item.weapon+' · '+item.skin.name+(item.wear?' · '+(wearLabels[item.wear]||item.wear):'')+(item.variant==='stattrak'?' · StatTrak™':item.variant==='souvenir'?' · Souvenir':'');const price=steamQuote(item.skin,item);price.dataset.priceEager='true';price.dataset.priceTeam=side;row.append(name,price);group.append(row)}if(!items.length){const empty=document.createElement('p');empty.textContent='Sin acabados ni agentes de pago activos.';group.append(empty)}area.append(group)}renderSummaryTotals()}
+function renderSummaryTotals(){if(!catalogReady)return;const rows=[...$('#summaryItems').querySelectorAll('[data-price-team]')].map(e=>({team:e.dataset.priceTeam,market:e.dataset.priceMarket,loaded:e.dataset.priceLoaded==='true',price:e.dataset.priceValue===undefined?null:Number(e.dataset.priceValue),stale:e.dataset.priceStale==='true'}));$('#summaryContext').textContent=(priceMarket==='steam'?'Steam':'CSFloat')+' · '+(viewMode==='current'?'Lo que tengo':'Lo que quiero')+' · USD';for(const key of ['CT','T','Combined']){const result=summarizeQuotes(key==='Combined'?rows:rows.filter(r=>r.team===key),priceMarket);$('#summary'+key).textContent=result.priced||!result.items?money(result.cents):result.pending?'Consultando…':'Sin cotización';$('#summary'+key).classList.toggle('summary-partial',result.partial);const notes=[];if(result.partial)notes.push('Parcial');notes.push(result.priced+' de '+result.items+' artículos con precio');if(result.pending)notes.push(result.pending+' pendientes');if(result.missing)notes.push(result.missing+' sin cotización');if(result.stale)notes.push(result.stale+' datos anteriores');$('#summary'+key+'Status').textContent=notes.join(' · ')}}
+
+function steamQuote(skin,condition){const e=document.createElement('span');e.className='steam-quote';e.textContent=(priceMarket==='steam'?'Steam':'CSFloat')+(skin.vanilla?' —':' …');if(!skin.vanilla){e.dataset.priceSkin=skin.id;e.dataset.priceWear=condition.wear;e.dataset.priceVariant=condition.variant}return e}
 const explorer=createExplorer($('.workspace'),{onEquip(skin,targetTeam,targetMode,condition={}){
  if(!accountReady||!weaponCatalog.find(w=>w.name===skin.weapon)?.teams.includes(targetTeam))return;
  team=targetTeam;weapon=skin.weapon;mode=targetMode;selection()[mode]=skin.id;setCondition(state[targetTeam],skin.weapon,targetMode,skinDetails[skin.id],condition.wear,condition.variant);setWeaponEnabled(state[targetTeam],skin.weapon,targetMode,true);persist();render();toast(skin.name+' · '+(mode==='current'?'Añadida a lo que tienes':'Añadida a tu lista'));
@@ -201,7 +211,7 @@ function renderOverview(){
     const note=document.createElement('p');note.className='board-caption';note.textContent=(viewMode==='current'?'LO QUE TENGO':'LO QUE ME GUSTARÍA')+' / '+teamKey;
     board.append(heading,body,note);return board;
   }));
-  overviewPrices.observe();mountBoardAgent3D();
+  renderSummaryItems();overviewPrices.observe();mountBoardAgent3D();
 }
 function openSlot(teamKey,group,index){
   if(!accountReady||!catalogReady)return;
@@ -240,7 +250,8 @@ $('#slotForm').onsubmit=e=>{
   team=c.team;weapon=c.weapon;mode=c.mode;category='Todas';$('#weaponSearch').value='';$('#search').value='';persist();closeSlot();render();toast('Equipamiento actualizado');
 };
 
-function renderConditionEditor(){const c=slotContext;if(!c)return;const skin=skinIndex.get(c.skin),detail=skinDetails[c.skin]||{};Object.assign(c,validCondition(detail,c.wear,c.variant));$('#slotWear').replaceChildren(...(detail.wears?.length?detail.wears.map(w=>new Option(wearLabels[w],w)):[new Option('Sin desgaste','')]));$('#slotWear').value=c.wear;$('#slotWear').disabled=!detail.wears?.length;$('#slotVariant').replaceChildren(new Option('Normal','normal'));if(detail.stattrak)$('#slotVariant').append(new Option('StatTrak™','stattrak'));if(detail.souvenir)$('#slotVariant').append(new Option('Souvenir','souvenir'));$('#slotVariant').value=c.variant;$('#slotEnabled').checked=c.enabled;$('#slotSteamPrice').replaceChildren(steamQuote(skin,c));editorPrices.observe()}
+function renderConditionEditor(){const c=slotContext;if(!c)return;const skin=skinIndex.get(c.skin),detail=skinDetails[c.skin]||{};Object.assign(c,validCondition(detail,c.wear,c.variant));$('#slotWear').replaceChildren(...(detail.wears?.length?detail.wears.map(w=>new Option(wearLabels[w],w)):[new Option('Sin desgaste','')]));$('#slotWear').value=c.wear;$('#slotWear').disabled=!detail.wears?.length;$('#slotVariant').replaceChildren(new Option('Normal','normal'));if(detail.stattrak)$('#slotVariant').append(new Option('StatTrak™','stattrak'));if(detail.souvenir)$('#slotVariant').append(new Option('Souvenir','souvenir'));$('#slotVariant').value=c.variant;$('#slotEnabled').checked=c.enabled;$('#slotPriceMarket').value=priceMarket;$('#slotSteamPrice').replaceChildren(steamQuote(skin,c));editorPrices.observe()}
+$('#slotPriceMarket').onchange=()=>setPriceMarket($('#slotPriceMarket').value);
 $('#slotWear').onchange=()=>{if(slotContext){slotContext.wear=$('#slotWear').value;renderConditionEditor()}};$('#slotVariant').onchange=()=>{if(slotContext){slotContext.variant=$('#slotVariant').value;renderConditionEditor()}};$('#slotEnabled').onchange=()=>{if(slotContext)slotContext.enabled=$('#slotEnabled').checked};
 let visibilityContext=null;
 function openWeaponVisibility(side){if(!accountReady||!catalogReady)return;const layout=ensureLayouts(state[side],side,weaponCatalog)[viewMode],all=overviewWeapons(weaponCatalog,side,layout),names=[...Object.values(all).flat(),...['knife','gloves','zeus'].map(g=>layout[g][0])];visibilityContext={team:side,mode:viewMode,epoch:accountEpoch};$('#weaponVisibilityTitle').textContent='Armas · '+(side==='CT'?'CT':'TT');$('#weaponVisibilityMode').textContent=viewMode==='current'?'Lo que tengo':'Lo que quiero';$('#weaponVisibilityList').replaceChildren(...names.map(name=>{const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.value=name;input.checked=weaponEnabled(state[side],name,viewMode);label.append(input,document.createTextNode(name));return label}));$('#weaponVisibilityDialog').showModal()}
