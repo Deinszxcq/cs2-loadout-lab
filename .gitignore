@@ -4,3 +4,6 @@ agents-source.json
 
 .local-tools/
 __pycache__/
+supabase/.env*
+supabase/functions/.env*
+supabase/.temp/

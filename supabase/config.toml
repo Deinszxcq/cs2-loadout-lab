@@ -1,0 +1,6 @@
+project_id = "cs2-loadout-lab"
+
+[functions.market-prices]
+# Modern publishable API keys are validated by the function itself.
+# This function only exposes public market quotes; cache tables are backend-only.
+verify_jwt = false

@@ -1,6 +1,7 @@
 export const rarityNames={Contraband:'Contrabando',Covert:'Encubierto',Classified:'Clasificado',Restricted:'Restringido','Mil-Spec Grade':'Grado militar','Industrial Grade':'Grado industrial','Consumer Grade':'Grado de consumidor',Extraordinary:'Extraordinario'};
 export const wearNames={'Factory New':'Recién fabricado','Minimal Wear':'Casi nuevo','Field-Tested':'Algo desgastado','Well-Worn':'Bastante desgastado','Battle-Scarred':'Deplorable'};
 export function catalogDetails(source){return Object.fromEntries(source.map(s=>[s.id,{rarity:s.rarity?.name||'',min:s.min_float??null,max:s.max_float??null,stattrak:!!s.stattrak,souvenir:!!s.souvenir,wears:(s.wears||[]).map(w=>w.name),collections:(s.collections||[]).map(c=>({name:c.name,image:c.image})),crates:(s.crates||[]).length}]))}
+export function marketItems(source){return Object.fromEntries(source.filter(s=>s.pattern).map(s=>[s.id,{name:s.name,wears:(s.wears||[]).map(w=>w.name),stattrak:!!s.stattrak,souvenir:!!s.souvenir,paint:Number(s.paint_index),weapon:s.weapon.weapon_id,phase:s.phase||null}]))}
 const normalize=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 export function filterCatalog(items,models,details,{weapon='',category='',query='',rarities=[],wear='',variant='',min=0,max=1,sort='name'}={}){
  if(Number(min)>Number(max))return [];
