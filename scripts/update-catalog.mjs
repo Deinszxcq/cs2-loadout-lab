@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {catalogDetails} from '../dist/catalog-data.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const source = 'https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/en/';
@@ -36,4 +37,5 @@ if (new Set(entries.map(s => s.id)).size !== entries.length) throw new Error('Du
 for (const weapon of weapons) if (!entries.some(s => s.weapon === weapon.name)) throw new Error(`Empty weapon: ${weapon.name}`);
 await fs.writeFile(path.join(root, 'dist/skins.json'), JSON.stringify(entries) + '\n');
 await fs.writeFile(path.join(root, 'dist/weapons.json'), JSON.stringify(weapons, null, 2) + '\n');
+await fs.writeFile(path.join(root, 'dist/skin-details.json'), JSON.stringify(catalogDetails(skins.filter(s=>entries.some(e=>e.id===s.id))))+'\n');
 console.log(JSON.stringify({ models: weapons.length, finishes: entries.filter(s=>!s.vanilla).length, options: entries.length, awp: weaponMap.get('AWP').count }));

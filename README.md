@@ -40,6 +40,8 @@ Verificado con dos cuentas temporales: autenticación real, guardado y recuperac
 
 ## Catálogo y dependencias
 
+«Explorar skins» usa un catálogo independiente del equipo: buscador superior por arma, acabado o colección, menús por categoría, filtros de rareza, float, desgaste y variantes, y orden por nombre o rareza. Las tarjetas muestran imágenes grandes, colección, contenedores y rango de float con metadatos de `skin-details.json`. Se cargan 36 tarjetas por página; «Ver más» amplía los resultados. En móvil, los filtros se despliegan con un botón. El detalle permite guardar «La tengo» o «La quiero» en un equipo compatible usando el guardado existente. No muestra precios ni ofertas simuladas. `scripts/update-catalog.mjs` actualiza también estos metadatos; `node --test tests/explorer-catalog.test.mjs` verifica cobertura y filtros combinados.
+
 Catálogo ampliado: 63 modelos (35 armas, 20 cuchillos y 8 familias de guantes), 2.106 acabados y 63 opciones sin skin. Incluye los 52 acabados de AWP. Las fases Doppler se muestran por separado. Imágenes de referencia de Valve, catálogo de [ByMykel/CSGO-API](https://github.com/ByMykel/CSGO-API). Las imágenes nuevas se cargan bajo demanda desde Steam; las 96 imágenes iniciales siguen incluidas localmente. El agente es una imagen fija; no hay integración con el inventario de Steam ni visor 3D.
 
 Cada modelo tiene un enlace de consulta a Pricempire. El catálogo se obtiene de los archivos públicos de ByMykel/CSGO-API, no de la API de Pricempire: esa API requiere una cuenta y una clave. No se incluyen precios ni se incrustan claves de Pricempire en el navegador.

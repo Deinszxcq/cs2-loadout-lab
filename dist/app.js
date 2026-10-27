@@ -1,7 +1,8 @@
+import {createExplorer} from './explorer.mjs';
 import {applyAgentEquipment} from './agent-prototype.mjs';
 import {selectedAgent,assignAgent} from './agent-selection.mjs';
 import {ensureLayouts,allowedWeapons,assignSlot} from './loadout-layout.mjs';
-const $=s=>document.querySelector(s);let data=[],weaponCatalog=[],agentCatalog=[],agentAssets=null,skinIndex=new Map(),skinGroups=new Map(),team='CT',weapon='USP-S',mode='desired',category='Todas',state={CT:{},T:{}},sets=[],viewMode='current',slotContext=null,agentContext=null;
+const $=s=>document.querySelector(s);let data=[],weaponCatalog=[],agentCatalog=[],agentAssets=null,skinDetails={},skinIndex=new Map(),skinGroups=new Map(),team='CT',weapon='USP-S',mode='desired',category='Todas',state={CT:{},T:{}},sets=[],viewMode='current',slotContext=null,agentContext=null;
 const cloud=supabase.createClient(LOADOUT_CLOUD.url,LOADOUT_CLOUD.publishableKey,{auth:{flowType:'pkce'}});
 let user=null,accountReady=false,accountEpoch=0,saveQueue=Promise.resolve(),unsynced=false,catalogReady=false,writeRevision=0;
 const status=(message,error=false)=>{$('#syncStatus').textContent=message;$('#syncStatus').dataset.error=error};
@@ -34,42 +35,19 @@ const selection=()=>{
   state[team][weapon]=pair;return pair;
 };
 function imageFor(img,src,lazy=false){img.loading=lazy?'lazy':'eager';img.decoding='async';img.onerror=()=>{img.onerror=null;img.src='assets/image-unavailable.svg'};img.src=src}
+const explorer=createExplorer($('.workspace'),{onEquip(skin,targetTeam,targetMode){
+ if(!accountReady||!weaponCatalog.find(w=>w.name===skin.weapon)?.teams.includes(targetTeam))return;
+ team=targetTeam;weapon=skin.weapon;mode=targetMode;selection()[mode]=skin.id;persist();render();toast(skin.name+' · '+(mode==='current'?'Añadida a lo que tienes':'Añadida a tu lista'));
+}});
 function render(){
-  if(!catalogReady)return;
-  document.querySelectorAll('[data-team]').forEach(b=>b.classList.toggle('selected',b.dataset.team===team));
-  $('#teamTitle').textContent=team==='CT'?'CONTRATERRORISTAS':'TERRORISTAS';$('#agentTitle').textContent='Referencia '+team;$('#agentImg').src='assets/loadout-agent-'+team.toLowerCase()+'.png';$('#teamBadge').textContent=team;const explorerAgent=selectedAgent(state[team],team,mode,agentCatalog);if(explorerAgent){$('#agentTitle').textContent=explorerAgent.name;imageFor($('#agentImg'),explorerAgent.fullImage||explorerAgent.image)}
-  const query=$('#weaponSearch').value.trim().toLowerCase();
-  const visible=weapons().filter(w=>(category==='Todas'||cat(w)===category)&&w.toLowerCase().includes(query));
-  $('#weaponCount').textContent=visible.length+' / '+weapons().length;
-  $('#categories').replaceChildren(...categoryOrder.map(c=>{const b=document.createElement('button');b.textContent=c;b.classList.toggle('selected',category===c);b.onclick=()=>{category=c;$('#weaponSearch').value='';const available=weapons().filter(w=>c==='Todas'||cat(w)===c);if(!available.includes(weapon)&&available.length){weapon=available[0];$('#search').value=''}render()};return b}));
-  $('#weapons').replaceChildren(...visible.map(w=>{
-    const b=document.createElement('button');b.className='weapon'+(w===weapon?' active':'');
-    const pair=state[team][w],s=skinIndex.get(pair?.desired)||skinIndex.get(defaultPair(w).desired);
-    const img=document.createElement('img');img.alt='';imageFor(img,s.image,true);
-    const text=document.createElement('span'),strong=document.createElement('strong'),small=document.createElement('small');strong.textContent=w;small.textContent=s.name;text.append(strong,small);b.append(img,text);
-    b.onclick=()=>{weapon=w;$('#search').value='';render();$('#skins').scrollTop=0};return b;
-  }));
-  if(!visible.length){const p=document.createElement('p');p.className='empty';p.textContent='No se encontraron armas.';$('#weapons').append(p)}
-  const pair=selection();$('#compareTitle').textContent=weapon;
-  for(const m of ['current','desired']){const skin=skinIndex.get(pair[m]);imageFor($('#'+m+'Img'),skin.image);$('#'+m+'Name').textContent=skin.name}
-  const metadata=weaponCatalog.find(w=>w.name===weapon);$('#pricempireLink').href=metadata.pricempire;$('#pricempireLink').textContent='Ver '+weapon+' en Pricempire ↗';
-  document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('selected',b.dataset.mode===mode));renderSkins();$('#count').textContent=sets.length;renderOverview();
-}
-function renderSkins(){
-  if(!catalogReady)return;
-  const pair=selection(),list=skins(weapon).filter(s=>s.name.toLowerCase().includes($('#search').value.trim().toLowerCase()));$('#skinCount').textContent=list.length;
-  $('#skins').replaceChildren(...list.map(s=>{
-    const b=document.createElement('button');b.className='skin'+(pair[mode]===s.id?' picked':'');b.style.setProperty('--rarity',s.color);b.setAttribute('aria-label','Elegir '+s.name);b.setAttribute('aria-pressed',pair[mode]===s.id);b.title=s.name;
-    const img=document.createElement('img');img.alt=s.name;imageFor(img,s.image,true);const label=document.createElement('span');label.textContent=s.name;b.append(img,label);
-    if(pair[mode]===s.id){const small=document.createElement('small');small.textContent='✓ ELEGIDA';b.append(small)}
-    b.onclick=()=>{const position=$('#skins').scrollTop;pair[mode]=s.id;persist();render();$('#skins').scrollTop=position};return b;
-  }));
-  if(!list.length){const p=document.createElement('p');p.className='empty';p.textContent='No hay skins con ese nombre.';$('#skins').append(p)}
+ if(!catalogReady)return;
+ explorer.update({items:data,models:weaponCatalog,details:skinDetails,team,mode,state});$('#count').textContent=sets.length;
+ if(!$('#overview').hidden)renderOverview();
 }
 function showSaved(){ $('#overview').hidden=true;$('#explore').classList.remove('active');$('.workspace').hidden=true;$('#savedPanel').hidden=false;$('#equip').classList.remove('active');$('#saved').classList.add('active');$('#sets').replaceChildren();if(!sets.length){const p=document.createElement('p');p.className='empty';p.textContent='Todavía no has guardado conjuntos. Arma tu primera combinación y pulsa «Guardar conjunto».';$('#sets').append(p)}sets.forEach(set=>{const row=document.createElement('article');row.className='set';const info=document.createElement('div'),title=document.createElement('h3'),small=document.createElement('small');title.textContent=set.name;small.textContent=`${set.team} · ${set.loadout.__layout?'18 casillas'+(set.loadout.__agent?' + agentes':'')+' · Actual y deseado':Object.keys(set.loadout).filter(k=>!k.startsWith('__')).length+' elementos'} · ${new Date(set.date).toLocaleDateString('es')}`;info.append(title,small);const load=document.createElement('button');load.textContent='Cargar conjunto';load.onclick=()=>{team=set.team;state[team]=JSON.parse(JSON.stringify(set.loadout));weapon=weapons()[0];category='Todas';$('#weaponSearch').value='';$('#search').value='';persist();showEquipment();toast('Conjunto cargado')};const remove=document.createElement('button');remove.textContent='Eliminar';remove.onclick=()=>deleteSet(set,remove);row.append(info,load,remove);$('#sets').append(row)})}
 function showEquipment(){$('#overview').hidden=false;$('.workspace').hidden=true;$('#savedPanel').hidden=true;$('#equip').classList.add('active');$('#explore').classList.remove('active');$('#saved').classList.remove('active');renderOverview()}
 function showExplorer(){$('#overview').hidden=true;$('.workspace').hidden=false;$('#savedPanel').hidden=true;$('#equip').classList.remove('active');$('#saved').classList.remove('active');$('#explore').classList.add('active');render()}
-document.querySelectorAll('[data-team]').forEach(b=>b.onclick=()=>{team=b.dataset.team;weapon=weapons()[0];category='Todas';$('#weaponSearch').value='';$('#search').value='';render();persist()});document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;render()});$('#search').oninput=renderSkins;$('#weaponSearch').oninput=render;$('#saved').onclick=showSaved;$('#equip').onclick=showEquipment;$('#explore').onclick=showExplorer;
+$('#saved').onclick=showSaved;$('#equip').onclick=showEquipment;$('#explore').onclick=showExplorer;
 function openSave(teamKey=team){$('#setTeam').value=teamKey;$('#setName').value='';$('#saveDialog').showModal();$('#setName').focus()}
 $('#save').onclick=()=>openSave();
 $('#cancel').onclick=()=>$('#saveDialog').close();
@@ -88,8 +66,8 @@ $('#saveForm').onsubmit=async e=>{
     if(!$('#savedPanel').hidden)showSaved();
   }catch{toast('No se pudo guardar el conjunto. Inténtalo de nuevo.')}finally{submit.disabled=false}
 };
-Promise.all(['skins.json','weapons.json','agents.json','agent-3d-catalog.json'].map(async file=>{const r=await fetch(file);if(!r.ok)throw Error();return r.json()})).then(([items,models,agents,assets])=>{
-  data=items;weaponCatalog=models;agentCatalog=agents;agentAssets=assets;skinIndex=new Map(data.map(s=>[s.id,s]));
+Promise.all(['skins.json','weapons.json','agents.json','agent-3d-catalog.json','skin-details.json'].map(async file=>{const r=await fetch(file);if(!r.ok)throw Error();return r.json()})).then(([items,models,agents,assets,details])=>{
+  skinDetails=details;data=items;weaponCatalog=models;agentCatalog=agents;agentAssets=assets;skinIndex=new Map(data.map(s=>[s.id,s]));
   for(const skin of data){if(!skinGroups.has(skin.weapon))skinGroups.set(skin.weapon,[]);skinGroups.get(skin.weapon).push(skin)}
   for(const list of skinGroups.values())list.sort((a,b)=>Number(!!b.vanilla)-Number(!!a.vanilla)||a.name.localeCompare(b.name));
   catalogReady=true;render();lockEquipment(!accountReady);
@@ -109,7 +87,7 @@ async function loadAccount(nextUser,force=false){
   if(!force&&nextUser?.id===user?.id&&accountReady)return;
   const epoch=++accountEpoch;accountReady=false;user=nextUser||null;unsynced=false;
   state=emptyState();sets=[];team='CT';weapon='USP-S';category='Todas';$('#weaponSearch').value='';$('#search').value='';
-  if($('#saveDialog').open)$('#saveDialog').close();if($('#slotDialog').open)$('#slotDialog').close();slotContext=null;if($('#agentLabDialog').open)$('#agentLabDialog').close();if($('#agentDialog').open)$('#agentDialog').close();agentContext=null;
+  if($('#catalogDialog').open)$('#catalogDialog').close();if($('#saveDialog').open)$('#saveDialog').close();if($('#slotDialog').open)$('#slotDialog').close();slotContext=null;if($('#agentLabDialog').open)$('#agentLabDialog').close();if($('#agentDialog').open)$('#agentDialog').close();agentContext=null;
   $('#accountButton').textContent=user?'Mi cuenta':'Iniciar sesión';
   $('#accountEmail').textContent=user?.email||'';$('#accountMessage').textContent='';
   if(!user){const guest=readGuest();state=guest.state;sets=guest.sets;accountReady=true;status('Guardado local · Sin cuenta');lockEquipment(false);if(catalogReady)showEquipment();return}
