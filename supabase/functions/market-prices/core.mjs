@@ -1,4 +1,12 @@
 export const TTL=30*60*1000;
+export function cardSelections(items,ids,wear='',variant='normal'){
+ if(!Array.isArray(ids)||ids.length<1||ids.length>36||ids.some(id=>typeof id!=='string'))throw Error('invalid_batch');
+ return [...new Set(ids)].sort().map(id=>{const item=items[id];if(!item)throw Error('invalid_selection');const selectedWear=wear||(item.wears.includes('Field-Tested')?'Field-Tested':item.wears[0]||'');return{skin:id,...marketSelection(items,id,selectedWear,variant)}});
+}
+export function batchQuoteRows(value,selections,now=Date.now()){
+ if(!value?.data||Array.isArray(value.data)||typeof value.data!=='object')throw Error('invalid_batch_response');
+ return selections.map(s=>({skin:s.skin,wear:s.wear,variant:s.variant,providers:['steam','csfloat'].map(provider=>{const base={provider,currency:'USD',link:marketLink(provider,s),observed_at:new Date(now).toISOString()};try{return{...base,...publicQuote({item:s.hash,prices:value.data[s.hash]||{}},provider,s,now)}}catch{return{...base,status:'unavailable',price:null,source_updated_at:null}}})}));
+}
 export function marketSelection(items,id,wear,variant='normal'){
  const item=items[id];if(!item||!['normal','stattrak','souvenir'].includes(variant)||variant!=='normal'&&!item[variant])throw Error('invalid_selection');
  if(item.wears.length?!item.wears.includes(wear):wear!=='')throw Error('invalid_wear');

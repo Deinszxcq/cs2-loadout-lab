@@ -97,3 +97,10 @@ La presentación conserva una pose de inventario nativa por agente (14 secuencia
 Las 42 superficies de cara con `F_EYEBALLS` usan una textura adicional que combina el albedo original del ojo, su máscara, el tamaño de iris/pupila y la posición de los huesos oculares. La mirada está fijada al frente del rostro; no simula el seguimiento ocular dinámico de Source 2. «Rostro» permite revisar el resultado. Los agentes enmascarados sin esa capa mantienen su material original.
 
 `python scripts/build-agent-presentations.py` reconstruye las poses y las texturas de ojos sin volver a empaquetar los modelos grandes. El proceso general de materiales lo ejecuta al terminar. Algoritmo de referencia para los parámetros oculares: [Source 2 Viewer](https://github.com/ValveResourceFormat/ValveResourceFormat/blob/master/Renderer/Shaders/features/csgo_character_eyes_ps.slang).
+
+
+### Precios en el catálogo y apariencia
+
+Las tarjetas muestran Steam y CSFloat en USD con la variante y el desgaste consultados. Con cualquier desgaste, se usa Algo desgastado si existe; en caso contrario, el primer desgaste disponible. Las tarjetas visibles se consultan en lotes de hasta 36 y reutilizan la caché durante 30 minutos. La fecha de cada mercado aparece al pasar por el precio. OpenSkin actualiza sus fuentes aproximadamente cada 6 horas (Steam) y cada hora (CSFloat). Los precios ausentes nunca se convierten en cero.
+
+`dist/theme.css` concentra la identidad visual en grafito, pizarra y turquesa suave, manteniendo los colores semánticos de rareza y desgaste.
