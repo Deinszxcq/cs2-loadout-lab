@@ -2,7 +2,7 @@ import {createExplorer} from './explorer.mjs';
 import {applyAgentEquipment} from './agent-prototype.mjs';
 import {selectedAgent,assignAgent} from './agent-selection.mjs';
 import {ensureLayouts,allowedWeapons,assignSlot} from './loadout-layout.mjs';
-const $=s=>document.querySelector(s);let data=[],weaponCatalog=[],agentCatalog=[],agentAssets=null,skinDetails={},skinIndex=new Map(),skinGroups=new Map(),team='CT',weapon='USP-S',mode='desired',category='Todas',state={CT:{},T:{}},sets=[],viewMode='current',slotContext=null,agentContext=null;
+const $=s=>document.querySelector(s);let data=[],weaponCatalog=[],agentCatalog=[],agentAssets=null,skinDetails={},skinViewers={},skinIndex=new Map(),skinGroups=new Map(),team='CT',weapon='USP-S',mode='desired',category='Todas',state={CT:{},T:{}},sets=[],viewMode='current',slotContext=null,agentContext=null;
 const cloud=supabase.createClient(LOADOUT_CLOUD.url,LOADOUT_CLOUD.publishableKey,{auth:{flowType:'pkce'}});
 let user=null,accountReady=false,accountEpoch=0,saveQueue=Promise.resolve(),unsynced=false,catalogReady=false,writeRevision=0;
 const status=(message,error=false)=>{$('#syncStatus').textContent=message;$('#syncStatus').dataset.error=error};
@@ -41,7 +41,7 @@ const explorer=createExplorer($('.workspace'),{onEquip(skin,targetTeam,targetMod
 }});
 function render(){
  if(!catalogReady)return;
- explorer.update({items:data,models:weaponCatalog,details:skinDetails,team,mode,state});$('#count').textContent=sets.length;
+ explorer.update({items:data,models:weaponCatalog,details:skinDetails,viewers:skinViewers,team,mode,state});$('#count').textContent=sets.length;
  if(!$('#overview').hidden)renderOverview();
 }
 function showSaved(){ $('#overview').hidden=true;$('#explore').classList.remove('active');$('.workspace').hidden=true;$('#savedPanel').hidden=false;$('#equip').classList.remove('active');$('#saved').classList.add('active');$('#sets').replaceChildren();if(!sets.length){const p=document.createElement('p');p.className='empty';p.textContent='Todavía no has guardado conjuntos. Arma tu primera combinación y pulsa «Guardar conjunto».';$('#sets').append(p)}sets.forEach(set=>{const row=document.createElement('article');row.className='set';const info=document.createElement('div'),title=document.createElement('h3'),small=document.createElement('small');title.textContent=set.name;small.textContent=`${set.team} · ${set.loadout.__layout?'18 casillas'+(set.loadout.__agent?' + agentes':'')+' · Actual y deseado':Object.keys(set.loadout).filter(k=>!k.startsWith('__')).length+' elementos'} · ${new Date(set.date).toLocaleDateString('es')}`;info.append(title,small);const load=document.createElement('button');load.textContent='Cargar conjunto';load.onclick=()=>{team=set.team;state[team]=JSON.parse(JSON.stringify(set.loadout));weapon=weapons()[0];category='Todas';$('#weaponSearch').value='';$('#search').value='';persist();showEquipment();toast('Conjunto cargado')};const remove=document.createElement('button');remove.textContent='Eliminar';remove.onclick=()=>deleteSet(set,remove);row.append(info,load,remove);$('#sets').append(row)})}
@@ -66,8 +66,8 @@ $('#saveForm').onsubmit=async e=>{
     if(!$('#savedPanel').hidden)showSaved();
   }catch{toast('No se pudo guardar el conjunto. Inténtalo de nuevo.')}finally{submit.disabled=false}
 };
-Promise.all(['skins.json','weapons.json','agents.json','agent-3d-catalog.json','skin-details.json'].map(async file=>{const r=await fetch(file);if(!r.ok)throw Error();return r.json()})).then(([items,models,agents,assets,details])=>{
-  skinDetails=details;data=items;weaponCatalog=models;agentCatalog=agents;agentAssets=assets;skinIndex=new Map(data.map(s=>[s.id,s]));
+Promise.all(['skins.json','weapons.json','agents.json','agent-3d-catalog.json','skin-details.json','skin-viewers.json'].map(async file=>{const r=await fetch(file);if(!r.ok)throw Error();return r.json()})).then(([items,models,agents,assets,details,viewers])=>{
+  skinViewers=viewers;skinDetails=details;data=items;weaponCatalog=models;agentCatalog=agents;agentAssets=assets;skinIndex=new Map(data.map(s=>[s.id,s]));
   for(const skin of data){if(!skinGroups.has(skin.weapon))skinGroups.set(skin.weapon,[]);skinGroups.get(skin.weapon).push(skin)}
   for(const list of skinGroups.values())list.sort((a,b)=>Number(!!b.vanilla)-Number(!!a.vanilla)||a.name.localeCompare(b.name));
   catalogReady=true;render();lockEquipment(!accountReady);
