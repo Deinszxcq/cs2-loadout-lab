@@ -112,3 +112,10 @@ Las tarjetas consultan todos los desgastes disponibles cuando el filtro es «Cua
 ### Detalle de skin
 
 Al abrir una skin, la ficha lateral muestra variantes y desgastes disponibles con el menor precio conocido entre Steam y CSFloat. El visor 3D ocupa el panel principal y debajo aparecen solo esos dos mercados, su precio para el desgaste elegido, la fecha de origen y un enlace directo a las ofertas. La variante y el desgaste de los enlaces se validan en el servidor. En móvil el visor aparece primero. Los ajustes visuales del visor externo son independientes del filtro de precios y del acabado guardado.
+
+
+### Equipamiento completo y agentes predeterminados
+
+El resumen muestra todas las pistolas, armas de nivel medio y rifles válidos para cada equipo, conservando la distribución guardada al principio y añadiendo las armas restantes. Cambiar un acabado en una tarjeta no sustituye otra arma de las antiguas cinco casillas. Cuchillo, guantes y Zeus mantienen sus selectores laterales.
+
+Sin un agente elegido se muestra SAS (CT) o Phoenix (T), sin escribir un agente de pago en la selección. `python scripts/export-default-agents.py` extrae sus modelos e iconos del CS2 local y añade sus referencias al manifiesto. Number K utiliza su render completo verificado en el resumen: la exportación Source 2 actual no conserva correctamente su máscara. El laboratorio 3D permanece disponible.
