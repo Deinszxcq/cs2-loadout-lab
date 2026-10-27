@@ -1,3 +1,5 @@
+import {wearLabels,validCondition,savedCondition,setCondition,weaponEnabled,setWeaponEnabled} from './equipment-options.mjs';
+import {createCardPrices} from './card-prices.mjs';
 import {overviewWeapons,overviewAgent} from './overview-catalog.mjs';
 import {createAgentCatalog} from './agent-catalog.mjs';
 import {createExplorer} from './explorer.mjs';
@@ -37,9 +39,11 @@ const selection=()=>{
   state[team][weapon]=pair;return pair;
 };
 function imageFor(img,src,lazy=false){img.loading=lazy?'lazy':'eager';img.decoding='async';img.onerror=()=>{img.onerror=null;img.src='assets/image-unavailable.svg'};img.src=src}
-const explorer=createExplorer($('.workspace'),{onEquip(skin,targetTeam,targetMode){
+const overviewPrices=createCardPrices($('#overview')),editorPrices=createCardPrices($('#slotDialog'));
+function steamQuote(skin,condition){const e=document.createElement('span');e.className='steam-quote';e.textContent=skin.vanilla?'Steam —':'Steam …';if(!skin.vanilla){e.dataset.priceSkin=skin.id;e.dataset.priceWear=condition.wear;e.dataset.priceVariant=condition.variant}return e}
+const explorer=createExplorer($('.workspace'),{onEquip(skin,targetTeam,targetMode,condition={}){
  if(!accountReady||!weaponCatalog.find(w=>w.name===skin.weapon)?.teams.includes(targetTeam))return;
- team=targetTeam;weapon=skin.weapon;mode=targetMode;selection()[mode]=skin.id;persist();render();toast(skin.name+' · '+(mode==='current'?'Añadida a lo que tienes':'Añadida a tu lista'));
+ team=targetTeam;weapon=skin.weapon;mode=targetMode;selection()[mode]=skin.id;setCondition(state[targetTeam],skin.weapon,targetMode,skinDetails[skin.id],condition.wear,condition.variant);setWeaponEnabled(state[targetTeam],skin.weapon,targetMode,true);persist();render();toast(skin.name+' · '+(mode==='current'?'Añadida a lo que tienes':'Añadida a tu lista'));
 }});
 function render(){
  if(!catalogReady)return;
@@ -50,7 +54,7 @@ const agentBrowser=createAgentCatalog($('#agentCatalogPanel'),{agents:()=>agentC
 function leaveAgents(){$('#agentCatalogPanel').hidden=true;$('#agentsNav').classList.remove('active')}
 function showAgents(){if(!catalogReady)return;$('#overview').hidden=true;$('.workspace').hidden=true;$('#savedPanel').hidden=true;for(const id of ['equip','explore','saved'])$('#'+id).classList.remove('active');$('#agentCatalogPanel').hidden=false;$('#agentsNav').classList.add('active');agentBrowser.render()}
 $('#agentsNav').onclick=showAgents;
-function showSaved(){leaveAgents(); $('#overview').hidden=true;$('#explore').classList.remove('active');$('.workspace').hidden=true;$('#savedPanel').hidden=false;$('#equip').classList.remove('active');$('#saved').classList.add('active');$('#sets').replaceChildren();if(!sets.length){const p=document.createElement('p');p.className='empty';p.textContent='Todavía no has guardado conjuntos. Arma tu primera combinación y pulsa «Guardar conjunto».';$('#sets').append(p)}sets.forEach(set=>{const row=document.createElement('article');row.className='set';const info=document.createElement('div'),title=document.createElement('h3'),small=document.createElement('small');title.textContent=set.name;small.textContent=`${set.team} · ${set.loadout.__layout?'18 casillas'+(set.loadout.__agent?' + agentes':'')+' · Actual y deseado':Object.keys(set.loadout).filter(k=>!k.startsWith('__')).length+' elementos'} · ${new Date(set.date).toLocaleDateString('es')}`;info.append(title,small);const load=document.createElement('button');load.textContent='Cargar conjunto';load.onclick=()=>{team=set.team;state[team]=JSON.parse(JSON.stringify(set.loadout));weapon=weapons()[0];category='Todas';$('#weaponSearch').value='';$('#search').value='';persist();showEquipment();toast('Conjunto cargado')};const remove=document.createElement('button');remove.textContent='Eliminar';remove.onclick=()=>deleteSet(set,remove);row.append(info,load,remove);$('#sets').append(row)})}
+function showSaved(){leaveAgents(); $('#overview').hidden=true;$('#explore').classList.remove('active');$('.workspace').hidden=true;$('#savedPanel').hidden=false;$('#equip').classList.remove('active');$('#saved').classList.add('active');$('#sets').replaceChildren();if(!sets.length){const p=document.createElement('p');p.className='empty';p.textContent='Todavía no has guardado conjuntos. Arma tu primera combinación y pulsa «Guardar conjunto».';$('#sets').append(p)}sets.forEach(set=>{const row=document.createElement('article');row.className='set';const info=document.createElement('div'),title=document.createElement('h3'),small=document.createElement('small');title.textContent=set.name;small.textContent=`${set.team} · ${set.loadout.__layout?'Equipamiento · Actual y deseado':Object.keys(set.loadout).filter(k=>!k.startsWith('__')).length+' elementos'} · ${new Date(set.date).toLocaleDateString('es')}`;info.append(title,small);const load=document.createElement('button');load.textContent='Cargar conjunto';load.onclick=()=>{team=set.team;state[team]=JSON.parse(JSON.stringify(set.loadout));weapon=weapons()[0];category='Todas';$('#weaponSearch').value='';$('#search').value='';persist();showEquipment();toast('Conjunto cargado')};const remove=document.createElement('button');remove.textContent='Eliminar';remove.onclick=()=>deleteSet(set,remove);row.append(info,load,remove);$('#sets').append(row)})}
 function showEquipment(){leaveAgents();$('#overview').hidden=false;$('.workspace').hidden=true;$('#savedPanel').hidden=true;$('#equip').classList.add('active');$('#explore').classList.remove('active');$('#saved').classList.remove('active');renderOverview()}
 function showExplorer(){leaveAgents();$('#overview').hidden=true;$('.workspace').hidden=false;$('#savedPanel').hidden=true;$('#equip').classList.remove('active');$('#saved').classList.remove('active');$('#explore').classList.add('active');render()}
 $('#saved').onclick=showSaved;$('#equip').onclick=showEquipment;$('#explore').onclick=showExplorer;
@@ -164,14 +168,14 @@ function slotTile(teamKey,group,index,weaponName,rail=false){
   button.title=weaponName+' · '+skin.name;
   const image=document.createElement('img');image.alt='';imageFor(image,skin.image,true);
   const name=document.createElement('strong'),finish=document.createElement('span');name.textContent=weaponName;finish.textContent=skin.name;
-  button.append(image,name,finish);button.onclick=()=>openSlot(teamKey,group,index);
+  button.append(image,name,finish);if(!rail){const condition=savedCondition(state[teamKey],weaponName,viewMode,skinDetails[skin.id]);const label=document.createElement('span');label.className='weapon-wear';label.textContent=(condition.variant==='stattrak'?'ST · ':condition.variant==='souvenir'?'SV · ':'')+(wearLabels[condition.wear]||'Sin desgaste');button.append(label,steamQuote(skin,condition))}button.onclick=()=>openSlot(teamKey,group,index);
   return button;
 }
 let boardViewers=[],boardViewerGeneration=0;
 function renderOverview(){
   boardViewerGeneration++;for(const viewer of boardViewers)viewer.dispose();boardViewers=[];
   if(!catalogReady)return;
-  $('#overviewTitle').textContent=viewMode==='current'?'Mi equipamiento actual':'Mi próximo equipamiento';
+  $('#overviewTitle').textContent=viewMode==='current'?'Equipamiento actual':'Equipamiento deseado';
   document.querySelectorAll('[data-view-mode]').forEach(b=>{b.classList.toggle('selected',b.dataset.viewMode===viewMode);b.setAttribute('aria-pressed',b.dataset.viewMode===viewMode)});
   $('#loadoutBoards').replaceChildren(...['CT','T'].map(teamKey=>{
     const layout=ensureLayouts(state[teamKey],teamKey,weaponCatalog)[viewMode];const chosenAgent=overviewAgent(selectedAgent(state[teamKey],teamKey,viewMode,agentCatalog),teamKey);
@@ -179,11 +183,11 @@ function renderOverview(){
     const heading=document.createElement('div');heading.className='board-heading';
     const title=document.createElement('h3');title.textContent=teamKey==='CT'?'ANTITERRORISTAS':'TERRORISTAS';
     const badge=document.createElement('span');badge.className='board-team';badge.textContent=teamKey;
-    const save=document.createElement('button');save.className='board-save';save.textContent='Guardar '+teamKey;save.onclick=()=>openSave(teamKey);heading.append(badge,title,save);
+    const save=document.createElement('button');save.className='board-save';save.textContent='Guardar '+teamKey;save.onclick=()=>openSave(teamKey);const manage=document.createElement('button');manage.className='board-manage';manage.textContent='Armas';manage.setAttribute('aria-label','Configurar armas '+teamKey);manage.onclick=()=>openWeaponVisibility(teamKey);heading.append(badge,title,manage,save);
     const stage=document.createElement('div');stage.className='board-stage';
     const rail=document.createElement('div');rail.className='equipment-rail';
     const agentIcon=document.createElement('button');agentIcon.type='button';agentIcon.className='rail-agent'+(chosenAgent?'':' reference-agent');agentIcon.setAttribute('aria-label','Cambiar agente '+teamKey+' · '+(viewMode==='current'?'Actual':'Deseado'));agentIcon.dataset.agentId=chosenAgent?.id||'reference-'+teamKey;agentIcon.title=chosenAgent?chosenAgent.name+' · '+chosenAgent.squad:'Elegir agente';agentIcon.onclick=()=>openAgentPicker(teamKey);const portrait=document.createElement('img');imageFor(portrait,chosenAgent?.image||'assets/loadout-agent-'+teamKey.toLowerCase()+'.png');portrait.alt='';agentIcon.append(portrait);rail.append(agentIcon);
-    for(const group of ['gloves','knife','zeus'])rail.append(slotTile(teamKey,group,0,layout[group][0],true));
+    for(const group of ['gloves','knife','zeus'])if(weaponEnabled(state[teamKey],layout[group][0],viewMode))rail.append(slotTile(teamKey,group,0,layout[group][0],true));
     const figure=document.createElement('button');figure.type='button';figure.setAttribute('aria-label','Cambiar agente desde la imagen '+teamKey);figure.onclick=()=>openAgentPicker(teamKey);figure.className='board-figure'+(chosenAgent?' inventory-agent':'');figure.dataset.agentId=chosenAgent?.id||'reference-'+teamKey;const agent=document.createElement('img');imageFor(agent,chosenAgent?.fullImage||chosenAgent?.image||'assets/loadout-agent-'+teamKey.toLowerCase()+'.png');agent.alt=chosenAgent?chosenAgent.name+' | '+chosenAgent.squad:'Agente de referencia '+teamKey+' de cuerpo completo';figure.append(agent);const identity=document.createElement('div');identity.className='agent-identity';const agentName=document.createElement('strong'),squad=document.createElement('span');agentName.textContent=chosenAgent?.name||'Sin agente seleccionado';squad.textContent=chosenAgent?.squad||'Imagen de referencia';identity.append(agentName,squad);const changeAgent=document.createElement('button');changeAgent.type='button';changeAgent.className='change-agent';changeAgent.textContent='Cambiar agente ↗';changeAgent.setAttribute('aria-label','Cambiar agente '+teamKey);changeAgent.onclick=()=>openAgentPicker(teamKey);
     const teamMark=document.createElement('span');teamMark.className='stage-team-mark';teamMark.textContent=teamKey;
     stage.append(teamMark,rail,figure,identity,changeAgent);
@@ -191,29 +195,29 @@ function renderOverview(){
     for(const [group,label] of [['pistols','Pistolas'],['mid','Nivel medio'],['rifles','Rifles']]){
       const column=document.createElement('section');column.className='weapon-column';column.setAttribute('aria-label',teamKey+' · '+label);
       const h=document.createElement('h4');h.textContent=label;column.append(h);
-      allWeapons[group].forEach((w,index)=>{const tile=slotTile(teamKey,group,index,w);tile.dataset.weapon=w;tile.onclick=()=>openOverviewWeapon(teamKey,group,w);if(group==='pistols'&&index===1){const sub=document.createElement('small');sub.className='other-pistols';sub.textContent='Otras pistolas';tile.append(sub)}column.append(tile)});arsenal.append(column);
+      allWeapons[group].filter(w=>weaponEnabled(state[teamKey],w,viewMode)).forEach((w,index)=>{const tile=slotTile(teamKey,group,index,w);tile.dataset.weapon=w;tile.onclick=()=>openOverviewWeapon(teamKey,group,w);if(group==='pistols'&&index===1){const sub=document.createElement('small');sub.className='other-pistols';sub.textContent='Otras pistolas';tile.append(sub)}column.append(tile)});arsenal.append(column);
     }
     const body=document.createElement('div');body.className='board-body';if(teamKey==='CT')body.append(stage,arsenal);else body.append(arsenal,stage);
     const note=document.createElement('p');note.className='board-caption';note.textContent=(viewMode==='current'?'LO QUE TENGO':'LO QUE ME GUSTARÍA')+' / '+teamKey;
     board.append(heading,body,note);return board;
   }));
-  mountBoardAgent3D();
+  overviewPrices.observe();mountBoardAgent3D();
 }
 function openSlot(teamKey,group,index){
   if(!accountReady||!catalogReady)return;
   const layout=ensureLayouts(state[teamKey],teamKey,weaponCatalog)[viewMode],name=layout[group][index];
-  slotContext={team:teamKey,group,index,mode:viewMode,weapon:name,skin:equippedSkin(teamKey,name,viewMode).id,epoch:accountEpoch};
+  slotContext={team:teamKey,group,index,mode:viewMode,weapon:name,skin:equippedSkin(teamKey,name,viewMode).id,...savedCondition(state[teamKey],name,viewMode,skinDetails[equippedSkin(teamKey,name,viewMode).id]),enabled:weaponEnabled(state[teamKey],name,viewMode),epoch:accountEpoch};
   $('#slotEyebrow').textContent=teamKey+' / '+(viewMode==='current'?'LO QUE TENGO':'LO QUE ME GUSTARÍA');
   $('#slotTitle').textContent=group==='pistols'&&index===0?'Pistola inicial':group==='mid'?'Nivel medio':group==='rifles'?'Rifles':group==='knife'?'Cuchillo':group==='gloves'?'Guantes':group==='zeus'?'Zeus x27':'Otras pistolas';
   $('#slotWeapon').replaceChildren(...allowedWeapons(weaponCatalog,teamKey,group,index).map(w=>{const option=document.createElement('option');option.value=w;option.textContent=w;return option}));
   $('#slotWeapon').disabled=false;$('#slotWeapon').value=name;$('#slotSearch').value='';renderSlotPicker();$('#slotDialog').showModal();
 }
 function openOverviewWeapon(teamKey,group,name){
- const starter=['USP-S','P2000','Glock-18'].includes(name),index=group==='pistols'?(starter?0:1):0;openSlot(teamKey,group,index);if(!slotContext)return;slotContext.fixedWeapon=true;slotContext.weapon=name;slotContext.skin=equippedSkin(teamKey,name,viewMode).id;$('#slotTitle').textContent=name;$('#slotWeapon').value=name;$('#slotWeapon').disabled=true;renderSlotPicker();
+ const starter=['USP-S','P2000','Glock-18'].includes(name),index=group==='pistols'?(starter?0:1):0;openSlot(teamKey,group,index);if(!slotContext)return;slotContext.fixedWeapon=true;slotContext.weapon=name;slotContext.skin=equippedSkin(teamKey,name,viewMode).id;Object.assign(slotContext,savedCondition(state[teamKey],name,viewMode,skinDetails[slotContext.skin]));slotContext.enabled=weaponEnabled(state[teamKey],name,viewMode);$('#slotTitle').textContent=name;$('#slotWeapon').value=name;$('#slotWeapon').disabled=true;renderSlotPicker();
 }
 function renderSlotPicker(){
   const context=slotContext;if(!context)return;
-  const selected=skinIndex.get(context.skin);imageFor($('#slotPreview'),selected.image);$('#slotSkinName').textContent=selected.name;$('#slotWeaponName').textContent=context.weapon;
+  const selected=skinIndex.get(context.skin);renderConditionEditor();imageFor($('#slotPreview'),selected.image);$('#slotSkinName').textContent=selected.name;$('#slotWeaponName').textContent=context.weapon;
   const list=skins(context.weapon).filter(s=>s.name.toLowerCase().includes($('#slotSearch').value.trim().toLowerCase()));
   $('#slotResults').textContent=list.length+' acabados disponibles';
   $('#slotSkins').replaceChildren(...list.map(s=>{
@@ -224,7 +228,7 @@ function renderSlotPicker(){
   if(!list.length){const p=document.createElement('p');p.className='empty';p.textContent='No hay acabados con ese nombre.';$('#slotSkins').append(p)}
 }
 document.querySelectorAll('[data-view-mode]').forEach(b=>b.onclick=()=>{viewMode=b.dataset.viewMode;mode=viewMode;renderOverview()});
-$('#slotWeapon').onchange=()=>{if(!slotContext)return;slotContext.weapon=$('#slotWeapon').value;slotContext.skin=equippedSkin(slotContext.team,slotContext.weapon,slotContext.mode).id;$('#slotSearch').value='';renderSlotPicker();$('#slotSkins').scrollTop=0};
+$('#slotWeapon').onchange=()=>{if(!slotContext)return;slotContext.weapon=$('#slotWeapon').value;slotContext.skin=equippedSkin(slotContext.team,slotContext.weapon,slotContext.mode).id;Object.assign(slotContext,savedCondition(state[slotContext.team],slotContext.weapon,slotContext.mode,skinDetails[slotContext.skin]));slotContext.enabled=weaponEnabled(state[slotContext.team],slotContext.weapon,slotContext.mode);$('#slotSearch').value='';renderSlotPicker();$('#slotSkins').scrollTop=0};
 $('#slotSearch').oninput=renderSlotPicker;
 const closeSlot=()=>{$('#slotDialog').close();slotContext=null};
 $('#slotClose').onclick=closeSlot;$('#slotCancel').onclick=closeSlot;$('#slotDialog').addEventListener('cancel',()=>{slotContext=null});
@@ -232,10 +236,15 @@ $('#slotForm').onsubmit=e=>{
   e.preventDefault();const c=slotContext;if(!c||c.epoch!==accountEpoch||!accountReady)return;
   if(!allowedWeapons(weaponCatalog,c.team,c.group,c.index).includes(c.weapon)||skinIndex.get(c.skin)?.weapon!==c.weapon)return;
   const layout=ensureLayouts(state[c.team],c.team,weaponCatalog)[c.mode];if(!c.fixedWeapon)assignSlot(layout,c.group,c.index,c.weapon);
-  state[c.team][c.weapon]={...(state[c.team][c.weapon]||defaultPair(c.weapon)),[c.mode]:c.skin};
+  state[c.team][c.weapon]={...(state[c.team][c.weapon]||defaultPair(c.weapon)),[c.mode]:c.skin};setCondition(state[c.team],c.weapon,c.mode,skinDetails[c.skin],c.wear,c.variant);setWeaponEnabled(state[c.team],c.weapon,c.mode,c.enabled);
   team=c.team;weapon=c.weapon;mode=c.mode;category='Todas';$('#weaponSearch').value='';$('#search').value='';persist();closeSlot();render();toast('Equipamiento actualizado');
 };
 
+function renderConditionEditor(){const c=slotContext;if(!c)return;const skin=skinIndex.get(c.skin),detail=skinDetails[c.skin]||{};Object.assign(c,validCondition(detail,c.wear,c.variant));$('#slotWear').replaceChildren(...(detail.wears?.length?detail.wears.map(w=>new Option(wearLabels[w],w)):[new Option('Sin desgaste','')]));$('#slotWear').value=c.wear;$('#slotWear').disabled=!detail.wears?.length;$('#slotVariant').replaceChildren(new Option('Normal','normal'));if(detail.stattrak)$('#slotVariant').append(new Option('StatTrak™','stattrak'));if(detail.souvenir)$('#slotVariant').append(new Option('Souvenir','souvenir'));$('#slotVariant').value=c.variant;$('#slotEnabled').checked=c.enabled;$('#slotSteamPrice').replaceChildren(steamQuote(skin,c));editorPrices.observe()}
+$('#slotWear').onchange=()=>{if(slotContext){slotContext.wear=$('#slotWear').value;renderConditionEditor()}};$('#slotVariant').onchange=()=>{if(slotContext){slotContext.variant=$('#slotVariant').value;renderConditionEditor()}};$('#slotEnabled').onchange=()=>{if(slotContext)slotContext.enabled=$('#slotEnabled').checked};
+let visibilityContext=null;
+function openWeaponVisibility(side){if(!accountReady||!catalogReady)return;const layout=ensureLayouts(state[side],side,weaponCatalog)[viewMode],all=overviewWeapons(weaponCatalog,side,layout),names=[...Object.values(all).flat(),...['knife','gloves','zeus'].map(g=>layout[g][0])];visibilityContext={team:side,mode:viewMode,epoch:accountEpoch};$('#weaponVisibilityTitle').textContent='Armas · '+(side==='CT'?'CT':'TT');$('#weaponVisibilityMode').textContent=viewMode==='current'?'Lo que tengo':'Lo que quiero';$('#weaponVisibilityList').replaceChildren(...names.map(name=>{const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.value=name;input.checked=weaponEnabled(state[side],name,viewMode);label.append(input,document.createTextNode(name));return label}));$('#weaponVisibilityDialog').showModal()}
+$('#weaponVisibilityClose').onclick=()=>$('#weaponVisibilityDialog').close();$('#enableAllWeapons').onclick=()=>$('#weaponVisibilityList').querySelectorAll('input').forEach(e=>e.checked=true);$('#disableAllWeapons').onclick=()=>$('#weaponVisibilityList').querySelectorAll('input').forEach(e=>e.checked=false);$('#weaponVisibilityApply').onclick=()=>{const c=visibilityContext;if(!c||c.epoch!==accountEpoch||!accountReady)return;for(const input of $('#weaponVisibilityList').querySelectorAll('input'))setWeaponEnabled(state[c.team],input.value,c.mode,input.checked);persist();$('#weaponVisibilityDialog').close();renderOverview();toast('Armas actualizadas')};
 function openAgentPicker(teamKey){
   if(!accountReady||!catalogReady)return;
   const current=selectedAgent(state[teamKey],teamKey,viewMode,agentCatalog);

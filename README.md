@@ -1,4 +1,4 @@
-# Loadout Lab · CS2
+# lab · CS2
 
 Planificador personal de skins con equipamiento CT/T, comparación actual/deseada y conjuntos guardados.
 
@@ -119,3 +119,8 @@ Al abrir una skin, la ficha lateral muestra variantes y desgastes disponibles co
 El resumen muestra todas las pistolas, armas de nivel medio y rifles válidos para cada equipo, conservando la distribución guardada al principio y añadiendo las armas restantes. Cambiar un acabado en una tarjeta no sustituye otra arma de las antiguas cinco casillas. Cuchillo, guantes y Zeus mantienen sus selectores laterales.
 
 Sin un agente elegido se muestra SAS (CT) o Phoenix (T), sin escribir un agente de pago en la selección. `python scripts/export-default-agents.py` extrae sus modelos e iconos del CS2 local y añade sus referencias al manifiesto. Number K utiliza su render completo verificado en el resumen: la exportación Source 2 actual no conserva correctamente su máscara. El laboratorio 3D permanece disponible.
+
+
+### Desgaste y armas activas
+
+`currentWear`/`desiredWear` y `currentVariant`/`desiredVariant` se guardan junto a cada par de skins; las configuraciones anteriores siguen siendo válidas. El estado solo acepta desgastes y variantes que existen para la skin. Las tarjetas del equipamiento consultan el precio Steam del estado guardado mediante la caché de mercado existente. Las armas desactivadas se guardan en `__disabled.current` y `__disabled.desired` por equipo y se pueden recuperar desde «Armas» sin borrar sus acabados. Todo viaja en el JSON del perfil y de los conjuntos existentes.
