@@ -107,3 +107,8 @@ Las tarjetas muestran Steam y CSFloat en USD con la variante y el desgaste consu
 
 
 Las tarjetas consultan todos los desgastes disponibles cuando el filtro es «Cualquier desgaste» (`all_wears: true`). El filtro puede limitar la tabla a un desgaste concreto. No se inventan condiciones inexistentes, y el lote sigue limitado a 36 artículos (hasta 180 cotizaciones). El apartado Agentes separa los 63 agentes por su equipo real CT/T, permite buscar y equipar cada uno en actual o deseado; sus precios no llevan desgaste.
+
+
+### Detalle de skin
+
+Al abrir una skin, la ficha lateral muestra variantes y desgastes disponibles con el menor precio conocido entre Steam y CSFloat. El visor 3D ocupa el panel principal y debajo aparecen solo esos dos mercados, su precio para el desgaste elegido, la fecha de origen y un enlace directo a las ofertas. La variante y el desgaste de los enlaces se validan en el servidor. En móvil el visor aparece primero. Los ajustes visuales del visor externo son independientes del filtro de precios y del acabado guardado.
