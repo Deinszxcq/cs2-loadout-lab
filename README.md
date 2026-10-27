@@ -104,3 +104,6 @@ Las 42 superficies de cara con `F_EYEBALLS` usan una textura adicional que combi
 Las tarjetas muestran Steam y CSFloat en USD con la variante y el desgaste consultados. Con cualquier desgaste, se usa Algo desgastado si existe; en caso contrario, el primer desgaste disponible. Las tarjetas visibles se consultan en lotes de hasta 36 y reutilizan la caché durante 30 minutos. La fecha de cada mercado aparece al pasar por el precio. OpenSkin actualiza sus fuentes aproximadamente cada 6 horas (Steam) y cada hora (CSFloat). Los precios ausentes nunca se convierten en cero.
 
 `dist/theme.css` concentra la identidad visual en grafito, pizarra y turquesa suave, manteniendo los colores semánticos de rareza y desgaste.
+
+
+Las tarjetas consultan todos los desgastes disponibles cuando el filtro es «Cualquier desgaste» (`all_wears: true`). El filtro puede limitar la tabla a un desgaste concreto. No se inventan condiciones inexistentes, y el lote sigue limitado a 36 artículos (hasta 180 cotizaciones). El apartado Agentes separa los 63 agentes por su equipo real CT/T, permite buscar y equipar cada uno en actual o deseado; sus precios no llevan desgaste.

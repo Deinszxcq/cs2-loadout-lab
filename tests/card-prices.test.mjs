@@ -17,3 +17,7 @@ test('batch prices preserve exact phases and isolate a malformed marketplace quo
 test('card currency formatting never turns missing data into a zero price',()=>{
  assert.match(cardPriceLabel({price:12345}),/123[,.]45/);assert.match(cardPriceLabel({price:0}),/0[,.]00/);assert.equal(cardPriceLabel({price:null}),'—');assert.equal(cardPriceLabel({status:'no_listing'}),'Sin ofertas');
 });
+test('all-wear batches request only real conditions and preserve the chosen variant',()=>{
+ const rows=cardSelections(items,['a'],'','stattrak',true);assert.deepEqual(rows.map(r=>r.wear),items.a.wears);assert(rows.every(r=>r.hash.startsWith('StatTrak™ AWP')));assert.equal(rows.length,2);
+ const agent={name:'Agent | Squad',wears:[],agent:true};const selection=cardSelections({agent},['agent'],'','normal',true);assert.equal(selection.length,1);assert.equal(selection[0].hash,'Agent | Squad');assert.equal(selection[0].wear,'');
+});
