@@ -1,4 +1,4 @@
-import {createCardPrices} from './card-prices.mjs';
+import {createCardPrices} from './card-prices.mjs?v=lab-1';
 import {createSkinInspector} from './skin-inspector.mjs';
 import {createMarketPrices} from './market-prices.mjs';
 import {filterCatalog,rarityNames,wearNames} from './catalog-data.mjs';
