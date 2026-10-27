@@ -63,9 +63,11 @@ Reconstrucción desde CS2 local (solo lectura):
 1. Instalar la [CLI oficial Source 2 Viewer 20.1](https://github.com/ValveResourceFormat/ValveResourceFormat/releases/tag/20.1) en `.local-tools/source2viewer/`.
 2. `node scripts/export-all-agent-assets.mjs`. Para otra instalación, definir `CS2_GAME_DIR` con la ruta a `game/csgo`. El script descarga los catálogos públicos si faltan en la caché local.
 3. `python scripts/build-all-agent-assets.py` (Pillow y NumPy). `--repack` reconstruye modelos ya empaquetados.
-4. `node --test tests/*.test.mjs`. Verifica las 504 combinaciones de articulaciones, cobertura de acabados y guardado independiente por equipo/vista.
+4. `node --test tests/*.test.mjs` y `python tests/glove-textures.test.py`. Verifica las 504 combinaciones de articulaciones, cobertura de acabados, identidad de las texturas y guardado independiente por equipo/vista.
 
 Solo se publican los modelos y materiales compactos de `dist/assets/equipment-3d/` y su manifiesto. Las texturas embebidas usan EXT_texture_webp para navegadores modernos. Herramientas y exportaciones de trabajo quedan ignoradas. Modelos/texturas originales: Valve / Counter-Strike 2. Three.js 0.180.0 conserva su licencia MIT en `dist/vendor/three/LICENSE`.
+
+Las texturas del compositor clásico se extraen por la ruta completa del recurso compilado y se almacenan con un nombre derivado de esa identidad. Distintas versiones compiladas pueden compartir el nombre de origen, pero conservar canales diferentes. Reutilizar ese nombre sobrescribía el alfa que selecciona los ocho colores en 12 acabados, entre ellos Slingshot, Vice, Hedge Maze, Pandora's Box y Crimson Kimono. `python scripts/export-glove-textures.py` reconstruye la caché independiente; el exportador general también lo ejecuta. El proceso de materiales rechaza una máscara clásica sin su canal alfa. Los recursos publicados siguen procediendo de CS2 local; no se depende de un visor externo.
 
 
 ### Poses y ojos

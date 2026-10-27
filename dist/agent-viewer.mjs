@@ -14,7 +14,7 @@ export function createAgentViewer(host,{assets,agentId,finish,interactive=true,o
   finish=id;const revision=++paintRevision;let pending=[];
   try{
    let color,orm,normal;
-   if(!option.vanilla){const loader=new THREE.TextureLoader();[color,orm,normal]=await Promise.all([option.color,option.orm,...(option.normal?[option.normal]:[])].map(async(path,index)=>{const texture=await loader.loadAsync(path);texture.flipY=false;texture.wrapS=THREE.MirroredRepeatWrapping;texture.wrapT=THREE.RepeatWrapping;texture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());texture.colorSpace=index===0?THREE.SRGBColorSpace:THREE.NoColorSpace;pending.push(texture);return texture}))}
+   if(!option.vanilla){const loader=new THREE.TextureLoader();[color,orm,normal]=await Promise.all([option.color,option.orm,...(option.normal?[option.normal]:[])].map(async(path,index)=>{const texture=await loader.loadAsync(path+'?v='+encodeURIComponent(assets.textureRevision||'1'));texture.flipY=false;texture.wrapS=THREE.MirroredRepeatWrapping;texture.wrapT=THREE.RepeatWrapping;texture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());texture.colorSpace=index===0?THREE.SRGBColorSpace:THREE.NoColorSpace;pending.push(texture);return texture}))}
    if(disposed||revision!==paintRevision){freePaint(pending);return false}
    for(const m of gloveMaterials){const original=originals.get(m);if(option.vanilla)Object.assign(m,original);else{m.map=color;m.normalMap=normal||original.normalMap;m.roughnessMap=orm;m.metalnessMap=orm;m.aoMap=orm;m.roughness=1;m.metalness=1;m.aoMapIntensity=.7}m.needsUpdate=true}
    freePaint(paintResources);paintResources=pending;for(const r of pending)resources.add(r);host.dataset.finish=id;draw();return true;

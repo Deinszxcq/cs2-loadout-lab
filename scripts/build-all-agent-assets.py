@@ -3,6 +3,7 @@ from pathlib import Path
 import json,struct,io,re,time,sys,subprocess
 import numpy as np
 from PIL import Image
+from glove_texture_resources import resolve_texture
 ROOT=Path(__file__).resolve().parents[1];SRC=ROOT/'.local-tools/all-3d';DEST=ROOT/'dist/assets/equipment-3d';DEST.mkdir(parents=True,exist_ok=True)
 def read(path):
  b=path.read_bytes();n=struct.unpack_from('<I',b,12)[0];return json.loads(b[20:20+n]),b[28+n:]
@@ -30,8 +31,7 @@ def image(p,key,n,mode='RGBA',nearest=False):
  value=p[key]
  if value.startswith('['):
   channels=4 if mode=='RGBA' else 3;values=vector(p,key,'[1 1 1 1]');return np.broadcast_to(np.array((values+[1]*4)[:channels],np.float32),(n,n,channels)).copy()
- filename=Path(value.replace('\\','/')).name;file=SRC/'paints'/filename
- if not file.exists():file=file.with_suffix('.png')
+ file=resolve_texture(p,key,SRC)
  return np.asarray(Image.open(file).convert(mode).resize((n,n),Image.Resampling.NEAREST if nearest else Image.Resampling.LANCZOS),dtype=np.float32)/255
 
 def save_paint(kit,color,orm,normal=None):
@@ -57,12 +57,13 @@ def modern_bake(kit,p):
 def bake(kit):
  p=dict(re.findall(r'"([^"\n]+)"\s+"([^"\n]*)"',(SRC/'paints'/(kit+'.vmat')).read_text(encoding='utf8')));n=1024
  if 'TextureObjectMaterialId'in p:return modern_bake(kit,p)
+ if 'A' not in Image.open(resolve_texture(p,'TextureLayerMask',SRC)).getbands():raise ValueError('Color-index alpha missing from glove mask: '+kit)
  palette=np.array([vector(p,f'g_vColorTint{i}','[0.4 0.4 0.4 0]')[:3] for i in range(1,9)],dtype=np.float32)
  mask=image(p,'TextureLayerMask',n,nearest=True);indices=np.minimum(7,(mask[:,:,3]*8).astype(int));color=palette[indices]
  y,x=np.mgrid[0:n,0:n].astype(np.float32);u=(x+.5)/n-.5;v=(y+.5)/n-.5
  pattern_replace=int(p.get('g_nPatternReplaceIndex','8'))-1
  if p.get('F_PATTERN')=='1' and 'TexturePattern' in p:
-  raw=Image.open(SRC/'paints'/Path(p['TexturePattern'].replace('\\','/')).name).convert('RGB');pattern=np.asarray(raw,dtype=np.float32)/255;angle=np.deg2rad(float(p.get('g_fPatternTexCoordRotation','0')));scale=float(p.get('g_fPatternTexCoordScale','1'));offset=vector(p,'g_fPatternTexCoordOffset','[0 0 0 0]');pu=(u*np.cos(angle)-v*np.sin(angle))*scale+offset[0];pv=(u*np.sin(angle)+v*np.cos(angle))*scale+offset[1];sample=pattern[(np.mod(pv,1)*pattern.shape[0]).astype(int),(np.mod(pu,1)*pattern.shape[1]).astype(int)]
+  raw=Image.open(resolve_texture(p,'TexturePattern',SRC)).convert('RGB');pattern=np.asarray(raw,dtype=np.float32)/255;angle=np.deg2rad(float(p.get('g_fPatternTexCoordRotation','0')));scale=float(p.get('g_fPatternTexCoordScale','1'));offset=vector(p,'g_fPatternTexCoordOffset','[0 0 0 0]');pu=(u*np.cos(angle)-v*np.sin(angle))*scale+offset[0];pv=(u*np.sin(angle)+v*np.cos(angle))*scale+offset[1];sample=pattern[(np.mod(pv,1)*pattern.shape[0]).astype(int),(np.mod(pu,1)*pattern.shape[1]).astype(int)]
   pi=np.clip(np.array(vector(p,'g_vPatternPaletteIndices','[1 2 3 4]'),dtype=int)-1,0,7);weights=np.concatenate([np.clip(1-sample.sum(axis=2,keepdims=True),0,1),sample],axis=2);weights/=np.maximum(weights.sum(axis=2,keepdims=True),1);paint=weights@palette[pi];color=np.where((indices==pattern_replace)[:,:,None],paint,color)
  layer=np.concatenate([np.clip(1-mask[:,:,:3].sum(axis=2,keepdims=True),0,1),mask[:,:,:3]],axis=2);layer/=np.maximum(layer.sum(axis=2,keepdims=True),1);detail=np.zeros((n,n),np.float32);rough=np.zeros_like(detail);metal=np.zeros_like(detail)
  for i in range(4):
@@ -71,13 +72,12 @@ def bake(kit):
  return save_paint(kit,color,orm)
 
 def main():
- sources=json.loads((SRC/'sources.json').read_text(encoding='utf8'));catalog=json.loads((ROOT/'dist/skins.json').read_text(encoding='utf8'));manifest={'agents':{},'families':{},'finishes':{},'rendering':'Source-based PBR; fixed pose; no wear/seed simulation'}
+ sources=json.loads((SRC/'sources.json').read_text(encoding='utf8'));catalog=json.loads((ROOT/'dist/skins.json').read_text(encoding='utf8'));manifest={'agents':{},'families':{},'finishes':{},'textureRevision':'compiled-masks-2','rendering':'Source-based PBR; fixed pose; no wear/seed simulation'}
  for agent in sources['agents']:
   file=f'agents/{agent["id"]}.glb';pack(SRC/'agents'/agent['id']/'model.glb',DEST/file);manifest['agents'][agent['id']]={'model':'assets/equipment-3d/'+file,'team':agent['team']};print(agent['id'],flush=True)
  for family,key in sources['map'].items():
   file=f'families/{key}.glb';pack(SRC/'families'/key/'model.glb',DEST/file);manifest['families'][family]={'model':'assets/equipment-3d/'+file}
   for vanilla in [s for s in catalog if s['weapon']==family and s.get('vanilla')]:manifest['finishes'][vanilla['id']]={'family':family,'name':vanilla['name'],'vanilla':True}
- (ROOT/'dist/agent-3d-catalog.json').write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+'\n',encoding='utf8')
  for skin in sources['skins']:
   log=SRC/'paints'/(skin['pattern']['id']+'.vmat.log')
   for _ in range(360):
