@@ -1,3 +1,4 @@
+import {fallbackPair,resolveEquippedSkin} from './equipment-selection.mjs';
 import {purchaseItems} from './purchase-plan.mjs';
 import {summaryItems,summarizeQuotes} from './loadout-total.mjs';
 import {wearLabels,validCondition,savedCondition,setCondition,weaponEnabled,setWeaponEnabled} from './equipment-options.mjs';
@@ -34,12 +35,8 @@ const weapons=()=>weaponCatalog.filter(w=>w.teams.includes(team)).map(w=>w.name)
 });
 const cat=w=>weaponCatalog.find(x=>x.name===w)?.category;
 const skins=w=>skinGroups.get(w)||[];
-const defaultPair=w=>{const list=skins(w),base=list.find(s=>s.vanilla)||list[0],finish=list.find(s=>!s.vanilla)||base;return {current:base.id,desired:finish.id}};
-const selection=()=>{
-  const defaults=defaultPair(weapon),pair=state[team][weapon]||{};
-  for(const mode of ['current','desired'])if(skinIndex.get(pair[mode])?.weapon!==weapon)pair[mode]=defaults[mode];
-  state[team][weapon]=pair;return pair;
-};
+const defaultPair=w=>fallbackPair(skins(w));
+const selection=()=>state[team][weapon]||(state[team][weapon]={});
 function imageFor(img,src,lazy=false){img.loading=lazy?'lazy':'eager';img.decoding='async';img.onerror=()=>{img.onerror=null;img.src='assets/image-unavailable.svg'};img.src=src}
 let priceMarket='steam';try{if(localStorage.getItem('lab-price-market')==='csfloat')priceMarket='csfloat'}catch{}let summaryTimer;
 const overviewPrices=createCardPrices($('#overview'),{provider:()=>priceMarket,onUpdate:queueSummary}),editorPrices=createCardPrices($('#slotDialog'),{provider:()=>priceMarket});
@@ -79,7 +76,6 @@ $('#saveForm').onsubmit=async e=>{
   try{
     if(!accountReady||!catalogReady)throw Error('Espera a que se cargue tu cuenta.');
     team=$('#setTeam').value;ensureLayouts(state[team],team,weaponCatalog);
-    const oldWeapon=weapon;for(const w of weapons()){weapon=w;selection()}weapon=weapons().includes(oldWeapon)?oldWeapon:weapons()[0];
     const set={id:crypto.randomUUID(),name,team,date:Date.now(),loadout:JSON.parse(JSON.stringify(state[team]))};
     if(user){const {error}=await cloud.from('loadout_sets').insert({id:set.id,user_id:owner,name,team,equipment:set.loadout,created_at:new Date(set.date).toISOString()});if(error)throw error;if(epoch!==accountEpoch)return;}
     sets.unshift(set);const ok=persist();$('#saveDialog').close();
@@ -166,10 +162,7 @@ $('#importGuest').onclick=async()=>{
 window.addEventListener('beforeunload',e=>{if(user&&unsynced){e.preventDefault();e.returnValue=''}});
 cloud.auth.onAuthStateChange((event,session)=>{if(event==='TOKEN_REFRESHED')return;setTimeout(()=>loadAccount(session?.user),0)});
 
-function equippedSkin(teamKey,weaponName,displayMode){
-  const id=state[teamKey][weaponName]?.[displayMode];
-  return skinIndex.get(id)?.weapon===weaponName?skinIndex.get(id):skinIndex.get(defaultPair(weaponName)[displayMode]);
-}
+function equippedSkin(teamKey,weaponName,displayMode){return resolveEquippedSkin(state[teamKey],weaponName,displayMode,skinIndex,skins(weaponName))}
 function slotTile(teamKey,group,index,weaponName,rail=false){
   const skin=equippedSkin(teamKey,weaponName,viewMode),button=document.createElement('button');
   button.type='button';button.className=rail?'rail-slot':'loadout-slot';
@@ -327,7 +320,10 @@ function renderPurchasePlan(){
  for(const side of ['CT','T']){if($('#planTeam').value!=='all'&&$('#planTeam').value!==side)continue;
  const layouts=ensureLayouts(state[side],side,weaponCatalog),items=purchaseItems({equipment:state[side],team:side,catalog:weaponCatalog,layout:layouts.desired,agents:agentCatalog,details:skinDetails,skinFor:(w,m)=>{const g=['knife','gloves','zeus'].find(g=>layouts.desired[g]?.includes(w));return equippedSkin(side,m==='current'&&g?layouts.current[g][0]:w,m)}});
  const group=document.createElement('section');group.className='plan-team';const h=document.createElement('h3');h.textContent=side==='CT'?'CT':'TT';group.append(h);
- for(const item of items){total++;if(item.owned)owned++;const row=document.createElement('article');row.className='plan-row';const img=document.createElement('img');imageFor(img,item.skin.image,true);img.alt='';const info=document.createElement('div'),title=document.createElement('strong'),before=document.createElement('small'),after=document.createElement('span');title.textContent=item.weapon;before.textContent='Tengo: '+(item.current?planLabel(item.current):'Sin skin');after.textContent='Quiero: '+planLabel(item);info.append(title,before,after);const price=item.owned?document.createElement('span'):steamQuote(item.skin,item);if(item.owned){price.textContent='Ya la tienes';price.className='plan-owned'}else{price.dataset.priceEager='true';price.dataset.planTeam=side}const edit=document.createElement('button');edit.textContent='Editar';edit.onclick=()=>{showEquipment();viewMode='desired';mode='desired';renderOverview();if(item.weapon==='Agente')openAgentPicker(side);else{const category=cat(item.weapon),g=category==='Pistolas'?'pistols':category==='Rifles'?'rifles':category==='Cuchillos'?'knife':category==='Guantes'?'gloves':item.weapon==='Zeus x27'?'zeus':'mid';if(['knife','gloves','zeus'].includes(g))openSlot(side,g,0);else openOverviewWeapon(side,g,item.weapon)}};row.append(img,info,price,edit);group.append(row)}
+ for(const item of items){total++;if(item.owned)owned++;const row=document.createElement('article');row.className='plan-row';const info=document.createElement('div');info.className='plan-comparison';const title=document.createElement('strong');title.textContent=item.weapon;const pair=document.createElement('div');pair.className='plan-pair';
+ const currentFallback=item.weapon==='Agente'?overviewAgent(null,side):skins(item.weapon).find(s=>s.vanilla);
+ for(const [label,entry] of [['Tengo',item.current],['Quiero',item]]){const card=document.createElement('figure'),img=document.createElement('img'),caption=document.createElement('figcaption'),tag=document.createElement('small'),name=document.createElement('span');const shown=entry?.skin||currentFallback;imageFor(img,shown?.image||'assets/image-unavailable.svg',true);img.alt=item.weapon+' · '+(shown?.name||'Sin skin');img.dataset.skinId=shown?.id||'';tag.textContent=label;name.textContent=entry?planLabel(entry):item.weapon==='Agente'?'Agente predeterminado':'Sin skin';caption.append(tag,name);card.append(img,caption);pair.append(card)}info.append(title,pair);
+ const price=item.owned?document.createElement('span'):steamQuote(item.skin,item);if(item.owned){price.textContent='Ya la tienes';price.className='plan-owned'}else{price.dataset.priceEager='true';price.dataset.planTeam=side}const edit=document.createElement('button');edit.textContent='Editar';edit.onclick=()=>{showEquipment();viewMode='desired';mode='desired';renderOverview();if(item.weapon==='Agente')openAgentPicker(side);else{const category=cat(item.weapon),g=category==='Pistolas'?'pistols':category==='Rifles'?'rifles':category==='Cuchillos'?'knife':category==='Guantes'?'gloves':item.weapon==='Zeus x27'?'zeus':'mid';if(['knife','gloves','zeus'].includes(g))openSlot(side,g,0);else openOverviewWeapon(side,g,item.weapon)}};row.append(info,price,edit);group.append(row)}
  if(!items.length){const p=document.createElement('p');p.textContent='Sin objetivos elegidos. Añade skins a «Lo que quiero» desde Equipamiento o Skins.';group.append(p)}area.append(group)}
  $('#planStatus').textContent=total+' objetivos · '+owned+' ya los tienes · '+(total-owned)+' por comprar';updatePlanTotals();planPrices.observe();
 }

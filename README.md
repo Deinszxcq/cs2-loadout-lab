@@ -133,3 +133,5 @@ El selector Steam/CSFloat cambia las tarjetas, el editor y el resumen, y recuerd
 ## Plan de compra
 
 La pestaña deriva sus objetivos del equipamiento deseado guardado y compara cada uno con el actual (ID, desgaste y variante). No modifica el inventario. Omite acabados base, objetivos desactivados y previsualizaciones sin selección guardada; incluye agentes, cuchillos y guantes, comparando el slot actual aunque cambie la familia. Los artículos idénticos ya poseídos no añaden coste. Mercado compartido Steam/CSFloat y filtros CT/TT; suma en céntimos y marca resultados parciales o antiguos. El total no descuenta ventas y suma ambos equipos por separado.
+
+Las lecturas del equipamiento usan siempre el acabado base cuando no hay selección: no el primer acabado de pago del catálogo. Guardar un conjunto no rellena acabados actuales o deseados. Plan de compra muestra imágenes separadas y etiquetadas del artículo actual y el objetivo, con su ID de catálogo.
