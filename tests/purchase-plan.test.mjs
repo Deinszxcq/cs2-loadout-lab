@@ -1,0 +1,7 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {purchaseItems} from '../dist/purchase-plan.mjs';
+const base={id:'base',vanilla:true,weapon:'USP-S'},a={id:'a',weapon:'USP-S'},b={id:'b',weapon:'USP-S'};
+function run(equipment){return purchaseItems({equipment,team:'CT',catalog:[{name:'USP-S',category:'Pistolas',teams:['CT']}],layout:{pistols:['USP-S'],mid:[],rifles:[],knife:[],gloves:[],zeus:[]},agents:[],details:{a:{wears:['Factory New','Field-Tested'],stattrak:true},b:{wears:['Factory New','Field-Tested']}},skinFor:(w,m)=>({a,b,base}[equipment[w]?.[m]]||(m==='desired'?a:base))})}
+test('preview defaults are not purchase objectives',()=>assert.equal(run({}).length,0));
+test('exact owned finish and condition needs no purchase even when current weapon disabled',()=>{const r=run({'USP-S':{current:'a',desired:'a',currentWear:'Factory New',desiredWear:'Factory New'},__disabled:{current:['USP-S']}});assert.equal(r.length,1);assert.equal(r[0].owned,true)});
+test('different wear or variant needs purchase',()=>{assert.equal(run({'USP-S':{current:'a',desired:'a',currentWear:'Factory New',desiredWear:'Field-Tested'}})[0].owned,false);assert.equal(run({'USP-S':{current:'a',desired:'a',desiredVariant:'stattrak'}})[0].owned,false)});
+test('changed skin is linked to actual inventory; disabled desired omitted',()=>{const e={'USP-S':{current:'b',desired:'a'}};assert.equal(run(e)[0].current.skin.id,'b');assert.equal(run(e)[0].owned,false);assert.equal(run({...e,__disabled:{desired:['USP-S']}}).length,0)});

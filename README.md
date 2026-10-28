@@ -129,3 +129,7 @@ Sin un agente elegido se muestra SAS (CT) o Phoenix (T), sin escribir un agente 
 ### Mercado y resumen por equipo
 
 El selector Steam/CSFloat cambia las tarjetas, el editor y el resumen, y recuerda la preferencia en este navegador (`lab-price-market`). El resumen del modo actual/deseado incluye acabados activos de armas, cuchillo, guantes, Zeus y agente seleccionado; omite «Sin skin» y agentes predeterminados. Consulta también los artículos fuera de pantalla para no calcular solo lo visible. El desglose permite revisar cada partida. Los importes se suman en céntimos y las cotizaciones ausentes o pendientes producen un subtotal marcado como parcial. Los datos anteriores se indican. CT + TT suma ambos equipamientos, por lo que un artículo compartido cuenta en cada uno.
+
+## Plan de compra
+
+La pestaña deriva sus objetivos del equipamiento deseado guardado y compara cada uno con el actual (ID, desgaste y variante). No modifica el inventario. Omite acabados base, objetivos desactivados y previsualizaciones sin selección guardada; incluye agentes, cuchillos y guantes, comparando el slot actual aunque cambie la familia. Los artículos idénticos ya poseídos no añaden coste. Mercado compartido Steam/CSFloat y filtros CT/TT; suma en céntimos y marca resultados parciales o antiguos. El total no descuenta ventas y suma ambos equipos por separado.
