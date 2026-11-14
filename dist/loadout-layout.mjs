@@ -13,7 +13,7 @@ export function allowedWeapons(catalog,team,group,index=0){
     group==='gloves'?w.category==='Guantes':w.name==='Zeus x27'
   )).map(w=>w.name);
 }
-export function ensureLayouts(equipment,team,catalog){
+export function ensureLayouts(equipment,team,catalog,skinIndex){
   const saved=equipment.__layout||{};
   const result={};
   for(const mode of ['current','desired']){
@@ -23,6 +23,14 @@ export function ensureLayouts(equipment,team,catalog){
       result[mode][group]=DEFAULT_LOADOUTS[team][group].map((fallback,index)=>{
         const allowed=allowedWeapons(catalog,team,group,index);
         const previous=saved[mode]?.[group]?.[index];
+        // Older catalog saves could store the knife skin without updating its slot.
+        if (group === 'knife' && skinIndex && !equipment[previous ?? fallback]?.[mode]) {
+          const equippedKnives = allowed.filter(weapon => {
+            const skin = skinIndex.get(equipment[weapon]?.[mode]);
+            return skin?.weapon === weapon && !skin.vanilla;
+          });
+          if (equippedKnives.length === 1) return equippedKnives[0];
+        }
         const value=allowed.includes(previous)&&!used.has(previous)?previous:
           allowed.includes(fallback)&&!used.has(fallback)?fallback:allowed.find(w=>!used.has(w));
         used.add(value);return value;
@@ -35,4 +43,18 @@ export function assignSlot(layout,group,index,weapon){
   const slots=layout[group],previous=slots[index],other=slots.indexOf(weapon);
   if(other!==-1&&other!==index)slots[other]=previous;
   slots[index]=weapon;
+}
+
+
+export function equipCatalogSkin(equipment, team, mode, skin, catalog, skinIndex) {
+  const model = catalog.find(entry => entry.name === skin.weapon);
+  if (!model?.teams.includes(team) || !['current', 'desired'].includes(mode)) return false;
+
+  const group = {Cuchillos: 'knife', Guantes: 'gloves'}[model.category];
+  if (group) {
+    const layout = ensureLayouts(equipment, team, catalog, skinIndex)[mode];
+    assignSlot(layout, group, 0, skin.weapon);
+  }
+  equipment[skin.weapon] = {...equipment[skin.weapon], [mode]: skin.id};
+  return true;
 }

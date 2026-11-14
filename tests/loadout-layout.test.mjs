@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {ensureLayouts,assignSlot,allowedWeapons,DEFAULT_LOADOUTS} from '../dist/loadout-layout.mjs';
+import {ensureLayouts,assignSlot,equipCatalogSkin,allowedWeapons,DEFAULT_LOADOUTS} from '../dist/loadout-layout.mjs';
+import {summaryItems,summarizeQuotes} from '../dist/loadout-total.mjs';
 const catalog=JSON.parse(fs.readFileSync(new URL('../dist/weapons.json',import.meta.url),'utf8'));
 test('legacy skin selections survive layout initialization',()=>{
   const equipment={'USP-S':{current:'owned-id',desired:'wish-id'}};
@@ -34,4 +35,33 @@ test('starter pistols, other pistols and mid-tier weapons obey slot rules',()=>{
   assert(!allowedWeapons(catalog,'T','pistols',1).includes('Glock-18'));
   assert(allowedWeapons(catalog,'CT','mid').includes('MP9'));
   assert(!allowedWeapons(catalog,'CT','mid').includes('MAC-10'));
+});
+
+const finishes=JSON.parse(fs.readFileSync(new URL('../dist/skins.json',import.meta.url),'utf8'));
+const skinIndex=new Map(finishes.map(skin=>[skin.id,skin]));
+const knife=finishes.find(skin=>skin.weapon==='Butterfly Knife'&&!skin.vanilla);
+const details=JSON.parse(fs.readFileSync(new URL('../dist/skin-details.json',import.meta.url),'utf8'));
+
+test('marking a catalog knife as owned equips its slot and includes it in the total',()=>{
+  const equipment={};
+  assert.equal(equipCatalogSkin(equipment,'CT','current',knife,catalog,skinIndex),true);
+  const layouts=ensureLayouts(JSON.parse(JSON.stringify(equipment)),'CT',catalog,skinIndex);
+  assert.equal(layouts.current.knife[0],knife.weapon);
+  assert.equal(layouts.desired.knife[0],DEFAULT_LOADOUTS.CT.knife[0]);
+  const items=summaryItems({
+    equipment,team:'CT',mode:'current',catalog,layout:layouts.current,agents:[],details,
+    skinFor:weapon=>skinIndex.get(equipment[weapon]?.current),
+  });
+  assert.deepEqual(items.map(item=>item.skin.id),[knife.id]);
+  const quotes=items.map(()=>({market:'steam',loaded:true,price:45000}));
+  assert.equal(summarizeQuotes(quotes,'steam').cents,45000);
+});
+
+test('a previously saved knife outside the default slot is recovered when unambiguous',()=>{
+  const equipment={[knife.weapon]:{current:knife.id},__layout:{current:{knife:['Bayonet']}}};
+  assert.equal(ensureLayouts(equipment,'CT',catalog,skinIndex).current.knife[0],knife.weapon);
+  const bayonet=finishes.find(skin=>skin.weapon==='Bayonet'&&!skin.vanilla);
+  equipment.Bayonet={current:bayonet.id};
+  equipment.__layout.current.knife=['Bayonet'];
+  assert.equal(ensureLayouts(equipment,'CT',catalog,skinIndex).current.knife[0],'Bayonet');
 });
